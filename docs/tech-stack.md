@@ -2,7 +2,7 @@
 
 > Kotlin/Jetpack Compose 앱의 스택. 지금은 후보이고, TODO 1단계에서 하나씩 확정하며 이 표를 고친다.
 > 결정 근거는 `decisions.md`(AOS-xxx)에 적고 여기에는 결과만 적는다. 버전은 확정할 때 웹 검색으로 최신 안정판을 확인하고 출처 날짜를 함께 적는다.
-> 서버·DB·배치는 `../futureETP/docs/tech-stack.md`(공용).
+> 서버·DB·배치는 `../futureETP_ReactNative/docs/tech-stack.md`(공용).
 
 상태: 후보 (2026-11-18 작성)
 
@@ -24,7 +24,7 @@
 
 ## RN 스택과의 대응
 
-| RN(`../futureETP`) | 이 앱 |
+| RN(`../futureETP_ReactNative`) | 이 앱 |
 |---|---|
 | TanStack Query(서버 상태·캐시·자동 새로고침) | 상태 계층 + repository 캐시 |
 | Zustand persist(언어·등락 색) | 기기 설정 저장 |
