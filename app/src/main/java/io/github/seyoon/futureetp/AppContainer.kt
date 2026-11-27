@@ -3,9 +3,11 @@ package io.github.seyoon.futureetp
 import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
 import io.github.seyoon.futureetp.core.api.ApiClient
+import io.github.seyoon.futureetp.core.api.commodities
 import io.github.seyoon.futureetp.core.api.createHttpClient
 import io.github.seyoon.futureetp.core.api.patchSettings
 import io.github.seyoon.futureetp.core.api.settings
+import io.github.seyoon.futureetp.core.data.CommodityListRepository
 import io.github.seyoon.futureetp.core.data.SettingsRepository
 import io.github.seyoon.futureetp.core.query.appReturns
 import io.github.seyoon.futureetp.core.settings.AppLocale
@@ -19,6 +21,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.merge
 import java.util.TimeZone
 
 /** 앱 전체에서 하나씩만 두는 의존성(AOS-005). ViewModel은 여기서 받은 것을 생성자로 넘겨받는다 */
@@ -67,6 +71,20 @@ class AppContainer(
             patch = apiClient::patchSettings,
             appReturns = appReturns,
             invalidations = credentials.keySaves,
+            onAlertCommodityChanged = { alertCommodityChanges.tryEmit(Unit) },
+        )
+    }
+
+    /** 알림 대상을 바꾸면 A 목록의 🔔가 바뀌어 목록을 다시 조회한다(RN `invalidateQueries(commodities.list)`) */
+    private val alertCommodityChanges = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+
+    /** A 원자재 목록. 처음 쓰면서 조회한다 */
+    val commodityListRepository: CommodityListRepository by lazy {
+        CommodityListRepository(
+            scope = appScope,
+            fetch = { apiClient.commodities() },
+            appReturns = appReturns,
+            invalidations = merge(credentials.keySaves, alertCommodityChanges),
         )
     }
 }

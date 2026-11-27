@@ -10,6 +10,7 @@
     <string name="errors_schema_mismatch">The app and server versions do not match. Please update the app.</string>
     <string name="common_back">Back</string>
     <string name="common_cancel">Cancel</string>
+    <string name="common_confirm">OK</string>
     <string name="common_retry">Retry</string>
     <string name="common_loading">Loading</string>
     <string name="freshness_as_of">As of %1$s</string>
@@ -105,4 +106,10 @@
     <string name="alert_settings_quiet_next_day">next day %1$s</string>
     <string name="alert_settings_quiet_note">Alerts during quiet hours are sent at the end time, only the rarest one per direction.</string>
     <string name="alert_settings_guide" formatted="false">Checked every 15 minutes during trading hours; each level alerts at most once per CME trading day. You are alerted when today\'s candle wick touches a rare-level line on the chart (intraday touches, so alerts can fire more often than p%).</string>
+
+    <!-- A commodity list -->
+    <string name="commodity_list_alert">Alert target</string>
+    <string name="commodity_list_no_trade">No trade</string>
+    <string name="commodity_list_refresh_failed_title">Couldn\'t finish refreshing</string>
+    <string name="commodity_list_refresh_failed_message">Pull down again in a moment.</string>
 </resources>

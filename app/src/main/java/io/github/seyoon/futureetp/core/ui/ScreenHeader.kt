@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,13 +44,14 @@ import io.github.seyoon.futureetp.core.theme.Spacing
 
 /**
  * 모든 화면의 상단 줄: [←] 제목 (오른쪽 버튼)(RN `ScreenHeader`). 제목은 왼쪽 정렬이고 아래에 1px `barSeparator` 선.
- * [onBack]이 null이면 [←]가 없다(첫 화면)
+ * [onBack]이 null이면 [←]가 없다(첫 화면). [titleAccessory]는 제목 바로 뒤(C의 🔔)
  */
 @Composable
 fun ScreenHeader(
     title: String,
     onBack: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    titleAccessory: (@Composable () -> Unit)? = null,
     right: @Composable RowScope.() -> Unit = {},
 ) {
     Column(modifier.background(AppColors.background).windowInsetsPadding(WindowInsets.statusBars)) {
@@ -62,15 +64,22 @@ fun ScreenHeader(
             } else {
                 Spacer(Modifier.width(Spacing.sm))
             }
-            Text(
-                title,
-                modifier = Modifier.weight(1f).semantics { heading() },
-                color = AppColors.text,
-                fontSize = FontSize.title,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+            Row(
+                Modifier.weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    title,
+                    modifier = Modifier.weight(1f, fill = false).semantics { heading() },
+                    color = AppColors.text,
+                    fontSize = FontSize.title,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                titleAccessory?.invoke()
+            }
             right()
         }
         Box(Modifier.fillMaxWidth().height(1.dp).background(AppColors.barSeparator))

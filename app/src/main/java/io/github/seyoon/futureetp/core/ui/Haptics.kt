@@ -13,3 +13,10 @@ fun rememberTapHaptic(): () -> Unit {
     val haptic = LocalHapticFeedback.current
     return { haptic.performHapticFeedback(HapticFeedbackType.SegmentTick) }
 }
+
+/** 당겨서 새로고침이 걸린 순간. 선택보다 또렷한 가벼운 충격으로 "놓아도 된다"를 알린다(RN `refreshHaptic`, D-138) */
+@Composable
+fun rememberRefreshHaptic(): () -> Unit {
+    val haptic = LocalHapticFeedback.current
+    return { haptic.performHapticFeedback(HapticFeedbackType.GestureThresholdActivate) }
+}

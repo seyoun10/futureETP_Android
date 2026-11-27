@@ -27,12 +27,13 @@
 ## 4. 화면 수직 슬라이스 (RN 순서)
 - [ ] C-a 차트 스파이크: 봉 756개 + 이평선·rare-level 밴드, 핀치·드래그·십자선, 가장 과거 봉이 보이면 이전 3년 이어 받기에서 범위 유지, 60fps 이상 (D-056, D-087, D-104, D-106) → 차트 방식 결정
 - [ ] A 원자재 목록: `GET /v1/commodities`, 대표월물 ●·알림 🔔·거래 없음, 당겨서 새로고침(햅틱·터치 차단·5초 시간 초과 Alert, D-138), C-a 이동·미리 조회 (D-085)
+  - 목록·●·🔔·거래 없음·당겨서 새로고침(햅틱·터치 차단·5초 시간 초과 안내)·자동 새로고침·[⚙] 빨간 점은 끝(`feature/commoditylist`, AOS-019). 행을 누르면 C 틀(title-bar만, `feature/commodity`)로 간다. 남은 것: C-a 미리 조회(C-a와 함께), [📅](A-a와 함께), 기기 확인(저장된 키가 없음)
 - [ ] C-a 이격도차트: `GET /v1/commodities/:code/disparity`, 기간 버튼 6개(D-102), 롤 음영, 십자선 상세, 가로 모드, 이전 3년 받기 중 화면 터치 차단·5초 시간 초과·실패 Alert (D-086, D-103, D-108, D-139)
 - [ ] C-c 월물차트: `GET /v1/commodities/:code/contracts`, log y축, 끝값 라벨 (D-092, D-093, D-113, D-118)
 - [ ] C-b 월물커브: `GET /v1/commodities/:code/curve?baseDate`, 기준일 OS 날짜 피커, 이전·다음 기준일, 변화율 라벨 배치, 롤 수익률 (D-090, D-091, D-114~D-123)
 - [ ] C-d ETP 목록(필터·정렬은 앱에서)·C-d-a 상세 (D-017)
 - [ ] B 설정·B-a 알림 설정: 낙관적 PATCH, rare-level 입력 검증, 알림 대상 없음 빨간 점 (D-081~D-083, D-124)
-  - B·데이터 출처·B-a는 끝(history). 남은 것: A·C title-bar에 `SettingsHeaderButton` 달기(빨간 점 부품은 있음), B·B-a 기기 확인(이 에뮬레이터에 저장된 키가 없음), A가 생기면 첫 화면을 A로
+  - B·데이터 출처·B-a는 끝(history). A·C title-bar [⚙] 빨간 점과 첫 화면 A도 끝. 남은 것: B·B-a 기기 확인(이 에뮬레이터에 저장된 키가 없음)
 - [ ] 화면별 세부 동작은 `../futureETP_ReactNative/docs/wireframes/screens.md`와 하나씩 대조
 
 ## 5. 푸시

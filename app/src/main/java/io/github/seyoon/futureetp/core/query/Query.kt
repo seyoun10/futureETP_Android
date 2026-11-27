@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -92,6 +93,15 @@ class Query<T>(
                     _state.update { it.copy(error = e, isFetching = false, errorUpdatedAt = now()) }
                 }
             }
+    }
+
+    /**
+     * 진행 중인 조회를 취소하고 다시 조회한 뒤 끝날 때까지 기다린다(RN `await refetch()`, 당겨서 새로고침).
+     * 성공하면 true. 기다리기를 취소해도 조회는 [scope]에서 계속된다
+     */
+    suspend fun refetchAndAwait(): Boolean {
+        refetch()
+        return state.first { !it.isFetching }.error == null
     }
 
     /** 진행 중인 조회를 끊는다. 늦게 끝난 조회가 새 값을 옛 값으로 덮지 않게 한다(RN `cancelQueries`) */

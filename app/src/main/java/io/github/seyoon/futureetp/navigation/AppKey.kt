@@ -1,12 +1,23 @@
 package io.github.seyoon.futureetp.navigation
 
 import androidx.navigation3.runtime.NavKey
+import io.github.seyoon.futureetp.core.api.model.CommodityCode
 import kotlinx.serialization.Serializable
 
 /** 백스택 키(AOS-004). 화면이 늘면 여기에 키를 더한다 */
 @Serializable
 sealed interface AppKey : NavKey {
-    /** B 설정. A를 만들기 전까지 첫 화면이다 */
+    /** A 원자재 목록. 첫 화면 */
+    @Serializable
+    data object CommodityList : AppKey
+
+    /** C 원자재 화면 */
+    @Serializable
+    data class Commodity(
+        val code: CommodityCode,
+    ) : AppKey
+
+    /** B 설정 */
     @Serializable
     data object Settings : AppKey
 

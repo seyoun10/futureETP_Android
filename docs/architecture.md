@@ -17,9 +17,9 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  ├─ api/                       HTTP 클라이언트(`ApiClient`), AppError, 엔드포인트(`Endpoints.kt`)
 │  │  └─ model/                  계약 `schemas/*.json`과 맞춘 @Serializable 응답·요청·query 모델(AOS-012)
 │  ├─ query/                     조회 상태 `Query`(자동 새로고침·앱 복귀·새 키 재조회, AOS-016)
-│  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회), 서버 설정 `SettingsRepository`(낙관적 PATCH, AOS-017)
+│  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회), 서버 설정 `SettingsRepository`(낙관적 PATCH, AOS-017), A 목록 `CommodityListRepository`
 │  ├─ chart/                     Canvas 차트·뷰포트
-│  ├─ ui/                        공용 Composable(ScreenHeader·HeaderIconButton·SettingsHeaderButton(알림 꺼짐 점), SectionHeader·SegmentedControl·SaveFailedLine, FreshnessFooter, QueryStateView), 선택 햅틱, 원자재 이름
+│  ├─ ui/                        공용 Composable(ScreenHeader·HeaderIconButton·SettingsHeaderButton(알림 꺼짐 점)·AlertBell, SectionHeader·SegmentedControl·SaveFailedLine, FreshnessFooter, QueryStateView), 선택·새로고침 햅틱, 원자재 이름
 │  ├─ storage/                   보안 저장소(datastore-tink): 접근 키·installation ID, 요청 헤더 값 `StoredCredentials`(AOS-007)
 │  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014), 앱 안 언어 `AppLocale`(per-app language, AOS-015)
 │  ├─ theme/                     테마 토큰(다크 전용, `Tokens.kt`), 등락 색 `UpDownPalette.kt`, `FutureEtpTheme`
@@ -38,7 +38,7 @@ docs/                            tech-stack, architecture, decisions
 - 화면 → ViewModel + `StateFlow` → repository → API client 한 방향. 화면은 HTTP·저장소를 직접 부르지 않는다.
 - 화면 전용 코드는 해당 feature 안에, 두 곳 이상에서 쓰면 공용 계층(`core`)으로 옮긴다.
 - import 방향(RN D-041, 2026-11-19 lint로 강제): feature끼리 import하지 않는다(컴포넌트·헬퍼·조회도 다른 feature가 쓰면 `core`로 옮긴다). `core`는 features·`navigation`을 import하지 않고, features는 `navigation`(라우트)을 import하지 않는다. `ArchitectureTest`(Konsist)가 `./gradlew check`에서 강제한다(AOS-010).
-- RN에서 공용으로 옮긴 것: `SectionHeader`·`SettingsHeaderButton`(공용 UI), 에러 code → 사용자 문구 함수 `errorText`(API의 `AppError` 옆), ETP 정렬 기준 `ETP_SORTS`(util).
+- RN에서 공용으로 옮긴 것: `SectionHeader`·`SettingsHeaderButton`·`AlertBell`(공용 UI), 에러 code → 사용자 문구 함수 `errorText`(API의 `AppError` 옆), ETP 정렬 기준 `ETP_SORTS`(util).
 - 월물 심볼은 서버 표준형(`CLZ26`)만 쓴다. 표시 표기(`DEC26`)는 포맷 함수가 만든다.
 
 ## 레이어

@@ -191,3 +191,16 @@
 - 결정: (a). 켜짐 여부는 `NotificationManagerCompat.areNotificationsEnabled()`(권한과 앱 알림 스위치 모두)로 보고, 화면이 올라올 때마다 다시 읽는다. Android 12 이하나 권한은 있는데 앱 알림이 꺼진 경우는 바로 [설정 열기](`ACTION_APP_NOTIFICATION_SETTINGS`)다.
 - 근거: 저장값은 앱 데이터 삭제·설정 앱의 권한 초기화와 어긋날 수 있다. (a)는 한 번 더 누르게 될 뿐 잘못된 버튼으로 막히지 않는다.
 - 영향: 5단계 푸시 작업에서 첫 실행 권한 요청을 넣을 때 같은 `rememberNotificationPermission`을 쓴다.
+
+## AOS-019: 당겨서 새로고침은 Material3 `PullToRefreshBox`, 실패 안내는 `AlertDialog`
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: A 당겨서 새로고침(D-138). RN은 `RefreshControl`, 걸리는 순간 `impactAsync(Light)`, 조회 중 투명 층으로 화면 전체 터치 차단, 5초 시간 초과·실패면 `Alert.alert`(떠 있으면 겹쳐 띄우지 않음)를 쓴다.
+- 선택지: 새로고침 (a) Material3 `PullToRefreshBox` (b) 직접 nestedScroll 구현. 안내 (a) Compose `AlertDialog` (b) Toast·Snackbar
+- 결정: 둘 다 (a).
+  - 햅틱은 `HapticFeedbackType.GestureThresholdActivate`(`rememberRefreshHaptic`). 선택 햅틱(`SegmentTick`)보다 또렷하다.
+  - 시간 초과는 ViewModel이 `withTimeoutOrNull(5초)`로 기다리기만 끊고, 조회는 앱 범위에서 계속돼 늦게 끝나면 목록이 바뀐다(`Query.refetchAndAwait`).
+  - 안내는 ViewModel의 `refreshFailed` 하나로 띄워 겹치지 않는다. [확인]·바깥 누르기는 닫기만 한다.
+  - 터치 차단은 헤더까지 덮는 투명 `Box`가 포인터 이벤트를 모두 소비한다.
+- 근거: Material3 기본 부품이 RN `RefreshControl`과 같은 동작(당김 임계점, 진행 중 유지)을 준다. Snackbar는 RN의 [확인] 모달과 다르다.
+- 영향: C-a 이전 3년 받기의 시간 초과·실패 안내(D-139)도 같은 `AlertDialog` 문구 틀을 쓴다. 두 곳이 되면 공용(`core/ui`)으로 옮긴다.

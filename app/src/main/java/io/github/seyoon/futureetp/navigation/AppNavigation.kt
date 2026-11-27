@@ -17,6 +17,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
@@ -24,11 +26,16 @@ import androidx.navigation3.ui.NavDisplay
 import io.github.seyoon.futureetp.AppContainer
 import io.github.seyoon.futureetp.BuildConfig
 import io.github.seyoon.futureetp.R
+import io.github.seyoon.futureetp.core.api.model.CommodityCode
 import io.github.seyoon.futureetp.core.api.settings
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyRoute
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyViewModel
 import io.github.seyoon.futureetp.feature.alertsettings.AlertSettingsRoute
 import io.github.seyoon.futureetp.feature.alertsettings.AlertSettingsViewModel
+import io.github.seyoon.futureetp.feature.commodity.CommodityRoute
+import io.github.seyoon.futureetp.feature.commodity.CommodityViewModel
+import io.github.seyoon.futureetp.feature.commoditylist.CommodityListRoute
+import io.github.seyoon.futureetp.feature.commoditylist.CommodityListViewModel
 import io.github.seyoon.futureetp.feature.datasources.DataSourcesScreen
 import io.github.seyoon.futureetp.feature.settings.DisplayControls
 import io.github.seyoon.futureetp.feature.settings.SettingsNav
@@ -56,7 +63,7 @@ private fun MainBackStack(
     container: AppContainer,
     rejected: Boolean,
 ) {
-    val backStack = rememberNavBackStack(AppKey.Settings)
+    val backStack = rememberNavBackStack(AppKey.CommodityList)
     // 키가 있는 동안 앱이 화면에 올라올 때마다 서버 기기 설정의 시간대·언어를 맞춘다(RN 루트 _layout DeviceSettingsSync, D-137)
     val lifecycleOwner = LocalLifecycleOwner.current
     LaunchedEffect(lifecycleOwner) {
@@ -74,40 +81,98 @@ private fun MainBackStack(
                 rememberSaveableStateHolderNavEntryDecorator(),
                 rememberViewModelStoreNavEntryDecorator(),
             ),
-        entryProvider =
-            entryProvider {
-                entry<AppKey.Settings> {
-                    SettingsEntry(
-                        container,
-                        SettingsNav(
-                            onBack = if (backStack.size > 1) ({ backStack.removeLastOrNull() }) else null,
-                            onOpenAlerts = { backStack.add(AppKey.AlertSettings) },
-                            onOpenAccessKey = { backStack.add(AppKey.AccessKey) },
-                            onOpenDataSources = { backStack.add(AppKey.DataSources) },
-                        ),
-                    )
-                }
-                entry<AppKey.AlertSettings> {
-                    val vm: AlertSettingsViewModel =
-                        viewModel(
-                            factory =
-                                viewModelFactory {
-                                    initializer {
-                                        AlertSettingsViewModel(
-                                            container.settingsRepository,
-                                        )
-                                    }
-                                },
-                        )
-                    AlertSettingsRoute(vm, onBack = { backStack.removeLastOrNull() })
-                }
-                entry<AppKey.DataSources> { DataSourcesScreen(onBack = { backStack.removeLastOrNull() }) }
-                entry<AppKey.AccessKey> {
-                    val back = { backStack.removeLastOrNull() }
-                    AccessKeyEntry(container, rejected, onBack = { back() }, onDone = { back() })
-                }
-            },
+        entryProvider = appEntries(container, backStack, rejected),
     )
+}
+
+/** 백스택 키별 화면. 화면 사이 이동은 백스택에 키를 더하고 뺀다 */
+private fun appEntries(
+    container: AppContainer,
+    backStack: NavBackStack<NavKey>,
+    rejected: Boolean,
+) = entryProvider<NavKey> {
+    entry<AppKey.CommodityList> {
+        CommodityListEntry(
+            container,
+            onOpenCommodity = { backStack.add(AppKey.Commodity(it)) },
+            onOpenSettings = { backStack.add(AppKey.Settings) },
+        )
+    }
+    entry<AppKey.Commodity> { key ->
+        // [←]는 탭 이력과 상관없이 A로 간다(screens.md C)
+        CommodityEntry(
+            container,
+            key.code,
+            onBack = { while (backStack.size > 1) backStack.removeLastOrNull() },
+            onOpenSettings = { backStack.add(AppKey.Settings) },
+        )
+    }
+    entry<AppKey.Settings> {
+        SettingsEntry(
+            container,
+            SettingsNav(
+                onBack = { backStack.removeLastOrNull() },
+                onOpenAlerts = { backStack.add(AppKey.AlertSettings) },
+                onOpenAccessKey = { backStack.add(AppKey.AccessKey) },
+                onOpenDataSources = { backStack.add(AppKey.DataSources) },
+            ),
+        )
+    }
+    entry<AppKey.AlertSettings> {
+        val vm: AlertSettingsViewModel =
+            viewModel(
+                factory =
+                    viewModelFactory {
+                        initializer {
+                            AlertSettingsViewModel(
+                                container.settingsRepository,
+                            )
+                        }
+                    },
+            )
+        AlertSettingsRoute(vm, onBack = { backStack.removeLastOrNull() })
+    }
+    entry<AppKey.DataSources> { DataSourcesScreen(onBack = { backStack.removeLastOrNull() }) }
+    entry<AppKey.AccessKey> {
+        val back = { backStack.removeLastOrNull() }
+        AccessKeyEntry(container, rejected, onBack = { back() }, onDone = { back() })
+    }
+}
+
+@Composable
+private fun CommodityListEntry(
+    container: AppContainer,
+    onOpenCommodity: (CommodityCode) -> Unit,
+    onOpenSettings: () -> Unit,
+) {
+    val vm: CommodityListViewModel =
+        viewModel(
+            factory =
+                viewModelFactory {
+                    initializer {
+                        CommodityListViewModel(
+                            container.commodityListRepository,
+                            container.settingsRepository,
+                        )
+                    }
+                },
+        )
+    CommodityListRoute(vm, onOpenCommodity, onOpenSettings)
+}
+
+@Composable
+private fun CommodityEntry(
+    container: AppContainer,
+    code: CommodityCode,
+    onBack: () -> Unit,
+    onOpenSettings: () -> Unit,
+) {
+    val vm: CommodityViewModel =
+        viewModel(
+            key = code.name,
+            factory = viewModelFactory { initializer { CommodityViewModel(code, container.settingsRepository) } },
+        )
+    CommodityRoute(vm, onBack, onOpenSettings)
 }
 
 @Composable
