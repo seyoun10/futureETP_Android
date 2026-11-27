@@ -28,3 +28,5 @@
   - 결과(2026-11-27, AOS-012): `core/api/model`에 손으로 쓴 `@Serializable` 모델(날짜·시각·월물은 java.time), `core/api/Endpoints.kt`에 엔드포인트 함수. `ContractTest`가 계약 복사본(futureETP `ed8194a`)과 원본 일치, dev 서버 응답 예시 16개의 스키마 통과·디코딩·왕복 일치, 요청 본문·query의 요청 스키마 통과를 본다. 필드를 하나 빼면 왕복 비교가 실패하는 것을 확인
 - [x] installation ID(첫 실행 UUID v4) 생성·보안 저장소 보관 (D-120). `core/storage`의 `SecureStore`(datastore-tink)·`StoredCredentials`가 `AppContainer`의 임시 값을 바꿨다(2026-11-27, AOS-007)
   - 결과: 단위 테스트는 메모리 키셋으로 암호화 저장·복호화 실패 복구·ID 유지·형식 아닌 값 교체·저장소 실패 시 메모리 ID를 본다. `AOS_Pixel_API_36`에서 앱 데이터를 지운 뒤 두 번 실행해 같은 ID가 나오고 `secure.json`이 암호문인 것을 확인(Keystore 경로는 기기에서만 돈다)
+- [x] 숫자·날짜 포맷(RN `formatNumber`·`formatDateTime`과 같은 결과) 단위 테스트
+  - 결과(2026-11-27): `core/util`의 `formatPrice`·`formatChange`·`formatChangePct`·`formatContractMonth(Short)`·`formatLocalDateTime`·`formatTradeDate`·`compactAmount`(RN `formatAmount`). 반올림은 JS `toFixed`처럼 double의 정확한 값에서 절반 올림(`BigDecimal(double)` + `HALF_UP`, 1.005 → 1.00). 월물·날짜는 java.time 값을 받는다. `FormatTest`가 RN 테스트 기대값과 toFixed 경계값(node로 확인)을 본다
