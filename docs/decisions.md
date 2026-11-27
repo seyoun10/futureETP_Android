@@ -108,10 +108,15 @@
 ## AOS-012: 응답 모델은 손으로 쓰고 계약 복사본·실제 응답 예시로 검사
 - 날짜: 2026-11-27
 - 상태: 제안 (Claude, 사용자 확인 전)
-- 선택지: (a) `@Serializable` 모델을 손으로 쓰고 계약 테스트로 맞춘다 (b) JSON Schema에서 모델 생성(quicktype 등)
+- 선택지: (a) `@Serializable` 모델을 손으로 쓰고 계약 테스트로 맞춘다 (b) quicktype 26.0.0(`--framework kotlinx`) (c) OpenAPI Generator 7.28.0(`kotlin`, `kotlinx_serialization`, 스키마를 OpenAPI 3.1 components로 감싸서) (d) json-kotlin-schema-codegen 0.123
+- 검토(2026-11-27, 계약 복사본으로 실제 생성):
+  - (b) 스키마 여러 개를 한 번에 넣으면 내부 오류(`Defined value expected`)라 하나씩 생성해야 하고, 그러면 `Basis`·`Window` 같은 enum이 파일마다 따로 생긴다. 필수 nullable 필드에 `= null` 기본값이 붙어 키가 빠져도 null로 통과한다(SCHEMA_MISMATCH를 못 잡음). `maPeriod`는 `Double`, 정수는 `Long`, `contractMonth`·`at`은 `String`. enum 이름을 속성 이름에서 지어 `alertCommodity` → `AlertCommodity`, `direction` → `Side`가 된다
+  - (c) 필수 nullable은 맞게 나오지만 enum이 클래스마다 중첩돼(`DisparityChart.Basis`·`SettingsPatch.Basis`가 다른 타입) 공용 `CommodityCode` 등이 없고, 숫자 enum `maPeriod`는 `BigDecimal` 값에 문자열 인자(`_20("20")`)를 넣는 코드와 문자열 `@SerialName`이 나와 서버 숫자 `20`과 맞지 않는다. `rareLevels`는 `@Contextual BigDecimal`, 안쪽 타입 이름은 `DisparityChartBarsInnerHoldingsInner`. OpenAPI 3.1 지원은 beta 경고
+  - (b)(c) 공통: `SettingsPatch`에서 "보내지 않음"과 "null로 지우기"(`alertCommodity: null`, 알림 대상 없음 D-124)를 구분하지 못한다. 생성 코드는 ktlint·detekt 규칙에 맞지 않아 검사에서 빼야 한다. 원본 스키마는 생성 파일이라 `$ref`로 공용 enum을 뽑도록 고칠 수 없다(D-142, 읽기만)
+  - (d) Draft 07 기준이고 마지막 릴리스가 2025-07이라 draft 2020-12 계약에는 시험하지 않았다
 - 결정: (a). `core/api/model`에 계약 필드·nullable·enum 그대로 쓴다. 날짜·시각·월물은 java.time(`LocalDate`·`Instant`·`YearMonth`·`LocalTime`)으로 디코딩하고, 형식이 다르거나 모르는 enum 값이면 `SCHEMA_MISMATCH`(D-042). 계약 테스트(`ContractTest`)는 networknt json-schema-validator 3.0.9(draft 2020-12)로
   1) 커밋한 계약 복사본(`app/src/test/resources/contract/schemas`, `scripts/sync-contract.sh`)이 원본과 같은지(원본 저장소가 옆에 있을 때),
   2) dev 서버 실제 응답 data(`contract/fixtures`, `scripts/capture-fixtures.sh`, 차트는 마지막 60거래일)가 스키마를 통과하고 모델로 디코딩되며 다시 인코딩하면 같은 JSON인지,
   3) 요청 본문(`SettingsPatch`·`DeviceRegistration`)과 query가 요청 스키마를 통과하는지 본다.
-- 근거: 스키마가 작고(응답 10개) zod refine·주석은 생성기로 옮겨지지 않는다. 생성 도구는 enum·nullable·날짜 타입 표현이 도구마다 달라 손볼 곳이 생긴다. iOS(IOS-007)·Flutter(FL-007)도 손 작성 + 예시 검사다. 왕복 비교가 빠진 필드를, 스키마 검사가 예시 자체의 계약 위반을 잡는다.
+- 근거: 스키마가 작고(응답 10개) zod refine·주석은 생성기로 옮겨지지 않는다. 위 검토처럼 생성 결과를 그대로 쓸 수 없고 손보면 생성의 이점이 사라진다. 계약 변경은 손 작성이어도 `ContractTest`(원본 일치·왕복 비교)가 바로 알려 준다. iOS(IOS-007)·Flutter(FL-007)도 손 작성 + 예시 검사다. 왕복 비교가 빠진 필드를, 스키마 검사가 예시 자체의 계약 위반을 잡는다.
 - 영향: 원본 계약이 바뀌면 `ContractTest.schemaCopyMatchesUpstream`이 실패하므로 `scripts/sync-contract.sh` → 모델 수정 → `scripts/capture-fixtures.sh`. 요청 본문은 `requestJson`(null을 빼지 않음)으로 인코딩한다. rare 레벨 query는 `formatLevel`로 숫자 기본 문자열(`1`, `2.5`)을 만든다.
