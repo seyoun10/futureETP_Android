@@ -3,8 +3,11 @@ package io.github.seyoon.futureetp.core.storage
 import android.util.Log
 import io.github.seyoon.futureetp.core.api.ApiCredentials
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.sync.Mutex
@@ -44,6 +47,10 @@ class StoredCredentials(
     private var keyLoaded = false
     private val _keyState = MutableStateFlow(AccessKeyState())
     val keyState: StateFlow<AccessKeyState> = _keyState.asStateFlow()
+    private val _keySaves = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+
+    /** 새 키를 저장할 때마다 내보낸다. 조회들이 옛 키로 실패한 결과를 다시 불러온다(RN `invalidateQueries`, D-044) */
+    val keySaves: SharedFlow<Unit> = _keySaves.asSharedFlow()
 
     override suspend fun deviceId(): String =
         mutex.withLock {
@@ -71,6 +78,7 @@ class StoredCredentials(
             keyLoaded = true
         }
         _keyState.value = AccessKeyState(loaded = true, hasKey = true, rejected = false)
+        _keySaves.tryEmit(Unit)
     }
 
     /** 키가 없어 보내지 않은 요청은 거절이 아니라 저장된 키가 있을 때만 표시한다(D-079) */

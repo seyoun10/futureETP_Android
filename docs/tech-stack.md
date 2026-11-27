@@ -10,7 +10,7 @@
 |---|---|---|---|
 | 언어 / 빌드 | Kotlin · Gradle Kotlin DSL + version catalog(`gradle/libs.versions.toml`) · AGP | Kotlin 2.4.21 · Gradle 9.9.2 · AGP 9.5.3 | JDK 17(D-055). compileSdk·targetSdk 37, minSdk 29 (AOS-003) |
 | UI | Jetpack Compose + Material 3 | Compose BOM 2026.11.01 · activity-compose 1.13.0 | |
-| 상태 | ViewModel + `StateFlow`, 코루틴 | lifecycle 2.11.1 · coroutines 1.11.0 | RN TanStack Query 역할(캐시·staleTime·자동 새로고침)은 repository 계층에서 직접 |
+| 상태 | ViewModel + `StateFlow`, 코루틴 | lifecycle 2.11.1(lifecycle-process 포함) · coroutines 1.11.0 | RN TanStack Query 역할은 `core/query/Query`(조회 상태·자동 새로고침·앱 복귀) + repository(화면 사이 캐시)에서 직접(AOS-016) |
 | 내비게이션 | Navigation 3 | navigation3 1.2.2 | 백스택 = 키 리스트(AOS-004) |
 | DI | 수동 DI(`AppContainer`) | — | ViewModel은 `viewModelFactory`(AOS-005) |
 | HTTP / JSON | Ktor Client(OkHttp 엔진) + kotlinx.serialization | Ktor 3.6.2 · serialization 1.13.0 | `HttpTimeout` 15초·`HttpRequestRetry`, 디코딩 실패 → `SCHEMA_MISMATCH`(AOS-006) |

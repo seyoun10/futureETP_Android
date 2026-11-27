@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.seyoon.futureetp.core.storage
 
 import com.google.crypto.tink.Aead
@@ -7,8 +9,12 @@ import com.google.crypto.tink.aead.AeadConfig
 import com.google.crypto.tink.aead.PredefinedAeadParameters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -172,6 +178,21 @@ class SecureStoreTest {
                 creds.reportRejected()
                 creds.clearRejected()
                 assertFalse(creds.keyState.value.rejected)
+            }
+        }
+
+    @Test
+    fun keySavesEmitOnEachSave() =
+        runTest {
+            withStore(newAead(), folder.root.resolve("secure.json")) { store ->
+                val creds = credentials(store)
+                var saves = 0
+                backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { creds.keySaves.collect { saves++ } }
+                creds.saveAccessKey("a")
+                runCurrent()
+                creds.saveAccessKey("b")
+                runCurrent()
+                assertEquals(2, saves)
             }
         }
 

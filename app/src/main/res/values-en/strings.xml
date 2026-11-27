@@ -17,6 +17,14 @@
     <string name="errors_schema_mismatch">The app and server versions do not match. Please update the app.</string>
     <string name="common_back">Back</string>
     <string name="common_cancel">Cancel</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_loading">Loading</string>
+    <string name="freshness_as_of">As of %1$s</string>
+    <string name="freshness_trade_date">Trade date %1$s</string>
+    <string name="freshness_delayed">Delayed</string>
+    <string name="freshness_market_state_open">Open</string>
+    <string name="freshness_market_state_closed">Closed</string>
+    <string name="freshness_market_state_settlement_pending">Settlement pending</string>
     <string name="access_key_title">Access key</string>
     <string name="access_key_guide">Enter the server access key. Scan the QR shown by the key script on your Mac, or paste the key.</string>
     <string name="access_key_paste_placeholder">Paste key</string>

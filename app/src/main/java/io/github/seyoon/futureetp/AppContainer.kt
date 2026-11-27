@@ -1,10 +1,12 @@
 package io.github.seyoon.futureetp
 
 import android.content.Context
+import androidx.lifecycle.ProcessLifecycleOwner
 import io.github.seyoon.futureetp.core.api.ApiClient
 import io.github.seyoon.futureetp.core.api.createHttpClient
 import io.github.seyoon.futureetp.core.api.patchSettings
 import io.github.seyoon.futureetp.core.api.settings
+import io.github.seyoon.futureetp.core.query.appReturns
 import io.github.seyoon.futureetp.core.settings.AppLocale
 import io.github.seyoon.futureetp.core.settings.DisplaySettingsStore
 import io.github.seyoon.futureetp.core.settings.createAppLocale
@@ -12,6 +14,7 @@ import io.github.seyoon.futureetp.core.settings.createDisplaySettingsStore
 import io.github.seyoon.futureetp.core.storage.StoredCredentials
 import io.github.seyoon.futureetp.core.storage.createSecureStore
 import io.github.seyoon.futureetp.feature.settings.DeviceSettingsSync
+import kotlinx.coroutines.flow.Flow
 import java.util.TimeZone
 
 /** 앱 전체에서 하나씩만 두는 의존성(AOS-005). ViewModel은 여기서 받은 것을 생성자로 넘겨받는다 */
@@ -33,6 +36,9 @@ class AppContainer(
 
     /** 앱 안 언어(per-app language, AOS-015) */
     val appLocale: AppLocale by lazy { createAppLocale(context) }
+
+    /** 앱이 백그라운드에서 다시 올라올 때(조회 재요청, D-030) */
+    val appReturns: Flow<Unit> by lazy { appReturns(ProcessLifecycleOwner.get().lifecycle) }
 
     val apiClient: ApiClient by lazy { ApiClient(createHttpClient(), apiBaseUrl, credentials) }
 

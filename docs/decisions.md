@@ -158,3 +158,16 @@
   - 서버 기기 설정 맞추기 `feature/settings/DeviceSettingsSync`(RN 같은 이름): 키가 있는 동안 앱이 STARTED가 될 때마다 `GET /v1/settings`를 받아 기기 시간대(`TimeZone.getDefault().id`, IANA ID가 아니면 빼기)·앱 언어가 다르면 한 번의 PATCH로 보낸다. 같은 값은 프로세스당 한 번만 보내고 실패해도 되풀이하지 않는다(D-084, D-137). 언어를 바꾸면 Activity가 다시 만들어져 다음 STARTED에서 보낸다.
 - 근거: (b)는 minSdk 29~32 기기에서 앱 안 언어 설정이 동작하지 않는다. (c)는 Compose·시스템 설정 화면의 앱 언어 항목(`generateLocaleConfig`)과 따로 놀아 값이 둘이 된다. AppCompat은 13+에서 시스템 LocaleManager에 위임해 시스템 설정과 같은 값을 쓴다.
 - 영향: 의존성 `androidx.appcompat:appcompat` 1.8.0(2026-08-12), `MainActivity`는 `AppCompatActivity`, 테마 부모 `Theme.AppCompat.NoActionBar`, 매니페스트 `AppLocalesMetadataHolderService`(`autoStoreLocales`). 언어를 고르는 화면은 B 화면 항목.
+
+## AOS-016: 조회 상태·자동 새로고침은 작은 `Query` 클래스로 직접
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: 공용 조회 UI(D-048, D-075, D-077). RN은 TanStack Query가 조회 상태(데이터·오류·조회 중), 앱 복귀 재조회(focusManager), 새 키 저장 뒤 `invalidateQueries`를 맡고, `useAutoRefresh`가 화면이 보이는 동안 `nextUpdateAt` + 1분에 다시 조회한다. Android에는 같은 역할의 표준 라이브러리가 없다.
+- 선택지: (a) `core/query/Query`(ViewModel 하나에 조회 하나, `StateFlow<QueryState>`)를 직접 (b) Store5 같은 캐시 라이브러리 (c) 화면마다 ViewModel에서 따로
+- 결정: (a).
+  - `Query`는 만들 때 조회하고, 새로고침이 실패해도 데이터를 남긴다. `refetch(cancelRunning)`는 RN `cancelRefetch`와 같다.
+  - 자동 새로고침 `autoRefresh()`는 `max(nextUpdateAt + 1분, 마지막 조회 + 1분)`에 다시 조회하고, 조회가 끝날 때마다 다시 예약한다. 화면은 `AutoRefreshEffect`로 STARTED 동안만 돌린다.
+  - 앱 복귀(`appReturns`, ProcessLifecycleOwner라 화면 회전에는 반응하지 않음)는 `staleTimeMs`가 지난 조회만 다시 부른다. 새 접근 키 저장(`StoredCredentials.keySaves`)은 진행 중인 조회를 취소하고 다시 부른다(RN `invalidateQueries`).
+  - 화면 사이 캐시(A → C 미리 조회, `gcTime`, 무한 조회)는 repository(`core/data`)가 맡고 `Query`의 `fetch`가 repository를 부른다. 필요한 화면을 만들 때 넣는다.
+- 근거: 필요한 동작이 위 네 가지뿐이라 라이브러리보다 짧고, RN 동작과 하나씩 대조해 테스트하기 쉽다. (c)는 같은 타이머·복귀 규칙을 화면마다 되풀이한다.
+- 영향: 의존성 `androidx.lifecycle:lifecycle-process`(lifecycle 2.11.1과 같은 버전). 공용 Composable `QueryStateView`·`LoadingView`·`CenterSpinner`·`ErrorView`·`FreshnessFooter`·`AsOfFooter`·`FooterLine`(`core/ui`).

@@ -19,6 +19,15 @@
     <string name="errors_schema_mismatch">앱과 서버 버전이 맞지 않습니다. 앱을 업데이트해 주세요.</string>
     <string name="common_back">뒤로</string>
     <string name="common_cancel">취소</string>
+    <string name="common_retry">다시 시도</string>
+    <string name="common_loading">불러오는 중</string>
+    <!-- 기준 시각 줄(RN freshness.*) -->
+    <string name="freshness_as_of">%1$s 기준</string>
+    <string name="freshness_trade_date">거래일 %1$s</string>
+    <string name="freshness_delayed">지연</string>
+    <string name="freshness_market_state_open">장중</string>
+    <string name="freshness_market_state_closed">휴장</string>
+    <string name="freshness_market_state_settlement_pending">정산 대기</string>
     <string name="access_key_title">접근 키</string>
     <string name="access_key_guide">서버 접근 키를 넣어 주세요. Mac에서 키 스크립트가 띄운 QR을 읽거나 키를 붙여넣으세요.</string>
     <string name="access_key_paste_placeholder">키 붙여넣기</string>

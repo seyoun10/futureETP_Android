@@ -17,9 +17,10 @@ app/src/main/java/io/github/seyoon/futureetp/
 ├─ core/
 │  ├─ api/                       HTTP 클라이언트(`ApiClient`), AppError, 엔드포인트(`Endpoints.kt`)
 │  │  └─ model/                  계약 `schemas/*.json`과 맞춘 @Serializable 응답·요청·query 모델(AOS-012)
-│  ├─ data/                      repository(조회 캐시·자동 새로고침)
+│  ├─ query/                     조회 상태 `Query`(자동 새로고침·앱 복귀·새 키 재조회, AOS-016)
+│  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회)
 │  ├─ chart/                     Canvas 차트·뷰포트
-│  ├─ ui/                        공용 Composable(ScreenHeader, FreshnessLine, QueryStateView, SegmentedControl)
+│  ├─ ui/                        공용 Composable(ScreenHeader, FreshnessFooter, QueryStateView, SegmentedControl)
 │  ├─ storage/                   보안 저장소(datastore-tink): 접근 키·installation ID, 요청 헤더 값 `StoredCredentials`(AOS-007)
 │  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014), 앱 안 언어 `AppLocale`(per-app language, AOS-015)
 │  ├─ theme/                     테마 토큰(다크 전용, `Tokens.kt`), 등락 색 `UpDownPalette.kt`, `FutureEtpTheme`
@@ -46,7 +47,7 @@ docs/                            tech-stack, architecture, decisions
 | 계층 | 맡는 것 | 하지 않는 것 |
 |---|---|---|
 | 화면(Composable 화면) | 그리기, 사용자 입력, 상태 구독 | HTTP, 저장소, 계산 |
-| 상태(ViewModel + `StateFlow`) | 화면 상태(로딩·데이터·오류), 사용자 동작 처리, 자동 새로고침 타이머 | HTTP 세부 |
+| 상태(ViewModel + `StateFlow`) | 화면 상태(`Query`의 로딩·데이터·오류), 사용자 동작 처리, 자동 새로고침(AOS-016) | HTTP 세부 |
 | repository | 조회 캐시(staleTime·gcTime), 무한 조회(`before`·`hasMore`), 낙관적 PATCH | 화면 문구 |
 | API client | 헤더, 타임아웃, 봉투 디코딩, `AppError`, 재시도 | 캐시 |
 
