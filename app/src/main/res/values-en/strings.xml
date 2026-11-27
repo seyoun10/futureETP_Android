@@ -15,4 +15,12 @@
     <string name="errors_network">Unable to connect to the network.</string>
     <string name="errors_timeout">The server is taking too long. Please try again shortly.</string>
     <string name="errors_schema_mismatch">The app and server versions do not match. Please update the app.</string>
+    <string name="common_back">Back</string>
+    <string name="access_key_title">Access key</string>
+    <string name="access_key_guide">Enter the server access key. Scan the QR shown by the key script on your Mac, or paste the key.</string>
+    <string name="access_key_paste_placeholder">Paste key</string>
+    <string name="access_key_submit">Confirm</string>
+    <string name="access_key_verifying">Verifying</string>
+    <string name="access_key_bad_format">The key format is invalid.</string>
+    <string name="access_key_rejected">The key was not accepted.</string>
 </resources>

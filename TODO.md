@@ -25,10 +25,10 @@
 
 ## 3. 공통 기반
 - [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
-- [ ] 접근 키 B-b: 붙여넣기·QR(`futureetp-key:v1:` 접두사), `GET /v1/settings`로 확인 뒤 `StoredCredentials.saveAccessKey`로 저장, 거절 상태(RN `rejected`)는 이때 만든다, 키 없으면 첫 화면이 B-b, `UNAUTHORIZED`면 어느 화면에서든 B-b + 거절 줄 (D-044, D-077~D-079)
+- [ ] 접근 키 B-b QR 읽기: [QR 읽기] → 카메라 권한 → 화면 안 미리보기에서 `parseAccessKey(requirePrefix = true)`, 접두사 없으면 "접근 키 QR이 아닙니다" 후 계속 읽기, 권한 거부·카메라 없음은 붙여넣기 안내, 마이크 권한 없음. 스캐너 방식(CameraX + ML Kit / Google 코드 스캐너)은 AOS 결정으로 남긴다 (D-044, D-078)
 - [ ] i18n ko/en, 앱 안 언어 설정을 서버 기기 설정과 맞춤 (D-033, D-073, D-137)
 - [ ] 테마 토큰(다크 전용)·등락 색 설정 저장 (D-031, D-073)
-- [ ] 공용 조회 UI: 기준 시각 줄(freshness)·로딩/오류/빈 상태 분기·`nextUpdateAt` + 1분 자동 새로고침·앱 복귀 재조회 (D-048, D-075)
+- [ ] 공용 조회 UI: 기준 시각 줄(freshness)·로딩/오류/빈 상태 분기·`nextUpdateAt` + 1분 자동 새로고침·앱 복귀 재조회·새 접근 키 저장 뒤 실패한 조회 다시(RN `invalidateQueries`, `AccessKeyState` 변화로) (D-048, D-075, D-077)
 - [ ] 앱 실행 때 시간대 PATCH (D-084), 세로 잠금·[⟲] 가로 전환 (D-076)
 
 ## 4. 화면 수직 슬라이스 (RN 순서)

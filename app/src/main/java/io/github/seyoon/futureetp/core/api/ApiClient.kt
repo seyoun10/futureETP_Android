@@ -58,6 +58,9 @@ interface ApiCredentials {
     suspend fun accessToken(): String?
 
     suspend fun deviceId(): String
+
+    /** 저장된 키로 보낸 요청을 서버가 UNAUTHORIZED로 거절함. 받은 쪽이 B-b로 보낸다(D-079) */
+    fun reportRejected() {}
 }
 
 /**
@@ -90,11 +93,17 @@ class ApiClient(
         token: String? = null,
     ): T {
         val maxRetries = if (method == HttpMethod.Get) MAX_RETRIES else 0
+        // 저장된 키로 보낸 요청만 거절을 알린다. B-b의 새 키 확인(token)은 그 화면의 오류 줄로만 보인다(D-079)
+        val sendsStoredKey = auth && token == null
         var attempt = 0
         while (true) {
             try {
                 return send(path, deserializer, method, query, body, auth, token)
             } catch (e: AppError) {
+                // 서버가 답한(status 있음) 거절만. 키가 없어 보내지 않은 요청은 status가 없다
+                if (e.code == AppErrorCode.UNAUTHORIZED && sendsStoredKey && e.status != null) {
+                    credentials.reportRejected()
+                }
                 if (attempt >= maxRetries || !e.code.isRetryable) throw e
                 delay(RETRY_BASE_DELAY_MS shl attempt)
                 attempt++

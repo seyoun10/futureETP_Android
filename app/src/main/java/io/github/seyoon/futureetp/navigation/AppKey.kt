@@ -8,4 +8,8 @@ import kotlinx.serialization.Serializable
 sealed interface AppKey : NavKey {
     @Serializable
     data object DevHealth : AppKey
+
+    /** B-b 접근 키. 키가 있을 때 B > 접근 키·저장된 키 거절로 들어온다(키가 없을 때는 백스택 밖에서 그린다) */
+    @Serializable
+    data object AccessKey : AppKey
 }

@@ -37,6 +37,12 @@ class ApiClientTest {
         override suspend fun accessToken() = token
 
         override suspend fun deviceId() = "device-1"
+
+        var rejections = 0
+
+        override fun reportRejected() {
+            rejections++
+        }
     }
 
     private val requests = mutableListOf<HttpRequestData>()
@@ -231,4 +237,26 @@ class ApiClientTest {
         assertEquals(AppErrorCode.TIMEOUT.messageRes, errorTextRes(AppError(AppErrorCode.TIMEOUT)))
         assertEquals(AppErrorCode.INTERNAL.messageRes, errorTextRes(IllegalStateException()))
     }
+
+    @Test
+    fun serverRejectionOfStoredKeyIsReported() =
+        runTest {
+            val creds = FakeCredentials()
+            val api = client(creds) { json(failure("UNAUTHORIZED"), HttpStatusCode.Unauthorized) }
+            assertEquals(AppErrorCode.UNAUTHORIZED, expectAppError { api.item() }.code)
+            assertEquals(1, creds.rejections)
+        }
+
+    @Test
+    fun newKeyCheckAndMissingKeyAreNotReportedAsRejection() =
+        runTest {
+            val creds = FakeCredentials()
+            val api = client(creds) { json(failure("UNAUTHORIZED"), HttpStatusCode.Unauthorized) }
+            // B-b에서 저장 전에 확인하는 새 키(D-079)
+            expectAppError { api.request("/settings", Item.serializer(), token = "new-key") }
+            // 키가 없어 보내지 않은 요청
+            creds.token = null
+            expectAppError { api.item() }
+            assertEquals(0, creds.rejections)
+        }
 }

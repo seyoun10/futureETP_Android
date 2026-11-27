@@ -149,4 +149,55 @@ class SecureStoreTest {
                 assertNull(credentials(store, devToken = "").accessToken())
             }
         }
+
+    @Test
+    fun keyStateFollowsLoadSaveAndRejection() =
+        runTest {
+            withStore(newAead(), folder.root.resolve("secure.json")) { store ->
+                val creds = credentials(store)
+                assertEquals(AccessKeyState(), creds.keyState.value)
+
+                creds.loadAccessKey()
+                assertEquals(AccessKeyState(loaded = true, hasKey = false), creds.keyState.value)
+                // 키가 없으면 거절로 보지 않는다
+                creds.reportRejected()
+                assertFalse(creds.keyState.value.rejected)
+
+                creds.saveAccessKey("saved-key")
+                creds.reportRejected()
+                assertEquals(AccessKeyState(loaded = true, hasKey = true, rejected = true), creds.keyState.value)
+                // 새 키를 저장하면 거절 표시가 지워진다
+                creds.saveAccessKey("new-key")
+                assertFalse(creds.keyState.value.rejected)
+                creds.reportRejected()
+                creds.clearRejected()
+                assertFalse(creds.keyState.value.rejected)
+            }
+        }
+
+    @Test
+    fun storedKeyIsReadOnceAtLoad() =
+        runTest {
+            val aead = newAead()
+            val file = folder.root.resolve("secure.json")
+            withStore(aead, file) { it.update { v -> v.copy(accessKey = "stored") } }
+            withStore(aead, file) { store ->
+                val creds = credentials(store)
+                assertEquals("stored", creds.loadAccessKey())
+                assertTrue(creds.keyState.value.hasKey)
+                // 이후 저장소가 바뀌어도 메모리 값을 쓴다(D-077)
+                store.update { it.copy(accessKey = null) }
+                assertEquals("stored", creds.accessToken())
+            }
+        }
+
+    @Test
+    fun failedSaveKeepsTheOldKey() =
+        runTest {
+            val creds = credentials(SecureStore({ error("keystore unavailable") }), devToken = "dev-token")
+            creds.loadAccessKey()
+            val saved = runCatching { creds.saveAccessKey("new-key") }
+            assertTrue(saved.isFailure)
+            assertEquals("dev-token", creds.accessToken())
+        }
 }
