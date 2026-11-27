@@ -19,7 +19,7 @@
 - [ ] 차트 방식은 2단계 뒤 C-a 스파이크(아래 4단계 첫 항목)로 정한다
 
 ## 2. 스캐폴딩
-- [ ] (선택) CI(GitHub Actions에서 check). 원격은 `github.com/seyoun10/futureETP_Android`(Public, 2026-11-27)
+- [x] CI(GitHub Actions `.github/workflows/check.yml`에서 `./gradlew check`). 원격은 `github.com/seyoun10/futureETP_Android`(Public, 2026-11-27)
 
 ## 3. 공통 기반
 - [ ] [⟲] 가로 전환·ETP 탭 세로 복귀(C 화면과 함께, D-076)

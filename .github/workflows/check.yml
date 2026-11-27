@@ -1,0 +1,48 @@
+# 커밋 전 검사(./gradlew check)를 push·PR마다 다시 돌린다.
+# ContractTest가 원본 계약(../../futureETP_ReactNative/packages/shared/contract, app/ 기준)과 복사본을 비교하므로
+# 원본 저장소 main을 형제 폴더로 함께 받는다. 원본이 바뀌어 여기가 실패하면 TODO.md "원본 변경 반영" 대상이다.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: futureETP_Android
+          # versionCode가 커밋 수(git rev-list --count HEAD)라 전체 이력을 받는다
+          fetch-depth: 0
+      - uses: actions/checkout@v7
+        with:
+          repository: seyoun10/futureETP_ReactNative
+          path: futureETP_ReactNative
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+      # compileSdk 37.2는 러너 기본 SDK에 없어 직접 받는다(AOS-003, AOS-009)
+      - run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "platforms;android-37.2" "build-tools;37.0.0" > /dev/null
+      - uses: gradle/actions/setup-gradle@v6
+      # secrets.properties가 없으면 dev 변형은 기본 주소와 빈 토큰으로 빌드된다
+      - run: ./gradlew check --stacktrace
+        working-directory: futureETP_Android
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: futureETP_Android/app/build/reports/
+          retention-days: 7
