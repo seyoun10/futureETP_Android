@@ -121,3 +121,16 @@
   3) 요청 본문(`SettingsPatch`·`DeviceRegistration`)과 query가 요청 스키마를 통과하는지 본다.
 - 근거: 스키마가 작고(응답 10개) zod refine·주석은 생성기로 옮겨지지 않는다. 위 검토처럼 생성 결과를 그대로 쓸 수 없고 손보면 생성의 이점이 사라진다. 계약 변경은 손 작성이어도 `ContractTest`(원본 일치·왕복 비교)가 바로 알려 준다. iOS(IOS-007)·Flutter(FL-007)도 손 작성 + 예시 검사다. 왕복 비교가 빠진 필드를, 스키마 검사가 예시 자체의 계약 위반을 잡는다.
 - 영향: 원본 계약이 바뀌면 `ContractTest.schemaCopyMatchesUpstream`이 실패하므로 `scripts/sync-contract.sh` → 모델 수정 → `scripts/capture-fixtures.sh`. 요청 본문은 `requestJson`(null을 빼지 않음)으로 인코딩한다. rare 레벨 query는 `formatLevel`로 숫자 기본 문자열(`1`, `2.5`)을 만든다.
+
+## AOS-013: 접근 키 QR은 CameraX + ML Kit 화면 안 미리보기
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: B-b QR 읽기(D-044, D-078). RN은 `expo-camera` `CameraView`를 B-b 안에 띄우고 시스템 스캐너(`launchScanner`)는 쓰지 않았다.
+- 선택지: (a) CameraX `Preview`·`ImageAnalysis` + `camera-compose` `CameraXViewfinder` + `camera-mlkit-vision` `MlKitAnalyzer` + ML Kit `barcode-scanning`(모델 번들) (b) Google 코드 스캐너(`play-services-code-scanner`, 권한 없이 Play 서비스 전체 화면)
+- 결정: (a). CameraX 1.7.0(2026-11-18), barcode-scanning 17.3.0(QR 형식만). 정사각형 미리보기와 [취소]를 B-b 안에 두고 RN과 같은 순서로 다룬다.
+  - [QR 읽기] → 권한이 있으면 바로, 없으면 `RequestPermission`으로 `CAMERA`를 받는다. 거부되면 "카메라를 쓸 수 없습니다. 키를 붙여넣어 주세요."
+  - 뒤 카메라가 없거나 연결에 실패하면 카메라를 닫고 같은 안내. 매니페스트 `android.hardware.camera`는 `required="false"`. 마이크 권한은 넣지 않는다.
+  - 읽은 값은 `parseAccessKey(requirePrefix = true)`. 아니면 "접근 키 QR이 아닙니다." 후 계속 읽고, 받아들인 값은 한 번만 넘겨 카메라를 닫고 붙여넣기와 같은 확인·저장으로 간다.
+  - 카메라 영역은 화면의 `scanner` 슬롯이라 Robolectric 테스트는 가짜 스캐너로 이벤트를 넣는다. 실제 카메라는 기기에서 확인한다.
+- 근거: (b)는 Play 서비스 모듈 내려받기·모달 생명주기에 따라 달라지고 RN과 화면 흐름이 다르다(D-078 근거와 같음). 모델 번들은 처음 읽을 때 내려받기를 기다리지 않는다(앱 크기는 개인용이라 문제 삼지 않음).
+- 영향: 권한 `CAMERA`. 의존성 `camera-camera2`·`camera-lifecycle`·`camera-compose`·`camera-mlkit-vision`·`com.google.mlkit:barcode-scanning`.

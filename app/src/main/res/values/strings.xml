@@ -18,6 +18,7 @@
     <string name="errors_timeout">서버 응답이 늦습니다. 잠시 뒤 다시 시도해 주세요.</string>
     <string name="errors_schema_mismatch">앱과 서버 버전이 맞지 않습니다. 앱을 업데이트해 주세요.</string>
     <string name="common_back">뒤로</string>
+    <string name="common_cancel">취소</string>
     <string name="access_key_title">접근 키</string>
     <string name="access_key_guide">서버 접근 키를 넣어 주세요. Mac에서 키 스크립트가 띄운 QR을 읽거나 키를 붙여넣으세요.</string>
     <string name="access_key_paste_placeholder">키 붙여넣기</string>
@@ -25,4 +26,8 @@
     <string name="access_key_verifying">확인 중</string>
     <string name="access_key_bad_format">키 형식이 맞지 않습니다.</string>
     <string name="access_key_rejected">키가 맞지 않습니다.</string>
+    <string name="access_key_scan_qr">QR 읽기</string>
+    <string name="access_key_scanner_label">QR 카메라</string>
+    <string name="access_key_not_key_qr">접근 키 QR이 아닙니다.</string>
+    <string name="access_key_camera_unavailable">카메라를 쓸 수 없습니다. 키를 붙여넣어 주세요.</string>
 </resources>

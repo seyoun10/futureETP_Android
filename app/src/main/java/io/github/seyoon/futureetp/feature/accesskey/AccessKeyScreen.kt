@@ -1,5 +1,9 @@
 package io.github.seyoon.futureetp.feature.accesskey
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +18,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.Surface
@@ -26,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
@@ -34,6 +40,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.seyoon.futureetp.R
 import io.github.seyoon.futureetp.core.api.AppErrorCode
@@ -56,7 +63,26 @@ fun AccessKeyRoute(
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(state.saved) { if (state.saved) onSaved() }
     DisposableEffect(Unit) { onDispose(onLeave) }
-    AccessKeyScreen(state = state, rejected = rejected, onBack = onBack, onSubmit = viewModel::submit)
+    val context = LocalContext.current
+    val permission =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) viewModel.startScan() else viewModel.cameraUnavailable()
+        }
+    val scanQr = {
+        val granted =
+            ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        if (granted) viewModel.startScan() else permission.launch(Manifest.permission.CAMERA)
+    }
+    AccessKeyScreen(
+        state = state,
+        rejected = rejected,
+        onBack = onBack,
+        onSubmit = viewModel::submit,
+        onScanQr = scanQr,
+        onScanned = viewModel::scanned,
+        onCameraUnavailable = viewModel::cameraUnavailable,
+        onCancelScan = viewModel::cancelScan,
+    )
 }
 
 @Composable
@@ -65,7 +91,18 @@ fun AccessKeyScreen(
     rejected: Boolean,
     onBack: (() -> Unit)?,
     onSubmit: (String) -> Unit,
+    onScanQr: () -> Unit,
+    onScanned: (String) -> Boolean,
+    onCameraUnavailable: () -> Unit,
+    onCancelScan: () -> Unit,
     modifier: Modifier = Modifier,
+    scanner: QrScannerSlot = {
+        scanned,
+        unavailable,
+        slotModifier,
+        ->
+        QrCameraScanner(scanned, unavailable, slotModifier)
+    },
 ) {
     // 키 값은 저장된 상태(Bundle)에 남기지 않는다(rememberTextFieldState는 저장한다)
     val input = remember { TextFieldState() }
@@ -81,6 +118,17 @@ fun AccessKeyScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(stringResource(R.string.access_key_guide))
+                // QR이 기본이고, 카메라를 못 쓰면 붙여넣기를 안내한다(D-078)
+                if (state.scanning) {
+                    scanner(onScanned, onCameraUnavailable, Modifier)
+                    WideButton(text = stringResource(R.string.common_cancel), onClick = onCancelScan)
+                } else {
+                    WideButton(
+                        text = stringResource(R.string.access_key_scan_qr),
+                        enabled = !state.verifying,
+                        onClick = onScanQr,
+                    )
+                }
                 OutlinedSecureTextField(
                     state = input,
                     modifier = Modifier.fillMaxWidth(),
@@ -126,6 +174,21 @@ private fun Header(onBack: (() -> Unit)?) {
 }
 
 @Composable
+private fun WideButton(
+    text: String,
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+) {
+    FilledTonalButton(
+        onClick = onClick,
+        enabled = enabled,
+        modifier = Modifier.fillMaxWidth().heightIn(min = TOUCH_TARGET),
+    ) {
+        Text(text)
+    }
+}
+
+@Composable
 private fun SubmitButton(
     verifying: Boolean,
     enabled: Boolean,
@@ -151,9 +214,17 @@ private fun errorText(
     rejected: Boolean,
 ): String? =
     when {
-        state.notice == AccessKeyNotice.BAD_FORMAT -> stringResource(R.string.access_key_bad_format)
+        state.notice != null -> stringResource(state.notice.textRes)
         state.failure == AppErrorCode.UNAUTHORIZED -> stringResource(R.string.access_key_rejected)
         state.failure != null -> stringResource(state.failure.messageRes)
         rejected && !state.verifying -> stringResource(R.string.access_key_rejected)
         else -> null
     }
+
+private val AccessKeyNotice.textRes: Int
+    get() =
+        when (this) {
+            AccessKeyNotice.BAD_FORMAT -> R.string.access_key_bad_format
+            AccessKeyNotice.NOT_KEY_QR -> R.string.access_key_not_key_qr
+            AccessKeyNotice.CAMERA_UNAVAILABLE -> R.string.access_key_camera_unavailable
+        }

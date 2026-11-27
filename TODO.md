@@ -25,7 +25,6 @@
 
 ## 3. 공통 기반
 - [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
-- [ ] 접근 키 B-b QR 읽기: [QR 읽기] → 카메라 권한 → 화면 안 미리보기에서 `parseAccessKey(requirePrefix = true)`, 접두사 없으면 "접근 키 QR이 아닙니다" 후 계속 읽기, 권한 거부·카메라 없음은 붙여넣기 안내, 마이크 권한 없음. 스캐너 방식(CameraX + ML Kit / Google 코드 스캐너)은 AOS 결정으로 남긴다 (D-044, D-078)
 - [ ] i18n ko/en, 앱 안 언어 설정을 서버 기기 설정과 맞춤 (D-033, D-073, D-137)
 - [ ] 테마 토큰(다크 전용)·등락 색 설정 저장 (D-031, D-073)
 - [ ] 공용 조회 UI: 기준 시각 줄(freshness)·로딩/오류/빈 상태 분기·`nextUpdateAt` + 1분 자동 새로고침·앱 복귀 재조회·새 접근 키 저장 뒤 실패한 조회 다시(RN `invalidateQueries`, `AccessKeyState` 변화로) (D-048, D-075, D-077)

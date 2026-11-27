@@ -74,4 +74,44 @@ class AccessKeyViewModelTest {
         vm.submit(key)
         assertEquals(AccessKeyUiState(failure = AppErrorCode.INTERNAL), vm.state.value)
     }
+
+    @Test
+    fun scanStartClearsEarlierMessages() {
+        val vm = viewModel()
+        vm.submit("short")
+        vm.startScan()
+        assertEquals(AccessKeyUiState(scanning = true), vm.state.value)
+        vm.cancelScan()
+        assertEquals(AccessKeyUiState(), vm.state.value)
+    }
+
+    @Test
+    fun qrWithoutPrefixIsNotAcceptedAndScanningGoesOn() {
+        val vm = viewModel()
+        vm.startScan()
+        // 붙여넣기와 달리 QR은 접두사가 있어야 한다(D-078)
+        assertEquals(false, vm.scanned(key))
+        assertEquals(AccessKeyUiState(scanning = true, notice = AccessKeyNotice.NOT_KEY_QR), vm.state.value)
+        assertTrue(calls.isEmpty())
+    }
+
+    @Test
+    fun acceptedQrClosesTheCameraAndSavesOnce() {
+        val vm = viewModel()
+        vm.startScan()
+        assertEquals(true, vm.scanned("$ACCESS_KEY_QR_PREFIX$key"))
+        // 카메라가 닫힌 뒤 늦게 온 결과는 무시한다
+        assertEquals(false, vm.scanned("$ACCESS_KEY_QR_PREFIX$key"))
+        assertEquals(listOf("verify:$key", "save:$key"), calls)
+        assertEquals(AccessKeyUiState(saved = true), vm.state.value)
+    }
+
+    @Test
+    fun cameraUnavailableClosesTheCameraWithPasteNotice() {
+        val vm = viewModel(verify = { throw AppError(AppErrorCode.NETWORK) })
+        vm.submit(key)
+        vm.startScan()
+        vm.cameraUnavailable()
+        assertEquals(AccessKeyUiState(notice = AccessKeyNotice.CAMERA_UNAVAILABLE), vm.state.value)
+    }
 }
