@@ -107,7 +107,7 @@
 
 ## AOS-012: 응답 모델은 손으로 쓰고 계약 복사본·실제 응답 예시로 검사
 - 날짜: 2026-11-27
-- 상태: 제안 (Claude, 사용자 확인 전)
+- 상태: 확정 (사용자 선택, 2026-11-27 생성 도구 검토 뒤)
 - 선택지: (a) `@Serializable` 모델을 손으로 쓰고 계약 테스트로 맞춘다 (b) quicktype 26.0.0(`--framework kotlinx`) (c) OpenAPI Generator 7.28.0(`kotlin`, `kotlinx_serialization`, 스키마를 OpenAPI 3.1 components로 감싸서) (d) json-kotlin-schema-codegen 0.123
 - 검토(2026-11-27, 계약 복사본으로 실제 생성):
   - (b) 스키마 여러 개를 한 번에 넣으면 내부 오류(`Defined value expected`)라 하나씩 생성해야 하고, 그러면 `Basis`·`Window` 같은 enum이 파일마다 따로 생긴다. 필수 nullable 필드에 `= null` 기본값이 붙어 키가 빠져도 null로 통과한다(SCHEMA_MISMATCH를 못 잡음). `maPeriod`는 `Double`, 정수는 `Long`, `contractMonth`·`at`은 `String`. enum 이름을 속성 이름에서 지어 `alertCommodity` → `AlertCommodity`, `direction` → `Side`가 된다
