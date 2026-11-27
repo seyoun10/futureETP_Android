@@ -7,4 +7,12 @@
     <string name="dev_health_error">Failed: %1$s</string>
     <string name="dev_health_retry">Check again</string>
     <string name="dev_health_no_commit">none</string>
+    <string name="errors_unauthorized">The access key is missing or invalid.</string>
+    <string name="errors_rate_limited">Too many requests. Please try again shortly.</string>
+    <string name="errors_validation_failed">The input is invalid.</string>
+    <string name="errors_not_found">Data not found.</string>
+    <string name="errors_internal">Something went wrong on the server. Please try again shortly.</string>
+    <string name="errors_network">Unable to connect to the network.</string>
+    <string name="errors_timeout">The server is taking too long. Please try again shortly.</string>
+    <string name="errors_schema_mismatch">The app and server versions do not match. Please update the app.</string>
 </resources>

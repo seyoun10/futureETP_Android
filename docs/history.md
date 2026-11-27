@@ -17,3 +17,7 @@
   - import 방향 규칙(architecture.md "규칙")을 검사에 넣는다. Konsist 아키텍처 테스트(AOS-010)
 - [x] dev 변형이 로컬 dev 서버 `GET /v1/health`를 부르는 최소 화면으로 연결 확인
   - 결과(2026-11-27): flavor `dev`(`futureETP Dev`, `.dev`)·`prod`(`futureETP`, `https://futureetp-api.duckdns.org`). 아이콘은 Flutter 저장소가 RN 에셋으로 만든 적응형 아이콘을 복사(minSdk 29라 PNG mipmap 없음). Compose 1.13이 compileSdk 37.1 이상을 요구해 SDK Platform 37.2를 설치했고, Robolectric은 SDK 36부터 Java 21이 필요해 SDK 35로 돈다(AOS-003, AOS-009). `AOS_Pixel_API_36`에서 dev 서버 health `OK`를 확인
+
+## 3. 공통 기반
+- [x] API client: 헤더(Bearer·`X-Device-Id`), 타임아웃 15초, 봉투 디코딩, `AppError`, 재시도 규칙 (D-042, D-072)
+  - 결과(2026-11-27): `core/api/ApiClient.request`가 유일한 경로. 키가 없으면 보내지 않고 `UNAUTHORIZED`, 봉투가 아닌 응답은 5xx면 `INTERNAL`·아니면 `SCHEMA_MISMATCH`, 계약에 없는 서버 코드도 `SCHEMA_MISMATCH`. GET만 `NETWORK`·`TIMEOUT`·`INTERNAL`을 1초·2초 뒤 최대 2회 다시 보낸다(RN TanStack Query 기본 backoff). 에러 문구는 `AppErrorCode.messageRes`·`errorTextRes`(RN `errors.*`). 접근 키·기기 ID는 `ApiCredentials`로 받는다
