@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="dev_health_title">Server check</string>
-    <string name="dev_health_server">Server: %1$s</string>
-    <string name="dev_health_loading">Checking…</string>
-    <string name="dev_health_ok">OK (commit %1$s)</string>
-    <string name="dev_health_error">Failed: %1$s</string>
-    <string name="dev_health_retry">Check again</string>
-    <string name="dev_health_no_commit">none</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="errors_unauthorized">The access key is missing or invalid.</string>
     <string name="errors_rate_limited">Too many requests. Please try again shortly.</string>
     <string name="errors_validation_failed">The input is invalid.</string>
@@ -36,4 +29,62 @@
     <string name="access_key_scanner_label">QR camera</string>
     <string name="access_key_not_key_qr">This QR is not an access key.</string>
     <string name="access_key_camera_unavailable">The camera is unavailable. Paste the key instead.</string>
+    <string name="commodity_gc">Gold</string>
+    <string name="commodity_si">Silver</string>
+    <string name="commodity_cl">Crude Oil</string>
+    <string name="commodity_ng">Natural Gas</string>
+    <string name="access_key_saved">Set</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_reset">Reset</string>
+    <string name="settings_reset_title">Reset settings</string>
+    <string name="settings_reset_message">Restore the display and disparity chart settings to their defaults? Alert settings and the access key stay as they are.</string>
+    <string name="settings_alerts">Alerts</string>
+    <string name="settings_access_key">Access key</string>
+    <string name="settings_data_sources">Data sources</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_up_down_style">Up/down colors</string>
+    <string name="settings_up_down_style_kr">Korean</string>
+    <string name="settings_up_down_style_us">US</string>
+    <string name="settings_section_general">General</string>
+    <string name="settings_section_disparity">Disparity chart</string>
+    <string name="settings_section_other">Other</string>
+    <string name="settings_basis">Chart basis</string>
+    <string name="settings_basis_front">Front month</string>
+    <string name="settings_basis_kr">KR-style</string>
+    <string name="settings_basis_us">US-style</string>
+    <string name="settings_ma_period">Moving average (days)</string>
+    <string name="settings_window">Distribution period (years)</string>
+    <string name="settings_window_all">All</string>
+    <string name="settings_alert_off">Off</string>
+    <string name="settings_rare_levels" formatted="false">Rare levels (%)</string>
+    <string name="settings_rare_level_field">Rare level %1$d</string>
+    <string name="settings_rare_level_hint" tools:ignore="PluralsCandidate">%1$s–%2$s, 1 decimal place, %3$d distinct values</string>
+    <string name="settings_rare_level_invalid">Enter a value from %1$s to %2$s with at most 1 decimal place.</string>
+    <string name="settings_rare_level_duplicate" tools:ignore="PluralsCandidate">Enter %1$d distinct values.</string>
+    <string name="settings_save_failed">Could not save. %1$s</string>
+    <string name="settings_language_desc">Language for screens and push notifications</string>
+    <string name="settings_up_down_style_desc">Korean: up red, down blue. US: up green, down red</string>
+    <string name="settings_basis_desc">Contracts used for the chart and alerts. Front: the most traded contract. KR/US: roll rules of Korean/US ETPs</string>
+    <string name="settings_ma_period_desc">Moving average period that disparity is measured against</string>
+    <string name="settings_window_desc">Past period of disparity used to judge rarity</string>
+    <string name="settings_rare_levels_desc" formatted="false">Bands at the top and bottom % of past disparity; you get an alert when price reaches one</string>
+    <string name="settings_alerts_desc">Commodity for rare-level alerts and quiet hours</string>
+    <string name="settings_access_key_desc">Secret key for connecting to the server</string>
+    <string name="settings_data_sources_desc">Where prices and data come from</string>
+    <string name="settings_bundle">AOS %1$s: %2$s (build %3$d)</string>
+    <string name="data_sources_section_futures">Futures prices</string>
+    <string name="data_sources_section_etp">ETP</string>
+    <string name="data_sources_exchange_label">Exchange</string>
+    <string name="data_sources_exchange_value">CME Group (NYMEX·COMEX)</string>
+    <string name="data_sources_settlement_label">Settlement &amp; volume</string>
+    <string name="data_sources_settlement_value">Massive, after close</string>
+    <string name="data_sources_intraday_label">Intraday</string>
+    <string name="data_sources_intraday_value">Yahoo Finance, ~10 min delayed</string>
+    <string name="data_sources_history_label">History</string>
+    <string name="data_sources_history_value" tools:ignore="TypographyDashes">Databento (since 2010-06)</string>
+    <string name="data_sources_etp_kr_label">KR</string>
+    <string name="data_sources_etp_kr_value">Naver Finance, KRX</string>
+    <string name="data_sources_etp_us_label">US</string>
+    <string name="data_sources_etp_us_value">Nasdaq, Yahoo Finance</string>
+    <string name="data_sources_notice">Roll-adjusted values are computed by this app from S&amp;P GSCI and Bloomberg index methodologies. For personal reference only; accuracy not guaranteed; not investment advice.</string>
 </resources>

@@ -47,6 +47,10 @@ class AppLocale(
         if (appLanguageOf(appLocales()) == null) setAppLocales(defaultAppLanguage(deviceLanguage()).tag)
     }
 
+    /** 지금 기기 언어의 기본값(B [초기화]) */
+    val deviceDefault: AppLanguage
+        get() = defaultAppLanguage(deviceLanguage())
+
     fun set(language: AppLanguage) {
         if (appLanguageOf(appLocales()) != language) setAppLocales(language.tag)
     }

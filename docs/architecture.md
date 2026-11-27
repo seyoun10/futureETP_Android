@@ -10,23 +10,22 @@ app/src/main/java/io/github/seyoon/futureetp/
 ├─ MainActivity.kt / FutureEtpApplication.kt / AppContainer.kt   진입점, 앱 컨테이너(수동 DI, AOS-005)
 ├─ navigation/                   Navigation 3 NavDisplay(`AppNavigation`), 백스택 키 `AppKey`(AOS-004)
 ├─ feature/
-│  ├─ devhealth/                 2단계 임시 health 화면(B 화면과 함께 지움)
 │  ├─ commoditylist/             A
-│  ├─ settings/ alertsettings/ accesskey/ datasources/   B, B-a, B-b
+│  ├─ settings/ alertsettings/ accesskey/ datasources/   B, B-a, B-b, B > 데이터 출처
 │  └─ commodity/                 C: disparitychart(C-a)·contractchart(C-c)·curve(C-b)·etp(C-d, C-d-a)
 ├─ core/
 │  ├─ api/                       HTTP 클라이언트(`ApiClient`), AppError, 엔드포인트(`Endpoints.kt`)
 │  │  └─ model/                  계약 `schemas/*.json`과 맞춘 @Serializable 응답·요청·query 모델(AOS-012)
 │  ├─ query/                     조회 상태 `Query`(자동 새로고침·앱 복귀·새 키 재조회, AOS-016)
-│  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회)
+│  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회), 서버 설정 `SettingsRepository`(낙관적 PATCH, AOS-017)
 │  ├─ chart/                     Canvas 차트·뷰포트
-│  ├─ ui/                        공용 Composable(ScreenHeader, FreshnessFooter, QueryStateView, SegmentedControl)
+│  ├─ ui/                        공용 Composable(ScreenHeader·HeaderIconButton, SectionHeader·SegmentedControl, FreshnessFooter, QueryStateView), 선택 햅틱, 원자재 이름
 │  ├─ storage/                   보안 저장소(datastore-tink): 접근 키·installation ID, 요청 헤더 값 `StoredCredentials`(AOS-007)
 │  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014), 앱 안 언어 `AppLocale`(per-app language, AOS-015)
 │  ├─ theme/                     테마 토큰(다크 전용, `Tokens.kt`), 등락 색 `UpDownPalette.kt`, `FutureEtpTheme`
 │  ├─ push/                      FCM 토큰 등록, 알림 탭 이동
-│  └─ util/                      숫자·날짜 포맷, 햅틱
-app/src/main/res/                values(ko 원문)·values-en, 적응형 아이콘, 백업 제외 규칙
+│  └─ util/                      숫자·날짜 포맷
+app/src/main/res/                values(ko 원문)·values-en, 적응형 아이콘, 화면 아이콘 vector(`drawable/ic_*`, AOS-017), 백업 제외 규칙
 app/src/dev/AndroidManifest.xml  dev만 평문 HTTP 허용
 app/src/test/                    JUnit 4 + Robolectric(SDK 35) + Konsist `ArchitectureTest` + 계약 테스트 `ContractTest`
 app/src/test/resources/contract/ 계약 복사본 `schemas/`, dev 서버 응답 예시 `fixtures/`(AOS-012)

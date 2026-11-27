@@ -64,6 +64,6 @@ class ArchitectureTest {
 
     @Test
     fun scopeFindsSources() {
-        assertTrue(files.any { it.packagee?.name == "$root.feature.devhealth" })
+        assertTrue(files.any { it.packagee?.name == "$root.feature.settings" })
     }
 }

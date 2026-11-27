@@ -171,3 +171,14 @@
   - 화면 사이 캐시(A → C 미리 조회, `gcTime`, 무한 조회)는 repository(`core/data`)가 맡고 `Query`의 `fetch`가 repository를 부른다. 필요한 화면을 만들 때 넣는다.
 - 근거: 필요한 동작이 위 네 가지뿐이라 라이브러리보다 짧고, RN 동작과 하나씩 대조해 테스트하기 쉽다. (c)는 같은 타이머·복귀 규칙을 화면마다 되풀이한다.
 - 영향: 의존성 `androidx.lifecycle:lifecycle-process`(lifecycle 2.11.1과 같은 버전). 공용 Composable `QueryStateView`·`LoadingView`·`CenterSpinner`·`ErrorView`·`FreshnessFooter`·`AsOfFooter`·`FooterLine`(`core/ui`).
+
+## AOS-017: 아이콘은 vector drawable, 서버 설정은 앱 범위 repository
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: B 화면에서 title-bar 아이콘([←]·초기화·›)과 서버 설정 낙관적 PATCH가 처음 필요해졌다. RN은 MaterialCommunityIcons 글꼴과 TanStack Query 캐시·mutation scope를 쓴다.
+- 선택지: 아이콘 (a) 쓰는 아이콘만 `res/drawable` vector로 (b) `material-icons-extended`. 설정 (a) `AppContainer`가 갖는 `SettingsRepository` 하나 (b) 화면마다 ViewModel에서 따로
+- 결정: 둘 다 (a).
+  - 아이콘은 Material Icons(Apache 2.0) path를 `ic_*.xml`로 옮기고 `Icon(painterResource)`로 tint한다.
+  - `SettingsRepository`는 앱 범위 CoroutineScope에서 `Query` 하나와 PATCH 줄(Channel)을 갖는다. 진행 중인 조회를 PATCH 앞뒤로 끊고(`Query.cancel`) 응답 값을 넣는다(`Query.setData`). 실패하면 서버 값을 다시 조회한다.
+- 근거: extended 아이콘 묶음은 크고 더 이상 갱신되지 않는다. 설정은 B·B-a·A(알림 꺼짐 점)·C-a(차트 조회 값)가 같은 값을 봐야 하고, 화면을 떠나도 보낸 PATCH가 끝나야 한다.
+- 영향: 새 아이콘은 drawable을 추가한다. 설정을 읽는 화면은 `container.settingsRepository.state`를 쓴다.

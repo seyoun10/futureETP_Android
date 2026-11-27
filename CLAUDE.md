@@ -80,7 +80,7 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 - 처음 한 번: `cp secrets.example.properties secrets.properties` 뒤 값 넣기, `cp ../futureETP_ReactNative/apps/mobile/google-services.json app/`(둘 다 커밋 안 함)
 - `./gradlew check`: 커밋 전 검사 전부(Android lint `lintDevDebug`, ktlint, detekt, dev·prod 단위 테스트 + Robolectric Compose UI 테스트 + Konsist import 방향 테스트). 통과해야 커밋
 - `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`). 실행 `adb shell am start -n io.github.seyoon.futureetp.dev/io.github.seyoon.futureetp.MainActivity`
-- `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.DevHealthViewModelTest"`
+- `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.SettingsViewModelTest"`
 - `./gradlew lintDevDebug` / `ktlintCheck` / `detekt`: 검사 하나씩. 포맷 자동 수정은 `./gradlew ktlintFormat`
 - 계약이 바뀌면: `scripts/sync-contract.sh`(원본 계약 복사) → 모델(`core/api/model`) 수정 → dev 서버를 띄우고 `scripts/capture-fixtures.sh [이름 ...]`(응답 예시 저장). `ContractTest`가 복사본과 원본이 다르면 실패한다 (AOS-012)
 - `./gradlew assembleProdRelease`: prod release(서명은 6단계에서 정한다, 지금은 unsigned)

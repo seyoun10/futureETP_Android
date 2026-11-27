@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ko 원문(AOS-011). 2단계 임시 화면 문구 dev_health_*는 B 화면을 만들 때 지운다 -->
-<resources>
-    <string name="dev_health_title">서버 연결 확인</string>
-    <string name="dev_health_server">서버: %1$s</string>
-    <string name="dev_health_loading">확인 중…</string>
-    <string name="dev_health_ok">정상 (커밋 %1$s)</string>
-    <string name="dev_health_error">실패: %1$s</string>
-    <string name="dev_health_retry">다시 확인</string>
-    <string name="dev_health_no_commit">없음</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- 에러 code → 문구(RN errors.*, D-042) -->
     <string name="errors_unauthorized">접근 키가 없거나 맞지 않습니다.</string>
     <string name="errors_rate_limited">요청이 너무 많습니다. 잠시 뒤 다시 시도해 주세요.</string>
@@ -39,4 +31,69 @@
     <string name="access_key_scanner_label">QR 카메라</string>
     <string name="access_key_not_key_qr">접근 키 QR이 아닙니다.</string>
     <string name="access_key_camera_unavailable">카메라를 쓸 수 없습니다. 키를 붙여넣어 주세요.</string>
+    <!-- 원자재 이름(RN commodities.*) -->
+    <string name="commodity_gc">금</string>
+    <string name="commodity_si">은</string>
+    <string name="commodity_cl">원유</string>
+    <string name="commodity_ng">천연가스</string>
+    <string name="access_key_saved">설정됨</string>
+    <!-- B 설정(RN settings.*) -->
+    <string name="settings_title">설정</string>
+    <string name="settings_reset">초기화</string>
+    <string name="settings_reset_title">설정 초기화</string>
+    <string name="settings_reset_message">표시·이격도차트 설정을 기본값으로 되돌릴까요? 알림 설정과 접근 키는 그대로입니다.</string>
+    <string name="settings_alerts">알림</string>
+    <string name="settings_access_key">접근 키</string>
+    <string name="settings_data_sources">데이터 출처</string>
+    <string name="settings_language">언어</string>
+    <string name="settings_up_down_style">등락 색</string>
+    <string name="settings_up_down_style_kr">한국식</string>
+    <string name="settings_up_down_style_us">미국식</string>
+    <!-- 언어 이름은 그 언어로 쓴다 -->
+    <string name="settings_language_ko" translatable="false">한국어</string>
+    <string name="settings_language_en" translatable="false">English</string>
+    <string name="settings_section_general">일반</string>
+    <string name="settings_section_disparity">이격도차트</string>
+    <string name="settings_section_other">기타</string>
+    <string name="settings_basis">차트 기준값</string>
+    <string name="settings_basis_front">대표월물</string>
+    <string name="settings_basis_kr">한국형</string>
+    <string name="settings_basis_us">미국형</string>
+    <string name="settings_ma_period">기준 이평선(일)</string>
+    <string name="settings_window">분포 기간(년)</string>
+    <string name="settings_window_all">전체</string>
+    <string name="settings_alert_off">끔</string>
+    <string name="settings_rare_levels" formatted="false">rare-level(%)</string>
+    <string name="settings_rare_level_field">rare-level %1$d</string>
+    <string name="settings_rare_level_hint" tools:ignore="PluralsCandidate">%1$s~%2$s, 소수 첫째 자리, 서로 다른 %3$d개</string>
+    <string name="settings_rare_level_invalid">%1$s~%2$s 사이 값을 소수 첫째 자리까지 입력해 주세요.</string>
+    <string name="settings_rare_level_duplicate" tools:ignore="PluralsCandidate">서로 다른 값 %1$d개를 입력해 주세요.</string>
+    <string name="settings_save_failed">저장하지 못했습니다. %1$s</string>
+    <string name="settings_language_desc">화면과 푸시 알림 문구의 언어</string>
+    <string name="settings_up_down_style_desc">한국식은 상승 빨강·하락 파랑, 미국식은 상승 초록·하락 빨강</string>
+    <string name="settings_basis_desc">차트와 알림에 쓰는 월물. 대표월물은 거래량이 가장 많은 월물, 한국형·미국형은 국내·미국 ETP의 롤 규칙</string>
+    <string name="settings_ma_period_desc">이격도를 재는 기준 이동평균 기간</string>
+    <string name="settings_window_desc">드문 정도를 판단할 과거 이격도 기간</string>
+    <string name="settings_rare_levels_desc" formatted="false">과거 이격도의 위·아래 끝 몇 %를 차트 밴드로 그리고, 닿으면 알림을 보냅니다</string>
+    <string name="settings_alerts_desc">rare-level 도달 알림을 받을 원자재와 알림 거부 시간</string>
+    <string name="settings_access_key_desc">서버에 접속하는 비밀 키</string>
+    <string name="settings_data_sources_desc">시세와 데이터를 가져오는 곳</string>
+    <!-- 맨 아래 줄: 클라이언트 구분·변형·앱 버전·빌드 번호(D-141) -->
+    <string name="settings_bundle">AOS %1$s: %2$s (빌드 %3$d)</string>
+    <!-- B > 데이터 출처(RN dataSources.*). 소스가 바뀌면 함께 바꾼다 -->
+    <string name="data_sources_section_futures">선물 시세</string>
+    <string name="data_sources_section_etp">ETP</string>
+    <string name="data_sources_exchange_label">거래소</string>
+    <string name="data_sources_exchange_value">CME Group (NYMEX·COMEX)</string>
+    <string name="data_sources_settlement_label">정산가·거래량</string>
+    <string name="data_sources_settlement_value">Massive · 장 마감 후 반영</string>
+    <string name="data_sources_intraday_label">장중 시세</string>
+    <string name="data_sources_intraday_value">Yahoo Finance · 약 10분 지연</string>
+    <string name="data_sources_history_label">과거 일봉</string>
+    <string name="data_sources_history_value" tools:ignore="TypographyDashes">Databento (2010-06~)</string>
+    <string name="data_sources_etp_kr_label">국내</string>
+    <string name="data_sources_etp_kr_value">네이버 증권, KRX</string>
+    <string name="data_sources_etp_us_label">미국</string>
+    <string name="data_sources_etp_us_value">Nasdaq, Yahoo Finance</string>
+    <string name="data_sources_notice">롤 규칙: S&amp;P GSCI·Bloomberg 지수 방법론을 따라 앱이 계산한 값입니다. 개인 참고용이며 정확성을 보장하지 않고, 투자 권유가 아닙니다.</string>
 </resources>

@@ -60,6 +60,11 @@ class DisplaySettingsStore(
         dataStore.edit { it[UP_DOWN_STYLE] = style.name }
     }
 
+    /** 지금 기기 지역의 기본값으로 되돌린다(B [초기화]) */
+    suspend fun reset() {
+        setUpDownStyle(defaultDisplaySettings(regionCode()).upDownStyle)
+    }
+
     private suspend fun remember(defaults: DisplaySettings) {
         try {
             dataStore.edit { if (it[UP_DOWN_STYLE] == null) it[UP_DOWN_STYLE] = defaults.upDownStyle.name }

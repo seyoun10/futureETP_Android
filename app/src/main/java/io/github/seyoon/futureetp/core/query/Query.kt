@@ -94,6 +94,18 @@ class Query<T>(
             }
     }
 
+    /** 진행 중인 조회를 끊는다. 늦게 끝난 조회가 새 값을 옛 값으로 덮지 않게 한다(RN `cancelQueries`) */
+    fun cancel() {
+        job?.cancel()
+        job = null
+        _state.update { it.copy(isFetching = false) }
+    }
+
+    /** 다른 요청(PATCH 응답 등)으로 받은 서버 값을 넣는다(RN `setQueryData`) */
+    fun setData(data: T) {
+        _state.update { it.copy(data = data, error = null, dataUpdatedAt = now()) }
+    }
+
     /**
      * 화면이 보이는 동안 부른다. `nextUpdateAt` + 1분(마지막 조회 + 1분보다 이르지 않게)에 다시 조회하고,
      * 조회가 끝날 때마다(성공·실패) 다시 예약한다. 화면이 가려지면 취소된다

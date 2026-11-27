@@ -6,13 +6,11 @@
 
 ## 원본 변경 반영
 마지막 대조: futureETP `646af4f`(2026-11-23, 앱 코드를 쓰기 전이라 그 전 RN 앱 코드 수정은 현재 RN 코드를 보고 구현할 때 들어간다). 적힌 항목 밖에 빠진 것이 있는지는 `git -C ../futureETP_ReactNative log --oneline 646af4f..HEAD -- apps/mobile packages/shared`로 그 뒤 커밋만 이 저장소 구현과 맞춰 본다. 다 보면 이 줄의 커밋을 그 HEAD로 바꾼다
-- [ ] 설정 키패드는 [완료]로만 닫기(2026-11-25, futureETP D-083 보충, `821b8c5`): B rare-level 키패드를 화면을 끌거나 빈 곳을 눌러도 닫지 않는다. iOS는 키패드 위 [완료] 줄, Android는 키패드의 완료 키로만 닫고, 열린 채 다른 행을 누르면 그 행이 눌린다(futureETP `SettingsScreen.tsx` `keyboardDismissMode="none"`·`keyboardShouldPersistTaps="always"`). screens.md B
-- [ ] 설정 키패드가 입력칸을 가리지 않게(2026-11-25, futureETP D-083 보충, `675fb8d`): B rare-level 키패드가 올라오면 포커스된 입력칸과 그 아래 안내 줄이 키패드·iOS [완료] 줄에 가리지 않도록 화면을 끌어올린다(futureETP `components/useKeepFocusedInputVisible.ts`: 입력칸 아래 + 48pt가 보이는 영역 아래를 넘은 만큼 스크롤). screens.md B
-- [ ] 설정 맨 아래 줄 머리에 클라이언트 구분·변형(2026-11-25, futureETP D-141, `b16c6e7`·`6dda52a`): 같은 앱 ID를 쓰는 앱 중 어느 것이, dev·prod 중 어느 변형이 떠 있는지 보이도록 B 맨 아래 줄을 `AOS prod:`·`AOS dev:`로 시작한다(RN은 `앱 번들:` → `RN prod:`, 네이티브 앱은 예: `AOS prod: 1.0.0 (빌드 1)`). 줄은 한 줄 고정이라 글자 수를 늘리지 않는다. screens.md B 맨 아래 앱 번들 줄
+- [ ] 설정 키패드는 [완료]로만 닫기(B에 구현, 기기 확인 남음)(2026-11-25, futureETP D-083 보충, `821b8c5`): B rare-level 키패드를 화면을 끌거나 빈 곳을 눌러도 닫지 않는다. iOS는 키패드 위 [완료] 줄, Android는 키패드의 완료 키로만 닫고, 열린 채 다른 행을 누르면 그 행이 눌린다(futureETP `SettingsScreen.tsx` `keyboardDismissMode="none"`·`keyboardShouldPersistTaps="always"`). screens.md B
+- [ ] 설정 키패드가 입력칸을 가리지 않게(B에 구현, 기기 확인 남음)(2026-11-25, futureETP D-083 보충, `675fb8d`): B rare-level 키패드가 올라오면 포커스된 입력칸과 그 아래 안내 줄이 키패드·iOS [완료] 줄에 가리지 않도록 화면을 끌어올린다(futureETP `components/useKeepFocusedInputVisible.ts`: 입력칸 아래 + 48pt가 보이는 영역 아래를 넘은 만큼 스크롤). screens.md B
 - [ ] 핀치 중 십자선 막기(2026-11-23, futureETP D-087 보충): 두 손가락으로 핀치하다 멈추면 길게 누르기 십자선이 켜지던 것. 핀치를 시작한 터치에서는 손가락을 댄 채 멈춰도 십자선·봉 스냅 햅틱·상세 박스를 띄우지 않고, 손을 모두 떼고 다시 길게 눌러야 나타난다(C-a·C-c 공통, futureETP `charts/useChartViewport.ts` `pinchedInTouch`). screens.md C-a 길게 누르기
 - [ ] 휴장 달력 일정을 기기 로컬로(2026-11-23, futureETP D-144): 예외 일정을 시장 날짜 대신 기기 로컬 날짜 칸에 둔다. 시각 있는 일정은 `at`(시장 현지)을, CLOSED는 정규 개장 시각(CME 전날 17:00 CT, KRX 09:00 KST, NYSE 09:30 ET)을 로컬로 바꾼 날짜. 목록과 날짜 칸 점은 로컬 시각순(휴장은 정규 개장 시각, 같은 시각은 시장 순). 문구 시각은 로컬 `HH:mm`이고 시간대 표기 없음(`calendar.kinds`의 `{{tz}}`·`calendar.timeZones` 삭제). 조회 범위를 앞뒤 하루씩 넓히고 3개월 밖 연도 `missing`은 숨김. 같은 날 같은 시장 점이 둘일 수 있음. futureETP `features/calendar/localSchedule.ts`, screens.md A-a
 - [ ] 휴장 달력 화면 A-a(2026-11-21, futureETP D-143): A title-bar [⚙] 왼쪽에 [📅](`calendar-month-outline`) → 이번 달~다다음 달 3개월 세로 달력, 오늘(기기 로컬)·CME/KRX/NYSE 휴장(채운 점)·조기 마감/개장 지연(빈 점)·달별 휴일 이름 목록·미입력 안내. API `GET /v1/calendar?from&to`(계약 `calendar`·`calendarQuery`), 색 `colors.market`·`today`, 문구 `calendar.*`. `../futureETP_ReactNative/docs/wireframes/screens.md` A-a. 캐시: 응답 `missing`이 비어 있으면 12시간, 있으면 5분 stale(화면 재진입·앱 복귀 때 다시 조회, 서버 import 뒤 재시작 없이 반영. futureETP `useMarketCalendar.ts`)
-- [ ] rare 레벨 입력 규칙 강화(2026-11-21, futureETP 품질 검증 B2/D1·D3): rare 레벨은 소수 첫째 자리로 반올림한 값으로 중복을 본다(1과 1.00000000001은 중복). C-a `levels` query는 `^d+(.d+)?(,d+(.d+)?)*$`만 받는다(공백·`0x8`·`1e1` 거절, 계약 `disparityQuery`). 앱 입력 검증이 같은 규칙인지 확인(B 화면). 직렬화는 `formatLevel`이 숫자 기본 문자열(`1`, `2.5`)을 만들고 `ContractTest`가 본다(AOS-012)
 - [ ] 레이어 import 방향 lint 강제(2026-11-19, futureETP D-041 변경): feature 간 import 금지, 공용 계층 → features·라우트 금지. `docs/architecture.md` "규칙"과 아래 2단계에 반영됨, 확인 뒤 체크
 - [ ] 첫 로딩 가운데 스피너(2026-11-19, futureETP 527a3b2, 공용 막대 스켈레톤 `LoadingView`는 반영, 차트 자리는 C-a와 함께): 첫 조회 중 스켈레톤(공용 막대·차트 격자) 위 가운데에 큰 스피너를 겹친다. 차트 탭은 차트 자리 가운데이고, 데이터가 온 뒤 첫 기간 맞춤 전(차트를 감춘 동안)에도 띄운다(e94b2c2). `../futureETP_ReactNative/docs/wireframes/screens.md` 공통 로딩 항목
 - [ ] 차트 데이터가 바뀌면 십자선·상세 박스 지우기(2026-11-21, futureETP E1 수정): C-a·C-c에서 이전 3년을 앞에 붙이거나 자동 새로고침으로 데이터 배열이 바뀌면 십자선과 상세 박스를 지운다(옛 순번으로 다른 봉을 가리키지 않게). `../futureETP_ReactNative/docs/wireframes/screens.md` C-a 길게 누르기
@@ -24,7 +22,6 @@
 - [ ] (선택) 원격 저장소·CI(GitHub Actions에서 check). 지금은 원격 없음(로컬 전용)
 
 ## 3. 공통 기반
-- [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
 - [ ] [⟲] 가로 전환·ETP 탭 세로 복귀(C 화면과 함께, D-076)
 
 ## 4. 화면 수직 슬라이스 (RN 순서)
@@ -35,6 +32,7 @@
 - [ ] C-b 월물커브: `GET /v1/commodities/:code/curve?baseDate`, 기준일 OS 날짜 피커, 이전·다음 기준일, 변화율 라벨 배치, 롤 수익률 (D-090, D-091, D-114~D-123)
 - [ ] C-d ETP 목록(필터·정렬은 앱에서)·C-d-a 상세 (D-017)
 - [ ] B 설정·B-a 알림 설정: 낙관적 PATCH, rare-level 입력 검증, 알림 대상 없음 빨간 점 (D-081~D-083, D-124)
+  - B·데이터 출처는 끝(아래 history). 남은 것: B-a(알림 대상·알림 거부 시간), A·C [⚙] 빨간 점, B 기기 확인(이 에뮬레이터에 저장된 키가 없음), A가 생기면 첫 화면을 A로
 - [ ] 화면별 세부 동작은 `../futureETP_ReactNative/docs/wireframes/screens.md`와 하나씩 대조
 
 ## 5. 푸시

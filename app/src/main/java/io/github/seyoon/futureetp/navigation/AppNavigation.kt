@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -21,11 +22,17 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import io.github.seyoon.futureetp.AppContainer
+import io.github.seyoon.futureetp.BuildConfig
+import io.github.seyoon.futureetp.R
 import io.github.seyoon.futureetp.core.api.settings
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyRoute
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyViewModel
-import io.github.seyoon.futureetp.feature.devhealth.DevHealthRoute
-import io.github.seyoon.futureetp.feature.devhealth.DevHealthViewModel
+import io.github.seyoon.futureetp.feature.datasources.DataSourcesScreen
+import io.github.seyoon.futureetp.feature.settings.DisplayControls
+import io.github.seyoon.futureetp.feature.settings.SettingsNav
+import io.github.seyoon.futureetp.feature.settings.SettingsRoute
+import io.github.seyoon.futureetp.feature.settings.SettingsViewModel
+import kotlinx.coroutines.flow.map
 
 /**
  * 저장된 키를 읽기 전에는 빈 배경, 키가 없으면 백스택 대신 B-b만([←] 없음), 키가 있으면 백스택을 그린다(D-077).
@@ -47,7 +54,7 @@ private fun MainBackStack(
     container: AppContainer,
     rejected: Boolean,
 ) {
-    val backStack = rememberNavBackStack(AppKey.DevHealth)
+    val backStack = rememberNavBackStack(AppKey.Settings)
     // 키가 있는 동안 앱이 화면에 올라올 때마다 서버 기기 설정의 시간대·언어를 맞춘다(RN 루트 _layout DeviceSettingsSync, D-137)
     val lifecycleOwner = LocalLifecycleOwner.current
     LaunchedEffect(lifecycleOwner) {
@@ -67,16 +74,19 @@ private fun MainBackStack(
             ),
         entryProvider =
             entryProvider {
-                entry<AppKey.DevHealth> {
-                    val vm: DevHealthViewModel =
-                        viewModel(
-                            factory =
-                                viewModelFactory {
-                                    initializer { DevHealthViewModel(container.apiClient::health) }
-                                },
-                        )
-                    DevHealthRoute(vm, container.apiBaseUrl)
+                entry<AppKey.Settings> {
+                    SettingsEntry(
+                        container,
+                        SettingsNav(
+                            onBack = if (backStack.size > 1) ({ backStack.removeLastOrNull() }) else null,
+                            // B-a는 다음 단계에서 만든다
+                            onOpenAlerts = {},
+                            onOpenAccessKey = { backStack.add(AppKey.AccessKey) },
+                            onOpenDataSources = { backStack.add(AppKey.DataSources) },
+                        ),
+                    )
                 }
+                entry<AppKey.DataSources> { DataSourcesScreen(onBack = { backStack.removeLastOrNull() }) }
                 entry<AppKey.AccessKey> {
                     val back = { backStack.removeLastOrNull() }
                     AccessKeyEntry(container, rejected, onBack = { back() }, onDone = { back() })
@@ -111,4 +121,35 @@ private fun AccessKeyEntry(
         onSaved = onDone,
         onLeave = container.credentials::clearRejected,
     )
+}
+
+@Composable
+private fun SettingsEntry(
+    container: AppContainer,
+    nav: SettingsNav,
+) {
+    val vm: SettingsViewModel =
+        viewModel(
+            factory =
+                viewModelFactory {
+                    initializer {
+                        SettingsViewModel(
+                            container.settingsRepository,
+                            DisplayControls(
+                                upDownStyle = container.displaySettings.settings.map { it.upDownStyle },
+                                setUpDownStyle = container.displaySettings::setUpDownStyle,
+                                resetUpDownStyle = container.displaySettings::reset,
+                                language = { container.appLocale.current },
+                                setLanguage = container.appLocale::set,
+                                defaultLanguage = { container.appLocale.deviceDefault },
+                            ),
+                        )
+                    }
+                },
+        )
+    val keyState by container.credentials.keyState.collectAsStateWithLifecycle()
+    // 같은 앱 ID를 쓰는 형제 앱·변형 구분과 앱 버전·빌드 번호(OTA 없음, D-141)
+    val bundle =
+        stringResource(R.string.settings_bundle, BuildConfig.FLAVOR, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+    SettingsRoute(vm, hasAccessKey = keyState.hasKey, bundleText = bundle, nav = nav)
 }

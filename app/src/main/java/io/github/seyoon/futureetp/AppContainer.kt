@@ -6,6 +6,7 @@ import io.github.seyoon.futureetp.core.api.ApiClient
 import io.github.seyoon.futureetp.core.api.createHttpClient
 import io.github.seyoon.futureetp.core.api.patchSettings
 import io.github.seyoon.futureetp.core.api.settings
+import io.github.seyoon.futureetp.core.data.SettingsRepository
 import io.github.seyoon.futureetp.core.query.appReturns
 import io.github.seyoon.futureetp.core.settings.AppLocale
 import io.github.seyoon.futureetp.core.settings.DisplaySettingsStore
@@ -14,6 +15,9 @@ import io.github.seyoon.futureetp.core.settings.createDisplaySettingsStore
 import io.github.seyoon.futureetp.core.storage.StoredCredentials
 import io.github.seyoon.futureetp.core.storage.createSecureStore
 import io.github.seyoon.futureetp.feature.settings.DeviceSettingsSync
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import java.util.TimeZone
 
@@ -22,6 +26,9 @@ class AppContainer(
     context: Context,
 ) {
     val apiBaseUrl: String = BuildConfig.API_BASE_URL
+
+    /** 화면 사이에 남는 조회·변경(repository)의 범위. 프로세스와 함께 끝난다 */
+    private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     /** 접근 키·installation ID(AOS-007). 저장된 키가 없으면 dev 변형만 DEV_API_TOKEN을 쓴다(D-043, D-044) */
     val credentials: StoredCredentials by lazy {
@@ -49,6 +56,17 @@ class AppContainer(
             patch = apiClient::patchSettings,
             deviceTimezone = { TimeZone.getDefault().id },
             appLanguage = { appLocale.current },
+        )
+    }
+
+    /** 서버 기기 설정(B·B-a·A·C 공용, 낙관적 PATCH). 키가 있을 때 처음 쓰면서 조회한다 */
+    val settingsRepository: SettingsRepository by lazy {
+        SettingsRepository(
+            scope = appScope,
+            fetch = { apiClient.settings() },
+            patch = apiClient::patchSettings,
+            appReturns = appReturns,
+            invalidations = credentials.keySaves,
         )
     }
 }
