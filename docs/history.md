@@ -30,3 +30,5 @@
   - 결과: 단위 테스트는 메모리 키셋으로 암호화 저장·복호화 실패 복구·ID 유지·형식 아닌 값 교체·저장소 실패 시 메모리 ID를 본다. `AOS_Pixel_API_36`에서 앱 데이터를 지운 뒤 두 번 실행해 같은 ID가 나오고 `secure.json`이 암호문인 것을 확인(Keystore 경로는 기기에서만 돈다)
 - [x] 숫자·날짜 포맷(RN `formatNumber`·`formatDateTime`과 같은 결과) 단위 테스트
   - 결과(2026-11-27): `core/util`의 `formatPrice`·`formatChange`·`formatChangePct`·`formatContractMonth(Short)`·`formatLocalDateTime`·`formatTradeDate`·`compactAmount`(RN `formatAmount`). 반올림은 JS `toFixed`처럼 double의 정확한 값에서 절반 올림(`BigDecimal(double)` + `HALF_UP`, 1.005 → 1.00). 월물·날짜는 java.time 값을 받는다. `FormatTest`가 RN 테스트 기대값과 toFixed 경계값(node로 확인)을 본다
+- [x] 세로 잠금은 코드로(`requestedOrientation`, D-076)
+  - 결과(2026-11-27): `core/ui/Orientation.kt`의 `lockPortrait`(`SCREEN_ORIENTATION_PORTRAIT`, expo `PORTRAIT_UP`)·`lockLandscape`(`SENSOR_LANDSCAPE`, expo `LANDSCAPE`)·`isLandscape()`(창 크기 너비 > 높이). `MainActivity.onCreate`가 세로로 잠근다. 코드 잠금도 lint `SourceLockedOrientationActivity`가 막아 `lockPortrait`에만 `@SuppressLint`를 단다. `AOS_Pixel_API_36`에서 기기를 가로로 돌려도 앱이 세로로 남는 것을 확인. [⟲]·ETP 탭 세로 복귀는 3단계 마지막 항목
