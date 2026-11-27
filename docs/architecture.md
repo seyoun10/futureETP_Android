@@ -21,7 +21,7 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  ├─ chart/                     Canvas 차트·뷰포트
 │  ├─ ui/                        공용 Composable(ScreenHeader, FreshnessLine, QueryStateView, SegmentedControl)
 │  ├─ storage/                   보안 저장소(datastore-tink): 접근 키·installation ID, 요청 헤더 값 `StoredCredentials`(AOS-007)
-│  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014)
+│  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014), 앱 안 언어 `AppLocale`(per-app language, AOS-015)
 │  ├─ theme/                     테마 토큰(다크 전용, `Tokens.kt`), 등락 색 `UpDownPalette.kt`, `FutureEtpTheme`
 │  ├─ push/                      FCM 토큰 등록, 알림 탭 이동
 │  └─ util/                      숫자·날짜 포맷, 햅틱

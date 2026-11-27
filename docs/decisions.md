@@ -146,3 +146,15 @@
   - 토큰은 `core/theme/Tokens.kt`(RN `tokens.ts`와 같은 값). 최소 터치 영역 `Size.touchTarget`만 RN 44pt 대신 Material 접근성 기준 48dp.
 - 근거: 첫 읽기는 작은 파일 하나라 빈 화면은 접근 키 읽기(D-077)와 같은 수준이다. `SharedPreferences` 동기 읽기는 메인 스레드 디스크 읽기(StrictMode)이고, `runBlocking`은 DataStore 권장 사용법이 아니다.
 - 영향: 의존성 `androidx.datastore:datastore-preferences` 1.3.0. 등락 색은 `changeColor`·`changePairColor`(`core/theme/UpDownPalette.kt`)로 읽는다.
+
+## AOS-015: 앱 안 언어는 AppCompat per-app language에 첫 기본값을 저장
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: i18n·앱 안 언어(D-033, D-073, D-137). RN은 표시 설정 store에 `language`를 persist하고, 첫 기기 언어가 `ko`면 한국어, 그 밖은 영어를 고른다. AOS-011은 per-app language를 쓰기로 했지만 첫 값·minSdk 29 지원 방법은 정하지 않았다.
+- 선택지: (a) AppCompat 1.8.0 `AppCompatDelegate.setApplicationLocales` + `AppCompatActivity` + `autoStoreLocales`(Android 12 이하 저장) (b) 프레임워크 `LocaleManager`만(Android 13+, 그 아래는 기기 언어를 따름) (c) DataStore에 언어를 두고 `Context`를 직접 감싸기
+- 결정: (a).
+  - `core/settings/AppLocale`: 저장된 앱 언어가 없거나 ko·en이 아니면 `MainActivity.onCreate`에서 그때의 기기 언어(`LocaleManagerCompat.getSystemLocales`)로 `ko`/`en`을 저장한다. 이후 기기 언어가 바뀌어도 첫 값을 유지한다(RN persist와 같음). 처음 정할 때 Activity가 한 번 다시 만들어진다.
+  - 기기 언어가 ko·en이 아니면 영어다(RN과 같음). `values`=ko(AOS-011)는 저장 전 첫 프레임과 키 누락 대비로만 보인다.
+  - 서버 기기 설정 맞추기 `feature/settings/DeviceSettingsSync`(RN 같은 이름): 키가 있는 동안 앱이 STARTED가 될 때마다 `GET /v1/settings`를 받아 기기 시간대(`TimeZone.getDefault().id`, IANA ID가 아니면 빼기)·앱 언어가 다르면 한 번의 PATCH로 보낸다. 같은 값은 프로세스당 한 번만 보내고 실패해도 되풀이하지 않는다(D-084, D-137). 언어를 바꾸면 Activity가 다시 만들어져 다음 STARTED에서 보낸다.
+- 근거: (b)는 minSdk 29~32 기기에서 앱 안 언어 설정이 동작하지 않는다. (c)는 Compose·시스템 설정 화면의 앱 언어 항목(`generateLocaleConfig`)과 따로 놀아 값이 둘이 된다. AppCompat은 13+에서 시스템 LocaleManager에 위임해 시스템 설정과 같은 값을 쓴다.
+- 영향: 의존성 `androidx.appcompat:appcompat` 1.8.0(2026-08-12), `MainActivity`는 `AppCompatActivity`, 테마 부모 `Theme.AppCompat.NoActionBar`, 매니페스트 `AppLocalesMetadataHolderService`(`autoStoreLocales`). 언어를 고르는 화면은 B 화면 항목.

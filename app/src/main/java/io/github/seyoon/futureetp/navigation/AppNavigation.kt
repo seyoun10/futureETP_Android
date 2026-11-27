@@ -8,7 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -45,6 +48,11 @@ private fun MainBackStack(
     rejected: Boolean,
 ) {
     val backStack = rememberNavBackStack(AppKey.DevHealth)
+    // 키가 있는 동안 앱이 화면에 올라올 때마다 서버 기기 설정의 시간대·언어를 맞춘다(RN 루트 _layout DeviceSettingsSync, D-137)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { container.deviceSettingsSync.sync() }
+    }
     // 저장된 키를 서버가 거절하면 어느 화면에서든 B-b로 보낸다. 이미 B-b면 그대로다(D-079)
     LaunchedEffect(rejected) {
         if (rejected && backStack.lastOrNull() != AppKey.AccessKey) backStack.add(AppKey.AccessKey)

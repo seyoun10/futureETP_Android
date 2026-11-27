@@ -3,10 +3,16 @@ package io.github.seyoon.futureetp
 import android.content.Context
 import io.github.seyoon.futureetp.core.api.ApiClient
 import io.github.seyoon.futureetp.core.api.createHttpClient
+import io.github.seyoon.futureetp.core.api.patchSettings
+import io.github.seyoon.futureetp.core.api.settings
+import io.github.seyoon.futureetp.core.settings.AppLocale
 import io.github.seyoon.futureetp.core.settings.DisplaySettingsStore
+import io.github.seyoon.futureetp.core.settings.createAppLocale
 import io.github.seyoon.futureetp.core.settings.createDisplaySettingsStore
 import io.github.seyoon.futureetp.core.storage.StoredCredentials
 import io.github.seyoon.futureetp.core.storage.createSecureStore
+import io.github.seyoon.futureetp.feature.settings.DeviceSettingsSync
+import java.util.TimeZone
 
 /** 앱 전체에서 하나씩만 두는 의존성(AOS-005). ViewModel은 여기서 받은 것을 생성자로 넘겨받는다 */
 class AppContainer(
@@ -25,5 +31,18 @@ class AppContainer(
     /** 등락 색 등 기기 UI 설정(D-073, AOS-014) */
     val displaySettings: DisplaySettingsStore by lazy { createDisplaySettingsStore(context) }
 
+    /** 앱 안 언어(per-app language, AOS-015) */
+    val appLocale: AppLocale by lazy { createAppLocale(context) }
+
     val apiClient: ApiClient by lazy { ApiClient(createHttpClient(), apiBaseUrl, credentials) }
+
+    /** 서버 기기 설정의 시간대·언어 맞추기(D-084, D-137). 보낸 값을 프로세스 동안 기억한다 */
+    val deviceSettingsSync: DeviceSettingsSync by lazy {
+        DeviceSettingsSync(
+            fetch = { apiClient.settings() },
+            patch = apiClient::patchSettings,
+            deviceTimezone = { TimeZone.getDefault().id },
+            appLanguage = { appLocale.current },
+        )
+    }
 }
