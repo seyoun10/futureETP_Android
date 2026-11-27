@@ -56,7 +56,3 @@ fun checkRareLevels(texts: List<String>): RareLevelsCheck {
         else -> RareLevelsCheck.Valid(levels.filterNotNull().sorted())
     }
 }
-
-/** 입력칸에 보일 값(RN `String(number)`: `1`, `2.5`) */
-fun rareLevelText(level: Double): String =
-    if (level == level.roundToLong().toDouble()) level.roundToLong().toString() else level.toString()

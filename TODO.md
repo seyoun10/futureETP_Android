@@ -32,11 +32,11 @@
 - [ ] C-b 월물커브: `GET /v1/commodities/:code/curve?baseDate`, 기준일 OS 날짜 피커, 이전·다음 기준일, 변화율 라벨 배치, 롤 수익률 (D-090, D-091, D-114~D-123)
 - [ ] C-d ETP 목록(필터·정렬은 앱에서)·C-d-a 상세 (D-017)
 - [ ] B 설정·B-a 알림 설정: 낙관적 PATCH, rare-level 입력 검증, 알림 대상 없음 빨간 점 (D-081~D-083, D-124)
-  - B·데이터 출처는 끝(아래 history). 남은 것: B-a(알림 대상·알림 거부 시간), A·C [⚙] 빨간 점, B 기기 확인(이 에뮬레이터에 저장된 키가 없음), A가 생기면 첫 화면을 A로
+  - B·데이터 출처·B-a는 끝(history). 남은 것: A·C title-bar에 `SettingsHeaderButton` 달기(빨간 점 부품은 있음), B·B-a 기기 확인(이 에뮬레이터에 저장된 키가 없음), A가 생기면 첫 화면을 A로
 - [ ] 화면별 세부 동작은 `../futureETP_ReactNative/docs/wireframes/screens.md`와 하나씩 대조
 
 ## 5. 푸시
-- [ ] FCM 토큰 등록, Android 13+ 알림 권한, 알림 채널(RN과 같은 채널 ID)
+- [ ] FCM 토큰 등록, 알림 채널(RN과 같은 채널 ID). Android 13+ 알림 권한 묻기는 B-a 배너에 있다(`core/push/rememberNotificationPermission`, AOS-018). 첫 실행 때 물을지는 RN 흐름과 맞춘다
 - [ ] `PUT /v1/devices`(토큰·플랫폼·`appVersion` `aos-<버전>`), 알림 탭으로 해당 C 화면 이동, 앱 사용 중 알림 표시 (D-037, D-120)
 
 ## 6. 기기 설치·운영

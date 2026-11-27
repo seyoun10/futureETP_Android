@@ -182,3 +182,12 @@
   - `SettingsRepository`는 앱 범위 CoroutineScope에서 `Query` 하나와 PATCH 줄(Channel)을 갖는다. 진행 중인 조회를 PATCH 앞뒤로 끊고(`Query.cancel`) 응답 값을 넣는다(`Query.setData`). 실패하면 서버 값을 다시 조회한다.
 - 근거: extended 아이콘 묶음은 크고 더 이상 갱신되지 않는다. 설정은 B·B-a·A(알림 꺼짐 점)·C-a(차트 조회 값)가 같은 값을 봐야 하고, 화면을 떠나도 보낸 PATCH가 끝나야 한다.
 - 영향: 새 아이콘은 drawable을 추가한다. 설정을 읽는 화면은 `container.settingsRepository.state`를 쓴다.
+
+## AOS-018: 알림 권한은 B-a 배너에서 묻고, 다시 물을 수 없으면 앱 알림 설정을 연다
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: B-a는 권한이 꺼져 있으면 배너와 [허용](OS가 다시 물을 수 있을 때)·[설정 열기]를 보인다(screens.md B-a). RN은 expo-notifications의 `canAskAgain`을 쓰지만 Android에는 같은 값이 없다. `shouldShowRequestPermissionRationale`은 처음 묻기 전과 두 번 거절한 뒤 모두 false다.
+- 선택지: (a) [허용]을 누르고 창 없이 거절되면(결과 거절 + rationale false) 그때부터 [설정 열기] (b) 물은 적이 있는지 DataStore에 저장
+- 결정: (a). 켜짐 여부는 `NotificationManagerCompat.areNotificationsEnabled()`(권한과 앱 알림 스위치 모두)로 보고, 화면이 올라올 때마다 다시 읽는다. Android 12 이하나 권한은 있는데 앱 알림이 꺼진 경우는 바로 [설정 열기](`ACTION_APP_NOTIFICATION_SETTINGS`)다.
+- 근거: 저장값은 앱 데이터 삭제·설정 앱의 권한 초기화와 어긋날 수 있다. (a)는 한 번 더 누르게 될 뿐 잘못된 버튼으로 막히지 않는다.
+- 영향: 5단계 푸시 작업에서 첫 실행 권한 요청을 넣을 때 같은 `rememberNotificationPermission`을 쓴다.

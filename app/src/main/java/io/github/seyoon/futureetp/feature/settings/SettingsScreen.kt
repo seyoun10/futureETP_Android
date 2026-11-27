@@ -30,15 +30,10 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.seyoon.futureetp.R
-import io.github.seyoon.futureetp.core.api.errorTextRes
 import io.github.seyoon.futureetp.core.api.model.AppLanguage
 import io.github.seyoon.futureetp.core.api.model.Basis
 import io.github.seyoon.futureetp.core.api.model.ChartWindow
@@ -55,6 +50,7 @@ import io.github.seyoon.futureetp.core.ui.ErrorView
 import io.github.seyoon.futureetp.core.ui.FooterLine
 import io.github.seyoon.futureetp.core.ui.HeaderIconButton
 import io.github.seyoon.futureetp.core.ui.RowDescription
+import io.github.seyoon.futureetp.core.ui.SaveFailedLine
 import io.github.seyoon.futureetp.core.ui.ScreenHeader
 import io.github.seyoon.futureetp.core.ui.SectionHeader
 import io.github.seyoon.futureetp.core.ui.SegmentOption
@@ -182,22 +178,6 @@ fun SettingsScreen(
 }
 
 private val ERROR_MIN_HEIGHT = 160.dp
-
-@Composable
-private fun SaveFailedLine(error: Throwable) {
-    Text(
-        stringResource(R.string.settings_save_failed, stringResource(errorTextRes(error))),
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .background(AppColors.surface)
-                .padding(horizontal = Spacing.lg, vertical = Spacing.sm)
-                .semantics { liveRegion = LiveRegionMode.Polite },
-        color = AppColors.error,
-        fontSize = FontSize.caption,
-        textAlign = TextAlign.Center,
-    )
-}
 
 /** 언어·등락 색은 기기 설정이다. 언어는 푸시 문구에 쓰므로 서버에도 보낸다 */
 @Composable

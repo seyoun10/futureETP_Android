@@ -19,11 +19,11 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  ├─ query/                     조회 상태 `Query`(자동 새로고침·앱 복귀·새 키 재조회, AOS-016)
 │  ├─ data/                      repository(화면 사이 조회 캐시·무한 조회), 서버 설정 `SettingsRepository`(낙관적 PATCH, AOS-017)
 │  ├─ chart/                     Canvas 차트·뷰포트
-│  ├─ ui/                        공용 Composable(ScreenHeader·HeaderIconButton, SectionHeader·SegmentedControl, FreshnessFooter, QueryStateView), 선택 햅틱, 원자재 이름
+│  ├─ ui/                        공용 Composable(ScreenHeader·HeaderIconButton·SettingsHeaderButton(알림 꺼짐 점), SectionHeader·SegmentedControl·SaveFailedLine, FreshnessFooter, QueryStateView), 선택 햅틱, 원자재 이름
 │  ├─ storage/                   보안 저장소(datastore-tink): 접근 키·installation ID, 요청 헤더 값 `StoredCredentials`(AOS-007)
 │  ├─ settings/                  기기 UI 설정(Preferences DataStore): 등락 색 `DisplaySettingsStore`(AOS-014), 앱 안 언어 `AppLocale`(per-app language, AOS-015)
 │  ├─ theme/                     테마 토큰(다크 전용, `Tokens.kt`), 등락 색 `UpDownPalette.kt`, `FutureEtpTheme`
-│  ├─ push/                      FCM 토큰 등록, 알림 탭 이동
+│  ├─ push/                      알림 권한 상태 `rememberNotificationPermission`(AOS-018), FCM 토큰 등록, 알림 탭 이동
 │  └─ util/                      숫자·날짜 포맷
 app/src/main/res/                values(ko 원문)·values-en, 적응형 아이콘, 화면 아이콘 vector(`drawable/ic_*`, AOS-017), 백업 제외 규칙
 app/src/dev/AndroidManifest.xml  dev만 평문 HTTP 허용

@@ -56,6 +56,7 @@
     <string name="settings_window">Distribution period (years)</string>
     <string name="settings_window_all">All</string>
     <string name="settings_alert_off">Off</string>
+    <string name="settings_alert_off_badge">Alerts off</string>
     <string name="settings_rare_levels" formatted="false">Rare levels (%)</string>
     <string name="settings_rare_level_field">Rare level %1$d</string>
     <string name="settings_rare_level_hint" tools:ignore="PluralsCandidate">%1$s–%2$s, 1 decimal place, %3$d distinct values</string>
@@ -87,4 +88,21 @@
     <string name="data_sources_etp_us_label">US</string>
     <string name="data_sources_etp_us_value">Nasdaq, Yahoo Finance</string>
     <string name="data_sources_notice">Roll-adjusted values are computed by this app from S&amp;P GSCI and Bloomberg index methodologies. For personal reference only; accuracy not guaranteed; not investment advice.</string>
+    <!-- B-a alert settings -->
+    <string name="alert_settings_title">Alert settings</string>
+    <string name="alert_settings_permission_off">⚠ Notifications are turned off</string>
+    <string name="alert_settings_allow">Allow</string>
+    <string name="alert_settings_open_settings">Open settings</string>
+    <string name="alert_settings_commodity">Target commodity</string>
+    <string name="alert_settings_commodity_none">None</string>
+    <string name="alert_settings_criteria">Current criteria</string>
+    <string name="alert_settings_criteria_chart">Basis %1$s · %2$d-day MA · %3$s</string>
+    <string name="alert_settings_criteria_window_years">%1$s years</string>
+    <string name="alert_settings_criteria_levels">Levels %1$s%% (above &amp; below)</string>
+    <string name="alert_settings_quiet_time">Quiet hours</string>
+    <string name="alert_settings_quiet_start">Start</string>
+    <string name="alert_settings_quiet_end">End</string>
+    <string name="alert_settings_quiet_next_day">next day %1$s</string>
+    <string name="alert_settings_quiet_note">Alerts during quiet hours are sent at the end time, only the rarest one per direction.</string>
+    <string name="alert_settings_guide" formatted="false">Checked every 15 minutes during trading hours; each level alerts at most once per CME trading day. You are alerted when today\'s candle wick touches a rare-level line on the chart (intraday touches, so alerts can fire more often than p%).</string>
 </resources>

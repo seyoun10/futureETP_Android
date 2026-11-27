@@ -50,6 +50,7 @@ import io.github.seyoon.futureetp.core.theme.AppColors
 import io.github.seyoon.futureetp.core.theme.FontSize
 import io.github.seyoon.futureetp.core.theme.Spacing
 import io.github.seyoon.futureetp.core.ui.RowDescription
+import io.github.seyoon.futureetp.core.util.formatRareLevel
 
 private val FIELD_WIDTH = 48.dp
 private val FIELD_MIN_HEIGHT = 36.dp
@@ -80,7 +81,7 @@ fun RareLevelsInput(
     LaunchedEffect(levels, editing) {
         if (editing) return@LaunchedEffect
         fields.forEachIndexed { i, field ->
-            field.setTextAndPlaceCursorAtEnd(levels?.getOrNull(i)?.let(::rareLevelText).orEmpty())
+            field.setTextAndPlaceCursorAtEnd(levels?.getOrNull(i)?.let(::formatRareLevel).orEmpty())
         }
     }
     // 완료 키는 포커스를 빼서 키패드를 닫는다. 시스템 뒤로 버튼으로 키패드만 닫혀도 저장한다
@@ -144,8 +145,8 @@ private fun KeepVisibleAboveKeyboard(
 /** 입력 범위 안내. 벗어나거나 중복이면 같은 자리에 빨간 오류(오른쪽 정렬) */
 @Composable
 private fun RareLevelHint(problem: RareLevelProblem?) {
-    val min = rareLevelText(RARE_LEVEL_MIN)
-    val max = rareLevelText(RARE_LEVEL_MAX)
+    val min = formatRareLevel(RARE_LEVEL_MIN)
+    val max = formatRareLevel(RARE_LEVEL_MAX)
     Text(
         when (problem) {
             RareLevelProblem.INVALID -> stringResource(R.string.settings_rare_level_invalid, min, max)

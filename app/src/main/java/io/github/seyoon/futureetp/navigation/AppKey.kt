@@ -10,6 +10,10 @@ sealed interface AppKey : NavKey {
     @Serializable
     data object Settings : AppKey
 
+    /** B-a 알림 설정 */
+    @Serializable
+    data object AlertSettings : AppKey
+
     @Serializable
     data object DataSources : AppKey
 

@@ -3,6 +3,7 @@ package io.github.seyoon.futureetp.core.util
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.YearMonth
+import kotlin.math.roundToLong
 
 // 시세 숫자 표시. 언어와 상관없이 `2,405.1`·`+12.2`·`-1.04%` 형식이다(RN lib/formatNumber.ts, screens.md A).
 // 반올림은 JS `toFixed`처럼 double의 정확한 값에서 절반 올림이다(1.005 → 1.00).
@@ -61,3 +62,7 @@ private fun groupThousands(int: String): String =
         .chunked(GROUP)
         .joinToString(",")
         .reversed()
+
+/** rare-level 값(RN `String(number)`: `1`, `2.5`). B 입력칸·B-a 적용 기준에 쓴다 */
+fun formatRareLevel(level: Double): String =
+    if (level == level.roundToLong().toDouble()) level.roundToLong().toString() else level.toString()

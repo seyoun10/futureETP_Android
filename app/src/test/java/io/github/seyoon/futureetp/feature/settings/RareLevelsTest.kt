@@ -1,5 +1,6 @@
 package io.github.seyoon.futureetp.feature.settings
 
+import io.github.seyoon.futureetp.core.util.formatRareLevel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -39,8 +40,8 @@ class RareLevelsTest {
 
     @Test
     fun levelTextMatchesRn() {
-        assertEquals("1", rareLevelText(1.0))
-        assertEquals("2.5", rareLevelText(2.5))
-        assertEquals("0.1", rareLevelText(0.1))
+        assertEquals("1", formatRareLevel(1.0))
+        assertEquals("2.5", formatRareLevel(2.5))
+        assertEquals("0.1", formatRareLevel(0.1))
     }
 }

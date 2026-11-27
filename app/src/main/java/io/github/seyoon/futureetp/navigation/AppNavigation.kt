@@ -27,6 +27,8 @@ import io.github.seyoon.futureetp.R
 import io.github.seyoon.futureetp.core.api.settings
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyRoute
 import io.github.seyoon.futureetp.feature.accesskey.AccessKeyViewModel
+import io.github.seyoon.futureetp.feature.alertsettings.AlertSettingsRoute
+import io.github.seyoon.futureetp.feature.alertsettings.AlertSettingsViewModel
 import io.github.seyoon.futureetp.feature.datasources.DataSourcesScreen
 import io.github.seyoon.futureetp.feature.settings.DisplayControls
 import io.github.seyoon.futureetp.feature.settings.SettingsNav
@@ -79,12 +81,25 @@ private fun MainBackStack(
                         container,
                         SettingsNav(
                             onBack = if (backStack.size > 1) ({ backStack.removeLastOrNull() }) else null,
-                            // B-a는 다음 단계에서 만든다
-                            onOpenAlerts = {},
+                            onOpenAlerts = { backStack.add(AppKey.AlertSettings) },
                             onOpenAccessKey = { backStack.add(AppKey.AccessKey) },
                             onOpenDataSources = { backStack.add(AppKey.DataSources) },
                         ),
                     )
+                }
+                entry<AppKey.AlertSettings> {
+                    val vm: AlertSettingsViewModel =
+                        viewModel(
+                            factory =
+                                viewModelFactory {
+                                    initializer {
+                                        AlertSettingsViewModel(
+                                            container.settingsRepository,
+                                        )
+                                    }
+                                },
+                        )
+                    AlertSettingsRoute(vm, onBack = { backStack.removeLastOrNull() })
                 }
                 entry<AppKey.DataSources> { DataSourcesScreen(onBack = { backStack.removeLastOrNull() }) }
                 entry<AppKey.AccessKey> {
