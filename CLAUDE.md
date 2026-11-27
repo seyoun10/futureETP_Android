@@ -57,10 +57,10 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
   - 모든 실패는 `AppError`(서버 코드 `UNAUTHORIZED`·`RATE_LIMITED`·`VALIDATION_FAILED`·`NOT_FOUND`·`INTERNAL` + 앱 코드 `NETWORK`·`TIMEOUT`·`SCHEMA_MISMATCH`). 타임아웃 15초, 재시도는 `NETWORK`·`TIMEOUT`·`INTERNAL`만 최대 2회, 변경 요청은 자동 재시도 없음 (D-072)
   - `UNAUTHORIZED`면 어느 화면에서든 B-b로 보내고 거절 줄을 보인다 (D-079)
   - 응답 모델은 `../futureETP_ReactNative/packages/shared/contract/schemas/*.json`과 필드·nullable·enum 값을 맞춘다. 모델 생성 도구를 쓰면 이 파일을 입력으로 한다 (D-142)
-- 접근 키·installation ID는 Android Keystore 키로 암호화한 저장소(DataStore + Tink 등, 1단계에서 확정)에만 둔다. 앱 번들·저장소에 넣지 않는다. 예외는 dev 변형의 `DEV_API_TOKEN`뿐 (D-043, D-044)
+- 접근 키·installation ID는 Android Keystore 키로 암호화한 저장소(androidx `datastore-tink`, AOS-007)에만 둔다. 앱 번들·저장소에 넣지 않는다. 예외는 dev 변형의 `DEV_API_TOKEN`뿐 (D-043, D-044)
 - dev 서버 주소·`DEV_API_TOKEN`은 `secrets.properties`(커밋 안 함, `secrets.example.properties`만 커밋)를 dev 변형 `BuildConfig`로만 넣는다
 - 변형: Gradle buildType/flavor `dev`·`prod`, dev는 `applicationIdSuffix = ".dev"` (D-043, D-052 대응)
-- 사용자에게 보이는 문구는 i18n 리소스로만 쓴다(ko 기준, en). `res/values/strings.xml`(ko 기준은 `values-ko`, 기본 en 여부는 1단계에서) + 앱 안 언어는 `AppCompatDelegate.setApplicationLocales`(per-app language) (D-033, D-073)
+- 사용자에게 보이는 문구는 i18n 리소스로만 쓴다(ko 기준, en). `res/values/strings.xml`(ko 원문)·`values-en`(AOS-011) + 앱 안 언어는 `AppCompatDelegate.setApplicationLocales`(per-app language) (D-033, D-073)
 - 시세 숫자·월물 표기(`2,405.1`·`+0.51%`·`DEC26`)는 언어와 상관없이 RN `../futureETP_ReactNative/apps/mobile/src/lib/formatNumber.ts` 규칙과 같게 만든다
 - 다크 전용 테마 토큰, 차트 색은 토큰에서, 등락 색은 표시 설정에서 읽는다 (D-031, D-073)
 - `PUT /v1/devices`의 `appVersion`은 `aos-<버전>`으로 보낸다 (AOS-002)
@@ -82,6 +82,6 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 - `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`)
 - `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.CommodityListViewModelTest"`
 - `./gradlew lintDevDebug`: Android lint
-- `./gradlew ktlintCheck detekt`: Kotlin 스타일·정적 분석(도구는 1단계에서 확정)
+- `./gradlew ktlintCheck detekt`: Kotlin 스타일·정적 분석(ktlint·detekt 2.0, AOS-008)
 - `./gradlew check`: 위 전부(스캐폴딩 때 묶는다). 커밋 전 통과
 - dev 서버 실행은 `../futureETP_ReactNative`에서 `npm run dev -w apps/server`. 에뮬레이터는 `http://10.0.2.2:<port>`, iOS 시뮬레이터는 `http://localhost:<port>`

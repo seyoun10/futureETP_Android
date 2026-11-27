@@ -8,7 +8,7 @@
 ```
 app/src/main/java/io/github/seyoon/futureetp/
 ├─ MainActivity.kt / FutureEtpApp.kt   진입점, 앱 컨테이너(수동 DI)
-├─ navigation/                   NavHost, route 정의
+├─ navigation/                   Navigation 3 NavDisplay, 백스택 키(AOS-004)
 ├─ feature/
 │  ├─ commoditylist/             A
 │  ├─ settings/ alertsettings/ accesskey/ datasources/   B, B-a, B-b
@@ -49,7 +49,7 @@ docs/                            tech-stack, architecture, decisions
 
 | RN(`../futureETP_ReactNative/apps/mobile/src`) | 이 앱 |
 |---|---|
-| `src/app/`(Expo Router) | `navigation/`(NavHost) |
+| `src/app/`(Expo Router) | `navigation/`(Navigation 3) |
 | `src/features/*` | `feature/*`(화면 + ViewModel) |
 | `src/api`(fetch 래퍼·AppError·TanStack Query) | `core/api` + `core/data`(repository) |
 | `src/charts`(Victory + Skia) | `core/chart`(Canvas) |
