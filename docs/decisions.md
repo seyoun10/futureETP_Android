@@ -71,6 +71,7 @@
 - 결정: (a). 키셋은 `AndroidKeysetManager`로 만들고 Android Keystore 마스터 키로 보호한다. 접근 키와 installation ID만 이 저장소에 둔다(D-043, D-044, D-120).
 - 근거: 공식 암호화 DataStore라 암·복호화 코드를 직접 쓰지 않는다. `EncryptedSharedPreferences`는 deprecated.
 - 영향: 앱 데이터를 지우면 키셋도 지워져 접근 키를 다시 넣는다(재설치와 같음, AOS-002). 백업에서 제외한다.
+- 구현(2026-11-27): 파일 `files/datastore/secure.json`(JSON을 AES256-GCM으로 암호화), 키셋 `shared_prefs/secure_keyset_prefs.xml`. 풀 수 없으면(키셋을 잃음 등) 빈 값으로 바꿔 새 기기·키 재입력이 된다. 저장소를 열 수 없으면 이번 실행만 메모리의 installation ID를 쓴다(RN `deviceId.ts`와 같음). Android용 `datastore-tink`은 `tink-android`에 기대므로 JVM `tink`을 뺄 일은 없다.
 
 ## AOS-008: lint·포맷·정적 분석
 - 날짜: 2026-11-27

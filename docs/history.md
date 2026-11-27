@@ -26,3 +26,5 @@
   - 결과(2026-11-27): `core/api/ApiClient.request`가 유일한 경로. 키가 없으면 보내지 않고 `UNAUTHORIZED`, 봉투가 아닌 응답은 5xx면 `INTERNAL`·아니면 `SCHEMA_MISMATCH`, 계약에 없는 서버 코드도 `SCHEMA_MISMATCH`. GET만 `NETWORK`·`TIMEOUT`·`INTERNAL`을 1초·2초 뒤 최대 2회 다시 보낸다(RN TanStack Query 기본 backoff). 에러 문구는 `AppErrorCode.messageRes`·`errorTextRes`(RN `errors.*`). 접근 키·기기 ID는 `ApiCredentials`로 받는다
 - [x] 응답 모델: `../futureETP_ReactNative/packages/shared/contract/schemas/*.json`과 맞춘 모델 + 계약 테스트 (D-142)
   - 결과(2026-11-27, AOS-012): `core/api/model`에 손으로 쓴 `@Serializable` 모델(날짜·시각·월물은 java.time), `core/api/Endpoints.kt`에 엔드포인트 함수. `ContractTest`가 계약 복사본(futureETP `ed8194a`)과 원본 일치, dev 서버 응답 예시 16개의 스키마 통과·디코딩·왕복 일치, 요청 본문·query의 요청 스키마 통과를 본다. 필드를 하나 빼면 왕복 비교가 실패하는 것을 확인
+- [x] installation ID(첫 실행 UUID v4) 생성·보안 저장소 보관 (D-120). `core/storage`의 `SecureStore`(datastore-tink)·`StoredCredentials`가 `AppContainer`의 임시 값을 바꿨다(2026-11-27, AOS-007)
+  - 결과: 단위 테스트는 메모리 키셋으로 암호화 저장·복호화 실패 복구·ID 유지·형식 아닌 값 교체·저장소 실패 시 메모리 ID를 본다. `AOS_Pixel_API_36`에서 앱 데이터를 지운 뒤 두 번 실행해 같은 ID가 나오고 `secure.json`이 암호문인 것을 확인(Keystore 경로는 기기에서만 돈다)

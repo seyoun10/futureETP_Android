@@ -26,8 +26,7 @@
 ## 3. 공통 기반
 - [ ] 세로 잠금은 코드로(`requestedOrientation`, D-076). 매니페스트 `screenOrientation`은 lint `LockedOrientationActivity`·`DiscouragedApi`가 막는다
 - [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
-- [ ] installation ID(첫 실행 UUID) 생성·보안 저장소 보관 (D-120). `AppContainer`의 임시 `ApiCredentials`(실행마다 새 UUID·`DEV_API_TOKEN`)를 바꾼다
-- [ ] 접근 키 B-b: 붙여넣기·QR(`futureetp-key:v1:` 접두사), `GET /v1/settings`로 확인 뒤 저장, 키 없으면 첫 화면이 B-b, `UNAUTHORIZED`면 어느 화면에서든 B-b + 거절 줄 (D-044, D-077~D-079)
+- [ ] 접근 키 B-b: 붙여넣기·QR(`futureetp-key:v1:` 접두사), `GET /v1/settings`로 확인 뒤 `StoredCredentials.saveAccessKey`로 저장, 거절 상태(RN `rejected`)는 이때 만든다, 키 없으면 첫 화면이 B-b, `UNAUTHORIZED`면 어느 화면에서든 B-b + 거절 줄 (D-044, D-077~D-079)
 - [ ] i18n ko/en, 앱 안 언어 설정을 서버 기기 설정과 맞춤 (D-033, D-073, D-137)
 - [ ] 테마 토큰(다크 전용)·등락 색 설정 저장 (D-031, D-073)
 - [ ] 공용 조회 UI: 기준 시각 줄(freshness)·로딩/오류/빈 상태 분기·`nextUpdateAt` + 1분 자동 새로고침·앱 복귀 재조회 (D-048, D-075)
