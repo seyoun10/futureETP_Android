@@ -128,6 +128,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.tink)
+    // 기기 UI 설정(D-073, AOS-014)
+    implementation(libs.androidx.datastore.preferences)
     // datastore-tink가 기대는 tink-android 1.20.0을 카탈로그 버전으로 올린다(키셋 생성에 직접 쓴다, AOS-007)
     implementation(libs.tink.android)
     // B-b QR 읽기(AOS-013)

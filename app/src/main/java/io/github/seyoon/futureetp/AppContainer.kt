@@ -3,6 +3,8 @@ package io.github.seyoon.futureetp
 import android.content.Context
 import io.github.seyoon.futureetp.core.api.ApiClient
 import io.github.seyoon.futureetp.core.api.createHttpClient
+import io.github.seyoon.futureetp.core.settings.DisplaySettingsStore
+import io.github.seyoon.futureetp.core.settings.createDisplaySettingsStore
 import io.github.seyoon.futureetp.core.storage.StoredCredentials
 import io.github.seyoon.futureetp.core.storage.createSecureStore
 
@@ -19,6 +21,9 @@ class AppContainer(
             BuildConfig.DEV_API_TOKEN,
         )
     }
+
+    /** 등락 색 등 기기 UI 설정(D-073, AOS-014) */
+    val displaySettings: DisplaySettingsStore by lazy { createDisplaySettingsStore(context) }
 
     val apiClient: ApiClient by lazy { ApiClient(createHttpClient(), apiBaseUrl, credentials) }
 }

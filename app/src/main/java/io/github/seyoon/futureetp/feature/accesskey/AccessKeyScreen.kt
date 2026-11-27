@@ -44,8 +44,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.seyoon.futureetp.R
 import io.github.seyoon.futureetp.core.api.AppErrorCode
-
-private val TOUCH_TARGET = 48.dp
+import io.github.seyoon.futureetp.core.theme.Size
+import io.github.seyoon.futureetp.core.theme.Spacing
 
 /**
  * @param rejected 저장된 키를 서버가 거절해서 왔음. 새 키를 확인하기 전까지 "키가 맞지 않습니다"를 보인다(D-079)
@@ -114,8 +114,8 @@ fun AccessKeyScreen(
         Column(modifier = Modifier.safeDrawingPadding()) {
             Header(onBack)
             Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(Spacing.lg),
+                verticalArrangement = Arrangement.spacedBy(Spacing.md),
             ) {
                 Text(stringResource(R.string.access_key_guide))
                 // QR이 기본이고, 카메라를 못 쓰면 붙여넣기를 안내한다(D-078)
@@ -156,7 +156,7 @@ fun AccessKeyScreen(
 @Composable
 private fun Header(onBack: (() -> Unit)?) {
     Row(
-        modifier = Modifier.fillMaxWidth().heightIn(min = TOUCH_TARGET).padding(horizontal = 4.dp),
+        modifier = Modifier.fillMaxWidth().heightIn(min = Size.touchTarget).padding(horizontal = Spacing.xs),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (onBack != null) {
@@ -167,7 +167,7 @@ private fun Header(onBack: (() -> Unit)?) {
         }
         Text(
             stringResource(R.string.access_key_title),
-            modifier = Modifier.padding(horizontal = 12.dp),
+            modifier = Modifier.padding(horizontal = Spacing.md),
             style = MaterialTheme.typography.titleLarge,
         )
     }
@@ -182,7 +182,7 @@ private fun WideButton(
     FilledTonalButton(
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier.fillMaxWidth().heightIn(min = TOUCH_TARGET),
+        modifier = Modifier.fillMaxWidth().heightIn(min = Size.touchTarget),
     ) {
         Text(text)
     }
@@ -194,7 +194,7 @@ private fun SubmitButton(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
-    Button(onClick = onClick, enabled = enabled, modifier = Modifier.fillMaxWidth().heightIn(min = TOUCH_TARGET)) {
+    Button(onClick = onClick, enabled = enabled, modifier = Modifier.fillMaxWidth().heightIn(min = Size.touchTarget)) {
         if (verifying) {
             val label = stringResource(R.string.access_key_verifying)
             CircularProgressIndicator(

@@ -16,7 +16,7 @@
 | HTTP / JSON | Ktor Client(OkHttp 엔진) + kotlinx.serialization | Ktor 3.6.2 · serialization 1.13.0 | `HttpTimeout` 15초·`HttpRequestRetry`, 디코딩 실패 → `SCHEMA_MISMATCH`(AOS-006) |
 | 차트 | Compose `Canvas` 직접 구현(후보), Vico 검토 | — | 4단계 C-a 스파이크로 정한다 |
 | 보안 저장소 | androidx `datastore-tink` + Tink(Android Keystore 마스터 키) | datastore 1.3.0 · Tink 1.24.0 | 접근 키(D-044)·installation ID(AOS-007). `EncryptedSharedPreferences`는 deprecated라 쓰지 않는다 |
-| 기기 설정 저장 | DataStore(Preferences) | datastore 1.3.0 | 언어·등락 색(D-073) |
+| 기기 설정 저장 | DataStore(Preferences) `datastore-preferences` | datastore 1.3.0 | 등락 색(D-073, AOS-014). 언어는 per-app language(AOS-011) |
 | i18n | `res/values`(ko 기본)·`values-en` + `AppCompatDelegate.setApplicationLocales` | — | RN `fallbackLng: 'ko'`와 같게(AOS-011) |
 | QR | CameraX + ML Kit 바코드 스캐닝 | CameraX 1.7.0 · barcode-scanning 17.3.0 | B-b(D-078). 3단계에서 넣는다 |
 | 푸시 | Firebase Cloud Messaging | Firebase BoM 35.2.0 · google-services 4.6.0 | RN과 같은 Firebase 앱. 5단계에서 넣는다 |

@@ -134,3 +134,15 @@
   - 카메라 영역은 화면의 `scanner` 슬롯이라 Robolectric 테스트는 가짜 스캐너로 이벤트를 넣는다. 실제 카메라는 기기에서 확인한다.
 - 근거: (b)는 Play 서비스 모듈 내려받기·모달 생명주기에 따라 달라지고 RN과 화면 흐름이 다르다(D-078 근거와 같음). 모델 번들은 처음 읽을 때 내려받기를 기다리지 않는다(앱 크기는 개인용이라 문제 삼지 않음).
 - 영향: 권한 `CAMERA`. 의존성 `camera-camera2`·`camera-lifecycle`·`camera-compose`·`camera-mlkit-vision`·`com.google.mlkit:barcode-scanning`.
+
+## AOS-014: 표시 설정은 Preferences DataStore, 읽기 전에는 빈 화면
+- 날짜: 2026-11-27
+- 상태: 확정
+- 맥락: 테마 토큰·등락 색 설정 저장(D-031, D-073). RN은 동기 kv-store로 persist를 복원해 첫 렌더부터 저장된 색이다. DataStore는 비동기라 같은 방법이 없다.
+- 선택지: (a) Preferences DataStore + 첫 값을 읽기 전 빈 배경 (b) `SharedPreferences` 동기 읽기 (c) 시작 때 `runBlocking`으로 DataStore 읽기
+- 결정: (a). `core/settings/DisplaySettingsStore`(`datastore-preferences`, 파일 `display_settings.preferences_pb`)가 `upDownStyle`만 둔다. `MainActivity`는 첫 값이 오기 전 `AppColors.background`만 그리고, 온 뒤 `FutureEtpTheme(upDownStyle)`이 `LocalUpDownPalette`로 등락 색을 넣는다.
+  - 기본값: 처음 읽을 때 값이 없으면 시스템 지역(`Resources.getSystem()`, 앱 언어와 상관없음)이 `KR`이면 한국식, 그 밖은 미국식을 저장한다(D-073 "첫 기기 지역"). 모르는 값·읽기 실패는 기본값.
+  - 언어는 여기 두지 않는다. per-app language(AOS-011)가 시스템에 저장한다(i18n 항목).
+  - 토큰은 `core/theme/Tokens.kt`(RN `tokens.ts`와 같은 값). 최소 터치 영역 `Size.touchTarget`만 RN 44pt 대신 Material 접근성 기준 48dp.
+- 근거: 첫 읽기는 작은 파일 하나라 빈 화면은 접근 키 읽기(D-077)와 같은 수준이다. `SharedPreferences` 동기 읽기는 메인 스레드 디스크 읽기(StrictMode)이고, `runBlocking`은 DataStore 권장 사용법이 아니다.
+- 영향: 의존성 `androidx.datastore:datastore-preferences` 1.3.0. 등락 색은 `changeColor`·`changePairColor`(`core/theme/UpDownPalette.kt`)로 읽는다.
