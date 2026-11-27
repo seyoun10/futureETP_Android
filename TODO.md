@@ -22,13 +22,11 @@
 - [ ] 차트 방식은 2단계 뒤 C-a 스파이크(아래 4단계 첫 항목)로 정한다
 
 ## 2. 스캐폴딩
-- [ ] 프로젝트 생성, 앱 ID `io.github.seyoon.futureetp`·dev `.dev` 두 변형, 앱 이름·아이콘(RN `apps/mobile/assets` 재사용)
-- [ ] lint·format·test 설정과 검사 명령 하나(`check`), CLAUDE.md Commands를 실제 명령으로 갱신
-  - import 방향 규칙(architecture.md "규칙")을 검사에 넣는다. Konsist 아키텍처 테스트(AOS-010)
-- [ ] dev 변형이 로컬 dev 서버 `GET /v1/health`를 부르는 최소 화면으로 연결 확인
-- [ ] (선택) 원격 저장소·CI(GitHub Actions에서 check)
+- [ ] (선택) 원격 저장소·CI(GitHub Actions에서 check). 지금은 원격 없음(로컬 전용)
 
 ## 3. 공통 기반
+- [ ] 세로 잠금은 코드로(`requestedOrientation`, D-076). 매니페스트 `screenOrientation`은 lint `LockedOrientationActivity`·`DiscouragedApi`가 막는다
+- [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
 - [ ] API client: 헤더(Bearer·`X-Device-Id`), 타임아웃 15초, 봉투 디코딩, `AppError`, 재시도 규칙 (D-042, D-072)
 - [ ] 응답 모델: `../futureETP_ReactNative/packages/shared/contract/schemas/*.json`과 맞춘 모델(손으로 또는 생성 도구) + 계약 테스트(실제 dev 서버 응답을 저장한 예시를 모델로 디코딩하고, 같은 예시가 JSON Schema를 통과하는지) (D-142)
 - [ ] installation ID(첫 실행 UUID) 생성·보안 저장소 보관 (D-120)

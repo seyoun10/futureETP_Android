@@ -10,3 +10,10 @@
 
 ## 1. 스택 확정
 - [x] `docs/tech-stack.md`의 후보를 하나씩 정한다(2026-11-27, AOS-003~AOS-011). 버전은 Maven 메타데이터로 확인
+
+## 2. 스캐폴딩
+- [x] 프로젝트 생성, 앱 ID `io.github.seyoon.futureetp`·dev `.dev` 두 변형, 앱 이름·아이콘(RN `apps/mobile/assets` 재사용)
+- [x] lint·format·test 설정과 검사 명령 하나(`check`), CLAUDE.md Commands를 실제 명령으로 갱신
+  - import 방향 규칙(architecture.md "규칙")을 검사에 넣는다. Konsist 아키텍처 테스트(AOS-010)
+- [x] dev 변형이 로컬 dev 서버 `GET /v1/health`를 부르는 최소 화면으로 연결 확인
+  - 결과(2026-11-27): flavor `dev`(`futureETP Dev`, `.dev`)·`prod`(`futureETP`, `https://futureetp-api.duckdns.org`). 아이콘은 Flutter 저장소가 RN 에셋으로 만든 적응형 아이콘을 복사(minSdk 29라 PNG mipmap 없음). Compose 1.13이 compileSdk 37.1 이상을 요구해 SDK Platform 37.2를 설치했고, Robolectric은 SDK 36부터 Java 21이 필요해 SDK 35로 돈다(AOS-003, AOS-009). `AOS_Pixel_API_36`에서 dev 서버 health `OK`를 확인

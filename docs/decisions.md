@@ -38,6 +38,7 @@
 - 결정: Kotlin 2.4.21, Gradle 9.9.2, AGP 9.5.3, Compose BOM 2026.11.01, JDK 17. compileSdk·targetSdk 37, minSdk 29. 버전은 `gradle/libs.versions.toml` 한 곳에만 둔다.
 - 근거: 2026-11-27 Maven 메타데이터 기준 최신 안정판. minSdk는 개인 앱(D-011)이라 넓게 받을 필요가 없어 Android 10으로 두고, 오래된 API 분기를 줄인다.
 - 영향: `docs/tech-stack.md`. Android Studio 2026.2가 AGP 9.5를 열지 못하면 Studio를 올린다(명령줄 빌드는 상관없음).
+- 보충(2026-11-27, 2단계): Compose 1.13(BOM 2026.11.01)이 compileSdk 37.1 이상을 요구해 compileSdk를 37.2(`release(37) { minorApiLevel = 2 }`)로 둔다. targetSdk는 37.
 
 ## AOS-004: 내비게이션은 Navigation 3
 - 날짜: 2026-11-27
@@ -86,6 +87,7 @@
 - 결정: (a). 단위 테스트와 Compose UI 테스트(`createComposeRule`)를 모두 JUnit 4로 `src/test`에서 Robolectric 4.18.1로 돌린다. 코루틴은 kotlinx-coroutines-test.
 - 근거: Compose UI test가 JUnit 4 rule 기반이라 한 가지로 통일하면 설정이 하나다. 기기 없이 `check`에서 돈다.
 - 영향: 기기에서만 확인되는 것(손동작·성능·QR)은 기기 확인으로 남긴다.
+- 보충(2026-11-27, 2단계): Robolectric 4.18은 SDK 36부터 Java 21이 필요하다. JDK 17(D-055)을 유지하려고 Robolectric은 SDK 35로 돌린다(`robolectric.properties`). UI 테스트는 `@Config(qualifiers = "ko")`로 ko 원문을 본다.
 
 ## AOS-010: 단일 app 모듈과 Konsist로 import 방향 검사
 - 날짜: 2026-11-27

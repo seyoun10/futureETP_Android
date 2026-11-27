@@ -1,15 +1,16 @@
 # Architecture
 
 > Kotlin/Jetpack Compose 앱의 구조. API 규약·화면 동작은 원본(`../futureETP_ReactNative/docs/architecture.md`·`wireframes/screens.md`)을 따르고, 여기에는 이 앱의 구조와 대응만 적는다.
-> 디렉터리는 초안이다. 스캐폴딩(TODO 2단계) 때 실제 구조로 고친다.
+> 2단계 스캐폴딩(2026-11-27)으로 만든 구조. 아직 없는 폴더는 해당 단계에서 만든다.
 
-## 디렉터리 구조 (초안)
+## 디렉터리 구조
 
 ```
 app/src/main/java/io/github/seyoon/futureetp/
-├─ MainActivity.kt / FutureEtpApp.kt   진입점, 앱 컨테이너(수동 DI)
-├─ navigation/                   Navigation 3 NavDisplay, 백스택 키(AOS-004)
+├─ MainActivity.kt / FutureEtpApplication.kt / AppContainer.kt   진입점, 앱 컨테이너(수동 DI, AOS-005)
+├─ navigation/                   Navigation 3 NavDisplay(`AppNavigation`), 백스택 키 `AppKey`(AOS-004)
 ├─ feature/
+│  ├─ devhealth/                 2단계 임시 health 화면(B 화면과 함께 지움)
 │  ├─ commoditylist/             A
 │  ├─ settings/ alertsettings/ accesskey/ datasources/   B, B-a, B-b
 │  └─ commodity/                 C: disparitychart(C-a)·contractchart(C-c)·curve(C-b)·etp(C-d, C-d-a)
@@ -22,15 +23,17 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  ├─ theme/                     테마 토큰(다크 전용)
 │  ├─ push/                      FCM 토큰 등록, 알림 탭 이동
 │  └─ util/                      숫자·날짜 포맷, 햅틱
-app/src/main/res/                strings(ko·en), 아이콘
-app/src/test/ · app/src/androidTest/
+app/src/main/res/                values(ko 원문)·values-en, 적응형 아이콘, 백업 제외 규칙
+app/src/dev/AndroidManifest.xml  dev만 평문 HTTP 허용
+app/src/test/                    JUnit 4 + Robolectric(SDK 35) + Konsist `ArchitectureTest`
+gradle/libs.versions.toml        버전(AOS-003) · config/detekt/detekt.yml · .editorconfig(ktlint)
 docs/                            tech-stack, architecture, decisions
 ```
 
 규칙
 - 화면 → ViewModel + `StateFlow` → repository → API client 한 방향. 화면은 HTTP·저장소를 직접 부르지 않는다.
 - 화면 전용 코드는 해당 feature 안에, 두 곳 이상에서 쓰면 공용 계층(`core`)으로 옮긴다.
-- import 방향(RN D-041, 2026-11-19 lint로 강제): feature끼리 import하지 않는다(컴포넌트·헬퍼·조회도 다른 feature가 쓰면 `core`로 옮긴다). `core`는 features·`navigation`을 import하지 않고, features는 `navigation`(라우트)을 import하지 않는다. 2단계에서 검사로 강제한다.
+- import 방향(RN D-041, 2026-11-19 lint로 강제): feature끼리 import하지 않는다(컴포넌트·헬퍼·조회도 다른 feature가 쓰면 `core`로 옮긴다). `core`는 features·`navigation`을 import하지 않고, features는 `navigation`(라우트)을 import하지 않는다. `ArchitectureTest`(Konsist)가 `./gradlew check`에서 강제한다(AOS-010).
 - RN에서 공용으로 옮긴 것: `SectionHeader`·`SettingsHeaderButton`(공용 UI), 에러 code → 사용자 문구 함수 `errorText`(API의 `AppError` 옆), ETP 정렬 기준 `ETP_SORTS`(util).
 - 월물 심볼은 서버 표준형(`CLZ26`)만 쓴다. 표시 표기(`DEC26`)는 포맷 함수가 만든다.
 

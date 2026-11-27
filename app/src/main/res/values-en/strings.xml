@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dev_health_title">Server check</string>
+    <string name="dev_health_server">Server: %1$s</string>
+    <string name="dev_health_loading">Checking…</string>
+    <string name="dev_health_ok">OK (commit %1$s)</string>
+    <string name="dev_health_error">Failed: %1$s</string>
+    <string name="dev_health_retry">Check again</string>
+    <string name="dev_health_no_commit">none</string>
+</resources>

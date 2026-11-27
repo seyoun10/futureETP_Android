@@ -69,7 +69,7 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 ## Conventions
 
 - commit message: Conventional Commits(`feat:`, `fix:`, `chore:`, `docs:`). 관련 결정 번호를 끝에 `(D-xxx)`·`(AOS-xxx)`로 붙인다
-- 커밋 전 검사 명령(아래 Commands의 check) 통과. 스캐폴딩 전에는 문서만이라 생략
+- 커밋 전 검사 명령(아래 Commands의 `./gradlew check`) 통과. 문서만 바꾼 커밋은 생략
 - `fix:` 커밋은 회귀 테스트를 함께 넣는다. 시각 조정만 예외로 기기 확인으로 대신한다
 - 이름: 클래스 `UpperCamelCase`, 함수·변수 `lowerCamelCase`, Composable은 `UpperCamelCase`. Kotlin 공식 코딩 컨벤션을 따른다
 - 테스트: JUnit 5(또는 4) + kotlinx-coroutines-test, Compose UI test(Robolectric 또는 기기)
@@ -77,11 +77,11 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 
 ## Commands
 
-스캐폴딩(TODO 2단계) 전이라 예정 명령이다. 프로젝트를 만든 뒤 실제 명령으로 고친다.
-
-- `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`)
-- `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.CommodityListViewModelTest"`
-- `./gradlew lintDevDebug`: Android lint
-- `./gradlew ktlintCheck detekt`: Kotlin 스타일·정적 분석(ktlint·detekt 2.0, AOS-008)
-- `./gradlew check`: 위 전부(스캐폴딩 때 묶는다). 커밋 전 통과
-- dev 서버 실행은 `../futureETP_ReactNative`에서 `npm run dev -w apps/server`. 에뮬레이터는 `http://10.0.2.2:<port>`, iOS 시뮬레이터는 `http://localhost:<port>`
+- 처음 한 번: `cp secrets.example.properties secrets.properties` 뒤 값 넣기, `cp ../futureETP_ReactNative/apps/mobile/google-services.json app/`(둘 다 커밋 안 함)
+- `./gradlew check`: 커밋 전 검사 전부(Android lint `lintDevDebug`, ktlint, detekt, dev·prod 단위 테스트 + Robolectric Compose UI 테스트 + Konsist import 방향 테스트). 통과해야 커밋
+- `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`). 실행 `adb shell am start -n io.github.seyoon.futureetp.dev/io.github.seyoon.futureetp.MainActivity`
+- `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.DevHealthViewModelTest"`
+- `./gradlew lintDevDebug` / `ktlintCheck` / `detekt`: 검사 하나씩. 포맷 자동 수정은 `./gradlew ktlintFormat`
+- `./gradlew assembleProdRelease`: prod release(서명은 6단계에서 정한다, 지금은 unsigned)
+- 버전은 `gradle/libs.versions.toml`에만 둔다. compileSdk 37.2(SDK Platform `android-37.2` 필요), Robolectric은 SDK 35로 돈다(`app/src/test/resources/robolectric.properties`, AOS-009)
+- dev 서버 실행은 `../futureETP_ReactNative`에서 `npm run dev -w apps/server`(포트 3000). 에뮬레이터는 `http://10.0.2.2:3000`(dev 변형 기본값, `secrets.properties`의 `DEV_API_BASE_URL`로 바꿈)

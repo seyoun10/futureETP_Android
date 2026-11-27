@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ko 원문(AOS-011). 2단계 임시 화면 문구 dev_health_*는 B 화면을 만들 때 지운다 -->
+<resources>
+    <string name="dev_health_title">서버 연결 확인</string>
+    <string name="dev_health_server">서버: %1$s</string>
+    <string name="dev_health_loading">확인 중…</string>
+    <string name="dev_health_ok">정상 (커밋 %1$s)</string>
+    <string name="dev_health_error">실패: %1$s</string>
+    <string name="dev_health_retry">다시 확인</string>
+    <string name="dev_health_no_commit">없음</string>
+</resources>

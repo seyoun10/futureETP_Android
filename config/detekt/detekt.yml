@@ -1,0 +1,12 @@
+# 기본 규칙 위에 바꾸는 것만 둔다(AOS-008)
+naming:
+  FunctionNaming:
+    # Composable은 UpperCamelCase
+    ignoreAnnotated: ['Composable']
+complexity:
+  LongParameterList:
+    ignoreAnnotated: ['Composable']
+style:
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreAnnotated: ['Composable', 'Preview']
