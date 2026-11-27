@@ -18,11 +18,6 @@
 - [ ] 첫 로딩 가운데 스피너(2026-11-19, futureETP 527a3b2): 첫 조회 중 스켈레톤(공용 막대·차트 격자) 위 가운데에 큰 스피너를 겹친다. 차트 탭은 차트 자리 가운데이고, 데이터가 온 뒤 첫 기간 맞춤 전(차트를 감춘 동안)에도 띄운다(e94b2c2). `../futureETP_ReactNative/docs/wireframes/screens.md` 공통 로딩 항목
 - [ ] 차트 데이터가 바뀌면 십자선·상세 박스 지우기(2026-11-21, futureETP E1 수정): C-a·C-c에서 이전 3년을 앞에 붙이거나 자동 새로고침으로 데이터 배열이 바뀌면 십자선과 상세 박스를 지운다(옛 순번으로 다른 봉을 가리키지 않게). `../futureETP_ReactNative/docs/wireframes/screens.md` C-a 길게 누르기
 
-## 0. 환경
-- [ ] Android Studio · Zulu JDK 17 · Android SDK · 에뮬레이터 `Pixel_API_36`은 RN과 함께 쓴다(D-055)
-- [ ] Compose BOM 2026.08.00은 compileSdk 37·AGP 9.1.1 이상이 필요하다. 설치된 SDK 37과 AGP 버전을 확인
-- [ ] `google-services.json`은 RN(`futureETP/apps/mobile/google-services.json`)과 같은 Firebase 앱(같은 앱 ID)이다. 커밋하지 않고 복사해 쓴다
-
 ## 1. 스택 확정
 - [ ] `docs/tech-stack.md`의 후보를 하나씩 정한다. 각 패키지·도구의 최신 안정 버전을 웹 검색으로 확인하고 출처 날짜를 적는다. 결정과 근거는 `docs/decisions.md`(AOS-003부터)
 - [ ] 차트 방식은 2단계 뒤 C-a 스파이크(아래 4단계 첫 항목)로 정한다

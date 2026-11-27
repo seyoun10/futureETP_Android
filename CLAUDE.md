@@ -79,7 +79,7 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 
 스캐폴딩(TODO 2단계) 전이라 예정 명령이다. 프로젝트를 만든 뒤 실제 명령으로 고친다.
 
-- `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `Pixel_API_36`)
+- `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`)
 - `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.CommodityListViewModelTest"`
 - `./gradlew lintDevDebug`: Android lint
 - `./gradlew ktlintCheck detekt`: Kotlin 스타일·정적 분석(도구는 1단계에서 확정)
