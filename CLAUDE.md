@@ -82,6 +82,7 @@ Kotlin/Jetpack Compose로 만드는 futureETP 앱(Android). 기능·화면·동�
 - `./gradlew installDevDebug`: dev 변형 설치(에뮬레이터 `AOS_Pixel_API_36`). 실행 `adb shell am start -n io.github.seyoon.futureetp.dev/io.github.seyoon.futureetp.MainActivity`
 - `./gradlew testDevDebugUnitTest`: 단위 테스트. 단일: `--tests "*.DevHealthViewModelTest"`
 - `./gradlew lintDevDebug` / `ktlintCheck` / `detekt`: 검사 하나씩. 포맷 자동 수정은 `./gradlew ktlintFormat`
+- 계약이 바뀌면: `scripts/sync-contract.sh`(원본 계약 복사) → 모델(`core/api/model`) 수정 → dev 서버를 띄우고 `scripts/capture-fixtures.sh [이름 ...]`(응답 예시 저장). `ContractTest`가 복사본과 원본이 다르면 실패한다 (AOS-012)
 - `./gradlew assembleProdRelease`: prod release(서명은 6단계에서 정한다, 지금은 unsigned)
 - 버전은 `gradle/libs.versions.toml`에만 둔다. compileSdk 37.2(SDK Platform `android-37.2` 필요), Robolectric은 SDK 35로 돈다(`app/src/test/resources/robolectric.properties`, AOS-009)
 - dev 서버 실행은 `../futureETP_ReactNative`에서 `npm run dev -w apps/server`(포트 3000). 에뮬레이터는 `http://10.0.2.2:3000`(dev 변형 기본값, `secrets.properties`의 `DEV_API_BASE_URL`로 바꿈)

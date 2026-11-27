@@ -1,0 +1,28 @@
+{
+  "id": "48dcae42-668b-4024-98ab-4edc8d3667dd",
+  "market": "KRX",
+  "fxHedge": "UNHEDGED",
+  "name": "KB 솔랙티브 레버리지 금 선물 ETN",
+  "nameLang": "ko",
+  "issuer": "KB",
+  "underlyingIndex": "Solactive Gold Total Return 2x Long Leverage",
+  "expenseRatio": null,
+  "issuerUrl": "https://www.kbsec.com/",
+  "aum": 16395000000,
+  "avgTradingValue": 21018192,
+  "commodityCode": "GC",
+  "type": "ETN",
+  "leverage": 2,
+  "tickers": [
+    "580089"
+  ],
+  "listedDate": null,
+  "series": [
+    {
+      "ticker": "580089",
+      "seriesCode": "A",
+      "maturityDate": null
+    }
+  ],
+  "collectedAt": "2026-10-28T12:17:47.989Z"
+}

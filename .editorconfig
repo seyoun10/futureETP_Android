@@ -10,3 +10,5 @@ indent_size = 4
 [*.{kt,kts}]
 # Composable은 UpperCamelCase(Kotlin·Compose 관례)
 ktlint_function_naming_ignore_when_annotated_with = Composable
+# detekt MaxLineLength(120)와 맞춘다. ktlint 기본 140이면 ktlintFormat이 detekt가 막는 줄로 되돌린다
+max_line_length = 120

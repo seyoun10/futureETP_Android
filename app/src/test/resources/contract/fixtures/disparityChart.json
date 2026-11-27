@@ -1,0 +1,1048 @@
+{
+  "freshness": {
+    "asOf": "2026-11-03T04:00:21.542Z",
+    "tradeDate": "2026-11-25",
+    "delayed": false,
+    "marketState": "SETTLEMENT_PENDING",
+    "nextUpdateAt": "2026-11-27T06:01:00.000Z"
+  },
+  "priceDecimals": 1,
+  "basis": "FRONT",
+  "fallback": false,
+  "maPeriod": 20,
+  "window": "Y3",
+  "distribution": {
+    "actualStartDate": "2023-10-31",
+    "sampleCount": 754
+  },
+  "bars": [
+    {
+      "tradeDate": "2026-08-07",
+      "open": 4298.3,
+      "high": 4432.3,
+      "low": 4288,
+      "close": 4399.7,
+      "ma": 4148.118,
+      "disparity": 6.065,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-10",
+      "open": 4400,
+      "high": 4453.8,
+      "low": 4373.9,
+      "close": 4419.7,
+      "ma": 4165.806,
+      "disparity": 6.095,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-11",
+      "open": 4446.9,
+      "high": 4495,
+      "low": 4415.7,
+      "close": 4441.1,
+      "ma": 4181.316,
+      "disparity": 6.213,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-12",
+      "open": 4430,
+      "high": 4502.7,
+      "low": 4421.4,
+      "close": 4467.5,
+      "ma": 4199.054,
+      "disparity": 6.393,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-13",
+      "open": 4468.8,
+      "high": 4509.1,
+      "low": 4400,
+      "close": 4420.4,
+      "ma": 4217.467,
+      "disparity": 4.812,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-14",
+      "open": 4408.2,
+      "high": 4454.6,
+      "low": 4365.5,
+      "close": 4437.3,
+      "ma": 4235.371,
+      "disparity": 4.768,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-17",
+      "open": 4440,
+      "high": 4486.5,
+      "low": 4422.3,
+      "close": 4473.7,
+      "ma": 4255.241,
+      "disparity": 5.134,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-18",
+      "open": 4473.4,
+      "high": 4493.1,
+      "low": 4383.3,
+      "close": 4420.6,
+      "ma": 4269.386,
+      "disparity": 3.542,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-19",
+      "open": 4391.4,
+      "high": 4582.8,
+      "low": 4378,
+      "close": 4545.3,
+      "ma": 4285.934,
+      "disparity": 6.052,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-20",
+      "open": 4580,
+      "high": 4597.1,
+      "low": 4506,
+      "close": 4571.4,
+      "ma": 4308.948,
+      "disparity": 6.091,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-21",
+      "open": 4577,
+      "high": 4690.4,
+      "low": 4565.5,
+      "close": 4680.6,
+      "ma": 4336.377,
+      "disparity": 7.938,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-24",
+      "open": 4673.4,
+      "high": 4738.5,
+      "low": 4651.8,
+      "close": 4697.8,
+      "ma": 4364.352,
+      "disparity": 7.64,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-25",
+      "open": 4710.1,
+      "high": 4755,
+      "low": 4659.5,
+      "close": 4694.5,
+      "ma": 4394.105,
+      "disparity": 6.836,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-26",
+      "open": 4715.7,
+      "high": 4730.9,
+      "low": 4638.2,
+      "close": 4653.3,
+      "ma": 4421.92,
+      "disparity": 5.233,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-27",
+      "open": 4650,
+      "high": 4697.7,
+      "low": 4616,
+      "close": 4664,
+      "ma": 4447.09,
+      "disparity": 4.878,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-28",
+      "open": 4656,
+      "high": 4688,
+      "low": 4495,
+      "close": 4529.9,
+      "ma": 4468.235,
+      "disparity": 1.38,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-08-31",
+      "open": 4483.2,
+      "high": 4521.5,
+      "low": 4445.6,
+      "close": 4481.5,
+      "ma": 4487.785,
+      "disparity": -0.14,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-01",
+      "open": 4498.7,
+      "high": 4510.5,
+      "low": 4369.7,
+      "close": 4396.4,
+      "ma": 4499.975,
+      "disparity": -2.302,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-02",
+      "open": 4377.2,
+      "high": 4444.4,
+      "low": 4329.2,
+      "close": 4414.6,
+      "ma": 4505.445,
+      "disparity": -2.016,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-03",
+      "open": 4436.4,
+      "high": 4558.5,
+      "low": 4426.7,
+      "close": 4539.9,
+      "ma": 4517.46,
+      "disparity": 0.497,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-04",
+      "open": 4522,
+      "high": 4537.8,
+      "low": 4412,
+      "close": 4476.6,
+      "ma": 4521.305,
+      "disparity": -0.989,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-08",
+      "open": 4466.5,
+      "high": 4488.8,
+      "low": 4381,
+      "close": 4439,
+      "ma": 4522.27,
+      "disparity": -1.841,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-09",
+      "open": 4399,
+      "high": 4479,
+      "low": 4384.1,
+      "close": 4460.7,
+      "ma": 4523.25,
+      "disparity": -1.383,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-10",
+      "open": 4448,
+      "high": 4479.9,
+      "low": 4354.7,
+      "close": 4407.3,
+      "ma": 4520.24,
+      "disparity": -2.499,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-11",
+      "open": 4359.4,
+      "high": 4444.9,
+      "low": 4333,
+      "close": 4408.9,
+      "ma": 4519.665,
+      "disparity": -2.451,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-14",
+      "open": 4375,
+      "high": 4396.8,
+      "low": 4293,
+      "close": 4351.9,
+      "ma": 4515.395,
+      "disparity": -3.621,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-15",
+      "open": 4340.3,
+      "high": 4358.2,
+      "low": 4301.6,
+      "close": 4332.8,
+      "ma": 4508.35,
+      "disparity": -3.894,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-16",
+      "open": 4333.5,
+      "high": 4413.1,
+      "low": 4273.3,
+      "close": 4387.5,
+      "ma": 4506.695,
+      "disparity": -2.645,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-17",
+      "open": 4301.4,
+      "high": 4423.3,
+      "low": 4294.5,
+      "close": 4399.7,
+      "ma": 4499.415,
+      "disparity": -2.216,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-18",
+      "open": 4381.6,
+      "high": 4439.8,
+      "low": 4372.2,
+      "close": 4424.9,
+      "ma": 4492.09,
+      "disparity": -1.496,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-21",
+      "open": 4413,
+      "high": 4422.1,
+      "low": 4360.3,
+      "close": 4383.9,
+      "ma": 4477.255,
+      "disparity": -2.085,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-22",
+      "open": 4382.5,
+      "high": 4414.1,
+      "low": 4327.6,
+      "close": 4376.4,
+      "ma": 4461.185,
+      "disparity": -1.901,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-23",
+      "open": 4394.7,
+      "high": 4407.5,
+      "low": 4310.7,
+      "close": 4318.4,
+      "ma": 4442.38,
+      "disparity": -2.791,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-24",
+      "open": 4324.4,
+      "high": 4338,
+      "low": 4278.3,
+      "close": 4298,
+      "ma": 4424.615,
+      "disparity": -2.862,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-25",
+      "open": 4309.5,
+      "high": 4351.6,
+      "low": 4289.2,
+      "close": 4321.2,
+      "ma": 4407.475,
+      "disparity": -1.957,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-28",
+      "open": 4315,
+      "high": 4315.6,
+      "low": 4143.1,
+      "close": 4168.4,
+      "ma": 4389.4,
+      "disparity": -5.035,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-29",
+      "open": 4150.1,
+      "high": 4218.1,
+      "low": 4145.2,
+      "close": 4179.7,
+      "ma": 4374.31,
+      "disparity": -4.449,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-09-30",
+      "open": 4216.2,
+      "high": 4251.1,
+      "low": 4178.2,
+      "close": 4186.7,
+      "ma": 4363.825,
+      "disparity": -4.059,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-01",
+      "open": 4190.1,
+      "high": 4222.8,
+      "low": 4169.4,
+      "close": 4202.3,
+      "ma": 4353.21,
+      "disparity": -3.467,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-02",
+      "open": 4204.6,
+      "high": 4259,
+      "low": 4153.8,
+      "close": 4162.3,
+      "ma": 4334.33,
+      "disparity": -3.969,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-05",
+      "open": 4169.4,
+      "high": 4198.9,
+      "low": 4150.4,
+      "close": 4156.8,
+      "ma": 4318.34,
+      "disparity": -3.741,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-06",
+      "open": 4169.2,
+      "high": 4212.4,
+      "low": 4130.7,
+      "close": 4187.1,
+      "ma": 4305.745,
+      "disparity": -2.756,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-07",
+      "open": 4195,
+      "high": 4197.8,
+      "low": 4091.2,
+      "close": 4140.7,
+      "ma": 4289.745,
+      "disparity": -3.474,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-08",
+      "open": 4139.9,
+      "high": 4170.7,
+      "low": 4128.1,
+      "close": 4157,
+      "ma": 4277.23,
+      "disparity": -2.811,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-09",
+      "open": 4159.7,
+      "high": 4233.7,
+      "low": 4156.1,
+      "close": 4216.3,
+      "ma": 4267.6,
+      "disparity": -1.202,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-12",
+      "open": 4220.8,
+      "high": 4242.3,
+      "low": 4178.1,
+      "close": 4190.6,
+      "ma": 4259.535,
+      "disparity": -1.618,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-13",
+      "open": 4195.5,
+      "high": 4224.8,
+      "low": 4169.7,
+      "close": 4177.3,
+      "ma": 4251.76,
+      "disparity": -1.751,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-14",
+      "open": 4184.2,
+      "high": 4193.5,
+      "low": 4095,
+      "close": 4107.9,
+      "ma": 4237.78,
+      "disparity": -3.065,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-15",
+      "open": 4128.3,
+      "high": 4197.7,
+      "low": 4120.9,
+      "close": 4170.1,
+      "ma": 4226.3,
+      "disparity": -1.33,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-16",
+      "open": 4192.1,
+      "high": 4220.4,
+      "low": 4167.5,
+      "close": 4181.1,
+      "ma": 4214.11,
+      "disparity": -0.783,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-19",
+      "open": 4185,
+      "high": 4211.2,
+      "low": 4155.6,
+      "close": 4160.1,
+      "ma": 4202.92,
+      "disparity": -1.019,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-20",
+      "open": 4162.4,
+      "high": 4174.9,
+      "low": 4130.1,
+      "close": 4142.6,
+      "ma": 4191.23,
+      "disparity": -1.16,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-21",
+      "open": 4143.4,
+      "high": 4160.6,
+      "low": 4122.3,
+      "close": 4150,
+      "ma": 4182.81,
+      "disparity": -0.784,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-22",
+      "open": 4159,
+      "high": 4164.3,
+      "low": 4036.8,
+      "close": 4060.4,
+      "ma": 4170.93,
+      "disparity": -2.65,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-23",
+      "open": 4042.2,
+      "high": 4050.2,
+      "low": 3989.1,
+      "close": 4007.9,
+      "ma": 4155.265,
+      "disparity": -3.546,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-26",
+      "open": 4012.2,
+      "high": 4044,
+      "low": 3990.9,
+      "close": 4038.4,
+      "ma": 4148.765,
+      "disparity": -2.66,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-27",
+      "open": 4032.8,
+      "high": 4079.4,
+      "low": 4001.6,
+      "close": 4074.6,
+      "ma": 4143.51,
+      "disparity": -1.663,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-28",
+      "open": 4073.6,
+      "high": 4097.2,
+      "low": 4036.9,
+      "close": 4051.6,
+      "ma": 4136.755,
+      "disparity": -2.058,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-29",
+      "open": 4081.4,
+      "high": 4081.7,
+      "low": 4016.3,
+      "close": 4031.4,
+      "ma": 4128.21,
+      "disparity": -2.345,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2026-10-30",
+      "open": 4033.6,
+      "high": 4038.2,
+      "low": 3879.3,
+      "close": 3898.9,
+      "ma": 4115.04,
+      "disparity": -5.252,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2026-12",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "rareLevels": [
+    {
+      "direction": "UP",
+      "level": 1,
+      "disparity": 8.384,
+      "price": 4460.05
+    },
+    {
+      "direction": "UP",
+      "level": 2.5,
+      "disparity": 6.446,
+      "price": 4380.315
+    },
+    {
+      "direction": "UP",
+      "level": 5,
+      "disparity": 5.362,
+      "price": 4335.679
+    },
+    {
+      "direction": "UP",
+      "level": 10,
+      "disparity": 4.247,
+      "price": 4289.805
+    },
+    {
+      "direction": "UP",
+      "level": 20,
+      "disparity": 3.071,
+      "price": 4241.407
+    },
+    {
+      "direction": "DOWN",
+      "level": 1,
+      "disparity": -8.144,
+      "price": 3779.903
+    },
+    {
+      "direction": "DOWN",
+      "level": 2.5,
+      "disparity": -4.902,
+      "price": 3913.301
+    },
+    {
+      "direction": "DOWN",
+      "level": 5,
+      "disparity": -3.663,
+      "price": 3964.308
+    },
+    {
+      "direction": "DOWN",
+      "level": 10,
+      "disparity": -2.43,
+      "price": 4015.024
+    },
+    {
+      "direction": "DOWN",
+      "level": 20,
+      "disparity": -1.421,
+      "price": 4056.577
+    }
+  ],
+  "currentTail": {
+    "side": "DOWN",
+    "pct": 1.859
+  },
+  "provisional": false,
+  "hasMore": true
+}

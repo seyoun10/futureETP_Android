@@ -15,7 +15,8 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  ├─ settings/ alertsettings/ accesskey/ datasources/   B, B-a, B-b
 │  └─ commodity/                 C: disparitychart(C-a)·contractchart(C-c)·curve(C-b)·etp(C-d, C-d-a)
 ├─ core/
-│  ├─ api/                       HTTP 클라이언트, AppError, 엔드포인트, @Serializable 모델
+│  ├─ api/                       HTTP 클라이언트(`ApiClient`), AppError, 엔드포인트(`Endpoints.kt`)
+│  │  └─ model/                  계약 `schemas/*.json`과 맞춘 @Serializable 응답·요청·query 모델(AOS-012)
 │  ├─ data/                      repository(조회 캐시·자동 새로고침)
 │  ├─ chart/                     Canvas 차트·뷰포트
 │  ├─ ui/                        공용 Composable(ScreenHeader, FreshnessLine, QueryStateView, SegmentedControl)
@@ -25,7 +26,9 @@ app/src/main/java/io/github/seyoon/futureetp/
 │  └─ util/                      숫자·날짜 포맷, 햅틱
 app/src/main/res/                values(ko 원문)·values-en, 적응형 아이콘, 백업 제외 규칙
 app/src/dev/AndroidManifest.xml  dev만 평문 HTTP 허용
-app/src/test/                    JUnit 4 + Robolectric(SDK 35) + Konsist `ArchitectureTest`
+app/src/test/                    JUnit 4 + Robolectric(SDK 35) + Konsist `ArchitectureTest` + 계약 테스트 `ContractTest`
+app/src/test/resources/contract/ 계약 복사본 `schemas/`, dev 서버 응답 예시 `fixtures/`(AOS-012)
+scripts/                         `sync-contract.sh`(계약 복사), `capture-fixtures.sh`(응답 예시 저장)
 gradle/libs.versions.toml        버전(AOS-003) · config/detekt/detekt.yml · .editorconfig(ktlint)
 docs/                            tech-stack, architecture, decisions
 ```

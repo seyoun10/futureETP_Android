@@ -1,0 +1,20 @@
+{
+  "freshness": {
+    "asOf": "2026-11-27T05:55:16.764Z",
+    "tradeDate": "2026-11-25",
+    "delayed": false,
+    "marketState": "SETTLEMENT_PENDING",
+    "nextUpdateAt": "2026-11-27T06:01:00.000Z"
+  },
+  "priceDecimals": 1,
+  "baseDate": "2026-11-24",
+  "baseOffset": 1,
+  "prevBaseDate": "2026-11-23",
+  "nextBaseDate": null,
+  "minBaseDate": "2010-06-07",
+  "maxBaseDate": "2026-11-24",
+  "compareDate": "2026-11-25",
+  "points": [],
+  "current": null,
+  "base": null
+}

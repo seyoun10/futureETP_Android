@@ -104,3 +104,14 @@
 - 결정: (a). 앱 안 언어는 `AppCompatDelegate.setApplicationLocales` + `locales_config.xml`(ko·en).
 - 근거: RN i18n `fallbackLng: 'ko'`와 같게 기기 언어가 ko·en이 아니면 한국어로 보인다.
 - 영향: `res/values/strings.xml`이 ko 원문이다.
+
+## AOS-012: 응답 모델은 손으로 쓰고 계약 복사본·실제 응답 예시로 검사
+- 날짜: 2026-11-27
+- 상태: 제안 (Claude, 사용자 확인 전)
+- 선택지: (a) `@Serializable` 모델을 손으로 쓰고 계약 테스트로 맞춘다 (b) JSON Schema에서 모델 생성(quicktype 등)
+- 결정: (a). `core/api/model`에 계약 필드·nullable·enum 그대로 쓴다. 날짜·시각·월물은 java.time(`LocalDate`·`Instant`·`YearMonth`·`LocalTime`)으로 디코딩하고, 형식이 다르거나 모르는 enum 값이면 `SCHEMA_MISMATCH`(D-042). 계약 테스트(`ContractTest`)는 networknt json-schema-validator 3.0.9(draft 2020-12)로
+  1) 커밋한 계약 복사본(`app/src/test/resources/contract/schemas`, `scripts/sync-contract.sh`)이 원본과 같은지(원본 저장소가 옆에 있을 때),
+  2) dev 서버 실제 응답 data(`contract/fixtures`, `scripts/capture-fixtures.sh`, 차트는 마지막 60거래일)가 스키마를 통과하고 모델로 디코딩되며 다시 인코딩하면 같은 JSON인지,
+  3) 요청 본문(`SettingsPatch`·`DeviceRegistration`)과 query가 요청 스키마를 통과하는지 본다.
+- 근거: 스키마가 작고(응답 10개) zod refine·주석은 생성기로 옮겨지지 않는다. 생성 도구는 enum·nullable·날짜 타입 표현이 도구마다 달라 손볼 곳이 생긴다. iOS(IOS-007)·Flutter(FL-007)도 손 작성 + 예시 검사다. 왕복 비교가 빠진 필드를, 스키마 검사가 예시 자체의 계약 위반을 잡는다.
+- 영향: 원본 계약이 바뀌면 `ContractTest.schemaCopyMatchesUpstream`이 실패하므로 `scripts/sync-contract.sh` → 모델 수정 → `scripts/capture-fixtures.sh`. 요청 본문은 `requestJson`(null을 빼지 않음)으로 인코딩한다. rare 레벨 query는 `formatLevel`로 숫자 기본 문자열(`1`, `2.5`)을 만든다.

@@ -24,6 +24,7 @@
 | 테스트 | JUnit 4 + Robolectric(Compose UI test를 JVM에서) + coroutines-test | Robolectric 4.18.1 | AOS-009 |
 | lint / 포맷 / 정적 분석 | Android lint · ktlint(`org.jlleitschuh.gradle.ktlint`) · detekt 2.0 alpha | ktlint-gradle 14.2.0 · detekt 2.0.0-alpha.6 | detekt 1.23.8은 Kotlin 2.4 지원 근거가 없어 2.0 alpha(AOS-008) |
 | 모듈 / import 방향 | 단일 `app` 모듈 + Konsist 아키텍처 테스트 | Konsist 0.18.1 | AOS-010 |
+| 계약 테스트 | networknt json-schema-validator(draft 2020-12, 테스트 전용) | 3.0.9(2026-11-03 릴리스, Maven Central 메타데이터 2026-11-27 확인) | AOS-012 |
 
 출처(2026-11-27 확인): [Navigation 3 is stable](https://developer.android.com/blog/posts/jetpack-navigation-3-is-stable), [DataStore 릴리스 노트](https://developer.android.com/jetpack/androidx/releases/datastore), [detekt 2.0.0 changelog](https://detekt.dev/changelog-2.0.0/), [detekt 2.0 migration](https://detekt.dev/docs/introduction/migration), 버전은 `dl.google.com/android/maven2`·`repo1.maven.org`·`plugins.gradle.org`의 `maven-metadata.xml`, Gradle은 `services.gradle.org/versions/current`
 

@@ -2,6 +2,9 @@
 
 > `TODO.md`에서 끝난 블록을 같은 절 이름 아래로 옮겨 둔다. 최신이 아래.
 
+## 원본 변경 반영
+- [x] API 계약 JSON Schema 생성(2026-11-19, futureETP D-142): 응답 모델·계약 테스트가 `packages/shared/contract`를 기준으로 한다(2026-11-27, AOS-012)
+
 ## 0. 환경
 - [x] Android Studio · Zulu JDK 17 · Android SDK · 에뮬레이터는 RN과 함께 쓴다(D-055). 에뮬레이터는 이 저장소 전용 `AOS_Pixel_API_36`(상위 `CLAUDE.md` 기기 표)
 - [x] Compose BOM 2026.08.00은 compileSdk 37·AGP 9.1.1 이상이 필요하다. 설치된 SDK 37과 AGP 버전을 확인
@@ -21,3 +24,5 @@
 ## 3. 공통 기반
 - [x] API client: 헤더(Bearer·`X-Device-Id`), 타임아웃 15초, 봉투 디코딩, `AppError`, 재시도 규칙 (D-042, D-072)
   - 결과(2026-11-27): `core/api/ApiClient.request`가 유일한 경로. 키가 없으면 보내지 않고 `UNAUTHORIZED`, 봉투가 아닌 응답은 5xx면 `INTERNAL`·아니면 `SCHEMA_MISMATCH`, 계약에 없는 서버 코드도 `SCHEMA_MISMATCH`. GET만 `NETWORK`·`TIMEOUT`·`INTERNAL`을 1초·2초 뒤 최대 2회 다시 보낸다(RN TanStack Query 기본 backoff). 에러 문구는 `AppErrorCode.messageRes`·`errorTextRes`(RN `errors.*`). 접근 키·기기 ID는 `ApiCredentials`로 받는다
+- [x] 응답 모델: `../futureETP_ReactNative/packages/shared/contract/schemas/*.json`과 맞춘 모델 + 계약 테스트 (D-142)
+  - 결과(2026-11-27, AOS-012): `core/api/model`에 손으로 쓴 `@Serializable` 모델(날짜·시각·월물은 java.time), `core/api/Endpoints.kt`에 엔드포인트 함수. `ContractTest`가 계약 복사본(futureETP `ed8194a`)과 원본 일치, dev 서버 응답 예시 16개의 스키마 통과·디코딩·왕복 일치, 요청 본문·query의 요청 스키마 통과를 본다. 필드를 하나 빼면 왕복 비교가 실패하는 것을 확인

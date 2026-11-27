@@ -1,0 +1,357 @@
+{
+  "asOf": "2026-10-28T12:17:47.989Z",
+  "etps": [
+    {
+      "id": "8e0cfe02-ed98-4cc1-8f86-4c7f55077316",
+      "market": "US",
+      "type": "ETF",
+      "leverage": 2,
+      "fxHedge": "NA",
+      "name": "ProShares Ultra Bloomberg Crude Oil",
+      "tickers": [
+        "UCO"
+      ],
+      "aum": 495760000,
+      "avgTradingValue": 125564993
+    },
+    {
+      "id": "e7fda1c4-97a4-4b22-973c-e661abddda6c",
+      "market": "US",
+      "type": "ETF",
+      "leverage": -2,
+      "fxHedge": "NA",
+      "name": "ProShares UltraShort Bloomberg Crude Oil",
+      "tickers": [
+        "SCO"
+      ],
+      "aum": 882538000,
+      "avgTradingValue": 101169708
+    },
+    {
+      "id": "6281b11d-ab70-48c7-a9c7-7083c2c56d8e",
+      "market": "US",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "NA",
+      "name": "United States 12 Month Oil",
+      "tickers": [
+        "USL"
+      ],
+      "aum": 47434000,
+      "avgTradingValue": 750308
+    },
+    {
+      "id": "64dfc6e1-41e5-4359-aee0-231ad7275d0d",
+      "market": "US",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "NA",
+      "name": "United States Oil Fund",
+      "tickers": [
+        "USO"
+      ],
+      "aum": 1805958000,
+      "avgTradingValue": 730194280
+    },
+    {
+      "id": "899327c6-7168-4227-88f6-3974d66e2a7f",
+      "market": "US",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "NA",
+      "name": "Invesco DB Oil Fund",
+      "tickers": [
+        "DBO"
+      ],
+      "aum": 316554000,
+      "avgTradingValue": 12824202
+    },
+    {
+      "id": "4aa0497d-a762-443f-b0c4-5c5d153cf14b",
+      "market": "US",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "NA",
+      "name": "ProShares K-1 Free Crude Oil ETF",
+      "tickers": [
+        "OILK"
+      ],
+      "aum": 252343000,
+      "avgTradingValue": 3814296
+    },
+    {
+      "id": "02afe5d0-918d-46c4-87ba-d84954e4f290",
+      "market": "KRX",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "HEDGED",
+      "name": "KODEX WTI원유선물(H)",
+      "tickers": [
+        "261220"
+      ],
+      "aum": 51743554134,
+      "avgTradingValue": 1837100091
+    },
+    {
+      "id": "5c001772-dcc4-4051-88bb-8866b8896af7",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "HEDGED",
+      "name": "메리츠 인버스 2X WTI원유 선물 ETN(H)",
+      "tickers": [
+        "610089"
+      ],
+      "aum": 27319000000,
+      "avgTradingValue": 1837306935
+    },
+    {
+      "id": "9a0fbf76-8c89-40d1-8dd4-4b33026ea21c",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 1,
+      "fxHedge": "UNHEDGED",
+      "name": "삼성 블룸버그 WTI원유 선물 ETN B",
+      "tickers": [
+        "530132"
+      ],
+      "aum": 20895000000,
+      "avgTradingValue": 41018872
+    },
+    {
+      "id": "dfb4b705-d0c3-440c-b9ad-290f9fb238dc",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "삼성 블룸버그 인버스2X WTI원유선물 ETN B",
+      "tickers": [
+        "530134"
+      ],
+      "aum": 127170000000,
+      "avgTradingValue": 4057344700
+    },
+    {
+      "id": "25520a06-8530-4905-971c-46490ddccdbc",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 1,
+      "fxHedge": "UNHEDGED",
+      "name": "신한 WTI원유 선물 ETN",
+      "tickers": [
+        "500099"
+      ],
+      "aum": 204400000000,
+      "avgTradingValue": 61898755
+    },
+    {
+      "id": "cbd33d30-cc33-4d79-b556-7e455d6b0d44",
+      "market": "KRX",
+      "type": "ETF",
+      "leverage": -1,
+      "fxHedge": "HEDGED",
+      "name": "KODEX WTI원유선물인버스(H)",
+      "tickers": [
+        "271050"
+      ],
+      "aum": 200660329907,
+      "avgTradingValue": 6439229151
+    },
+    {
+      "id": "1315bef0-06a9-43d1-9e5b-70c704cda341",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "미래에셋 레버리지 WTI원유 선물 ETN",
+      "tickers": [
+        "520095"
+      ],
+      "aum": 78200000000,
+      "avgTradingValue": 1773643701
+    },
+    {
+      "id": "d0abc715-b41a-456e-974f-57266c3795a7",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "미래에셋 인버스 2X WTI원유 선물 ETN",
+      "tickers": [
+        "520096"
+      ],
+      "aum": 25237500000,
+      "avgTradingValue": 8966813655
+    },
+    {
+      "id": "add5e164-981f-43b4-b751-bf7204602124",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "삼성 레버리지 WTI원유 선물 ETN",
+      "tickers": [
+        "530031",
+        "530133"
+      ],
+      "aum": 1555015000000,
+      "avgTradingValue": 1198418445
+    },
+    {
+      "id": "26ec8a9e-619f-49b7-8fc9-db8532023027",
+      "market": "KRX",
+      "type": "ETF",
+      "leverage": 1,
+      "fxHedge": "HEDGED",
+      "name": "TIGER 원유선물Enhanced(H)",
+      "tickers": [
+        "130680"
+      ],
+      "aum": 15818663858,
+      "avgTradingValue": 119406328
+    },
+    {
+      "id": "ef8dc1f3-0b90-4090-9601-4b5be340298f",
+      "market": "KRX",
+      "type": "ETF",
+      "leverage": -1,
+      "fxHedge": "HEDGED",
+      "name": "TIGER 원유선물인버스(H)",
+      "tickers": [
+        "217770"
+      ],
+      "aum": 29729445659,
+      "avgTradingValue": 653918606
+    },
+    {
+      "id": "3b33d605-948e-4be8-b142-693376788b11",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "KB S&P 레버리지 WTI원유 선물 ETN B",
+      "tickers": [
+        "580068"
+      ],
+      "aum": 65080000000,
+      "avgTradingValue": 349711370
+    },
+    {
+      "id": "e3aed3bd-6e7e-43a1-a4d3-1bf7d1717229",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "KB S&P 인버스 2X WTI원유 선물 ETN B",
+      "tickers": [
+        "580069"
+      ],
+      "aum": 26732500000,
+      "avgTradingValue": 256243003
+    },
+    {
+      "id": "b79504f6-2c5a-4001-bceb-d0776a0f95ec",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "신한 블룸버그 레버리지 WTI원유선물 ETN B",
+      "tickers": [
+        "500093"
+      ],
+      "aum": 63780000000,
+      "avgTradingValue": 37703531
+    },
+    {
+      "id": "ee0217c4-9bc6-454d-8b12-e70ef9d6b7b0",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "신한 블룸버그 인버스2X WTI원유선물 ETN B",
+      "tickers": [
+        "500094"
+      ],
+      "aum": 29652000000,
+      "avgTradingValue": 498577208
+    },
+    {
+      "id": "1ae0c513-35be-4971-a973-69e02e582fcf",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 1,
+      "fxHedge": "HEDGED",
+      "name": "메리츠 WTI원유 선물 ETN(H)",
+      "tickers": [
+        "610087"
+      ],
+      "aum": 22525000000,
+      "avgTradingValue": 77749994
+    },
+    {
+      "id": "35a561fd-8e50-44aa-912c-8a6fb94d42e6",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "HEDGED",
+      "name": "메리츠 레버리지 WTI원유 선물 ETN(H)",
+      "tickers": [
+        "610088"
+      ],
+      "aum": 68000000000,
+      "avgTradingValue": 573117615
+    },
+    {
+      "id": "ace5f510-f8ee-4117-a844-c567d658da4c",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "하나 S&P 레버리지 WTI원유 선물 ETN B",
+      "tickers": [
+        "700029"
+      ],
+      "aum": 64825000000,
+      "avgTradingValue": 28139116
+    },
+    {
+      "id": "01ab4da4-ca1f-4feb-8f2b-c29b8a1154b4",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "하나 S&P 인버스 2X WTI원유 선물 ETN B",
+      "tickers": [
+        "700030"
+      ],
+      "aum": 5652000000,
+      "avgTradingValue": 103748290
+    },
+    {
+      "id": "5c9c7903-b037-4b47-98e2-01a726b229eb",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": 2,
+      "fxHedge": "UNHEDGED",
+      "name": "한투 레버리지WTI원유선물 ETN B",
+      "tickers": [
+        "570116"
+      ],
+      "aum": 129820000000,
+      "avgTradingValue": 15445964
+    },
+    {
+      "id": "eaa6f063-9f0f-47a3-83b8-2e7c7ff72ff0",
+      "market": "KRX",
+      "type": "ETN",
+      "leverage": -2,
+      "fxHedge": "UNHEDGED",
+      "name": "한투 인버스2XWTI원유선물 ETN B",
+      "tickers": [
+        "570117"
+      ],
+      "aum": 31306000000,
+      "avgTradingValue": 575153296
+    }
+  ]
+}

@@ -9,4 +9,6 @@ complexity:
 style:
   MagicNumber:
     ignorePropertyDeclaration: true
+    # enum 생성자 인자(MaPeriod(20) 등)는 이름이 뜻을 준다
+    ignoreEnums: true
     ignoreAnnotated: ['Composable', 'Preview']

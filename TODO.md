@@ -12,8 +12,7 @@
 - [ ] 핀치 중 십자선 막기(2026-11-23, futureETP D-087 보충): 두 손가락으로 핀치하다 멈추면 길게 누르기 십자선이 켜지던 것. 핀치를 시작한 터치에서는 손가락을 댄 채 멈춰도 십자선·봉 스냅 햅틱·상세 박스를 띄우지 않고, 손을 모두 떼고 다시 길게 눌러야 나타난다(C-a·C-c 공통, futureETP `charts/useChartViewport.ts` `pinchedInTouch`). screens.md C-a 길게 누르기
 - [ ] 휴장 달력 일정을 기기 로컬로(2026-11-23, futureETP D-144): 예외 일정을 시장 날짜 대신 기기 로컬 날짜 칸에 둔다. 시각 있는 일정은 `at`(시장 현지)을, CLOSED는 정규 개장 시각(CME 전날 17:00 CT, KRX 09:00 KST, NYSE 09:30 ET)을 로컬로 바꾼 날짜. 목록과 날짜 칸 점은 로컬 시각순(휴장은 정규 개장 시각, 같은 시각은 시장 순). 문구 시각은 로컬 `HH:mm`이고 시간대 표기 없음(`calendar.kinds`의 `{{tz}}`·`calendar.timeZones` 삭제). 조회 범위를 앞뒤 하루씩 넓히고 3개월 밖 연도 `missing`은 숨김. 같은 날 같은 시장 점이 둘일 수 있음. futureETP `features/calendar/localSchedule.ts`, screens.md A-a
 - [ ] 휴장 달력 화면 A-a(2026-11-21, futureETP D-143): A title-bar [⚙] 왼쪽에 [📅](`calendar-month-outline`) → 이번 달~다다음 달 3개월 세로 달력, 오늘(기기 로컬)·CME/KRX/NYSE 휴장(채운 점)·조기 마감/개장 지연(빈 점)·달별 휴일 이름 목록·미입력 안내. API `GET /v1/calendar?from&to`(계약 `calendar`·`calendarQuery`), 색 `colors.market`·`today`, 문구 `calendar.*`. `../futureETP_ReactNative/docs/wireframes/screens.md` A-a. 캐시: 응답 `missing`이 비어 있으면 12시간, 있으면 5분 stale(화면 재진입·앱 복귀 때 다시 조회, 서버 import 뒤 재시작 없이 반영. futureETP `useMarketCalendar.ts`)
-- [ ] rare 레벨 입력 규칙 강화(2026-11-21, futureETP 품질 검증 B2/D1·D3): rare 레벨은 소수 첫째 자리로 반올림한 값으로 중복을 본다(1과 1.00000000001은 중복). C-a `levels` query는 `^d+(.d+)?(,d+(.d+)?)*$`만 받는다(공백·`0x8`·`1e1` 거절, 계약 `disparityQuery`). 앱 입력 검증이 같은 규칙인지, 직렬화가 숫자 기본 문자열(`1`, `2.5`)인지 확인
-- [ ] API 계약 JSON Schema 생성(2026-11-19, futureETP D-142): `../futureETP_ReactNative/packages/shared/contract/`. 3단계 응답 모델은 이 파일을 기준으로 한다(아래 3단계에 반영됨, 확인 뒤 체크)
+- [ ] rare 레벨 입력 규칙 강화(2026-11-21, futureETP 품질 검증 B2/D1·D3): rare 레벨은 소수 첫째 자리로 반올림한 값으로 중복을 본다(1과 1.00000000001은 중복). C-a `levels` query는 `^d+(.d+)?(,d+(.d+)?)*$`만 받는다(공백·`0x8`·`1e1` 거절, 계약 `disparityQuery`). 앱 입력 검증이 같은 규칙인지 확인(B 화면). 직렬화는 `formatLevel`이 숫자 기본 문자열(`1`, `2.5`)을 만들고 `ContractTest`가 본다(AOS-012)
 - [ ] 레이어 import 방향 lint 강제(2026-11-19, futureETP D-041 변경): feature 간 import 금지, 공용 계층 → features·라우트 금지. `docs/architecture.md` "규칙"과 아래 2단계에 반영됨, 확인 뒤 체크
 - [ ] 첫 로딩 가운데 스피너(2026-11-19, futureETP 527a3b2): 첫 조회 중 스켈레톤(공용 막대·차트 격자) 위 가운데에 큰 스피너를 겹친다. 차트 탭은 차트 자리 가운데이고, 데이터가 온 뒤 첫 기간 맞춤 전(차트를 감춘 동안)에도 띄운다(e94b2c2). `../futureETP_ReactNative/docs/wireframes/screens.md` 공통 로딩 항목
 - [ ] 차트 데이터가 바뀌면 십자선·상세 박스 지우기(2026-11-21, futureETP E1 수정): C-a·C-c에서 이전 3년을 앞에 붙이거나 자동 새로고침으로 데이터 배열이 바뀌면 십자선과 상세 박스를 지운다(옛 순번으로 다른 봉을 가리키지 않게). `../futureETP_ReactNative/docs/wireframes/screens.md` C-a 길게 누르기
@@ -27,7 +26,6 @@
 ## 3. 공통 기반
 - [ ] 세로 잠금은 코드로(`requestedOrientation`, D-076). 매니페스트 `screenOrientation`은 lint `LockedOrientationActivity`·`DiscouragedApi`가 막는다
 - [ ] 2단계 임시 화면 `feature/devhealth`·`dev_health_*` 문구 지우기(B 화면과 함께)
-- [ ] 응답 모델: `../futureETP_ReactNative/packages/shared/contract/schemas/*.json`과 맞춘 모델(손으로 또는 생성 도구) + 계약 테스트(실제 dev 서버 응답을 저장한 예시를 모델로 디코딩하고, 같은 예시가 JSON Schema를 통과하는지) (D-142)
 - [ ] installation ID(첫 실행 UUID) 생성·보안 저장소 보관 (D-120). `AppContainer`의 임시 `ApiCredentials`(실행마다 새 UUID·`DEV_API_TOKEN`)를 바꾼다
 - [ ] 접근 키 B-b: 붙여넣기·QR(`futureetp-key:v1:` 접두사), `GET /v1/settings`로 확인 뒤 저장, 키 없으면 첫 화면이 B-b, `UNAUTHORIZED`면 어느 화면에서든 B-b + 거절 줄 (D-044, D-077~D-079)
 - [ ] i18n ko/en, 앱 안 언어 설정을 서버 기기 설정과 맞춤 (D-033, D-073, D-137)

@@ -1,0 +1,1096 @@
+{
+  "freshness": {
+    "asOf": "2026-11-15T07:52:04.816Z",
+    "tradeDate": "2026-11-25",
+    "delayed": false,
+    "marketState": "SETTLEMENT_PENDING",
+    "nextUpdateAt": "2026-11-27T06:01:00.000Z"
+  },
+  "priceDecimals": 2,
+  "basis": "KR",
+  "fallback": false,
+  "maPeriod": 200,
+  "window": "ALL",
+  "distribution": {
+    "actualStartDate": "2011-03-21",
+    "sampleCount": 3927
+  },
+  "bars": [
+    {
+      "tradeDate": "2017-10-05",
+      "open": 36.9727,
+      "high": 37.966,
+      "low": 36.9505,
+      "close": 37.6472,
+      "ma": 38.0136,
+      "disparity": -0.964,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-06",
+      "open": 37.6176,
+      "high": 37.6695,
+      "low": 36.3946,
+      "close": 36.5354,
+      "ma": 37.9832,
+      "disparity": -3.812,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-09",
+      "open": 36.5117,
+      "high": 36.9025,
+      "low": 36.4155,
+      "close": 36.7486,
+      "ma": 37.9571,
+      "disparity": -3.184,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 0.8
+        },
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.19999999999999996
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-10",
+      "open": 36.7175,
+      "high": 37.8336,
+      "low": 36.7131,
+      "close": 37.7271,
+      "ma": 37.9341,
+      "disparity": -0.546,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 0.6
+        },
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.4
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-11",
+      "open": 37.7375,
+      "high": 38.0785,
+      "low": 37.4939,
+      "close": 38.0032,
+      "ma": 37.9122,
+      "disparity": 0.24,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 0.4
+        },
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-12",
+      "open": 37.7761,
+      "high": 37.872,
+      "low": 37.173,
+      "close": 37.5048,
+      "ma": 37.8843,
+      "disparity": -1.002,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-11",
+          "weight": 0.2
+        },
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-13",
+      "open": 37.6079,
+      "high": 38.3148,
+      "low": 37.5711,
+      "close": 38.0939,
+      "ma": 37.8587,
+      "disparity": 0.621,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-16",
+      "open": 38.0718,
+      "high": 38.7714,
+      "low": 38.0203,
+      "close": 38.3958,
+      "ma": 37.8357,
+      "disparity": 1.48,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-17",
+      "open": 38.44,
+      "high": 38.6683,
+      "low": 37.9098,
+      "close": 38.3737,
+      "ma": 37.8128,
+      "disparity": 1.483,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-18",
+      "open": 38.4179,
+      "high": 38.7051,
+      "low": 38.2338,
+      "close": 38.4842,
+      "ma": 37.7961,
+      "disparity": 1.821,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-19",
+      "open": 38.4842,
+      "high": 38.5799,
+      "low": 37.7625,
+      "close": 37.9319,
+      "ma": 37.7729,
+      "disparity": 0.421,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-20",
+      "open": 37.9908,
+      "high": 38.359,
+      "low": 37.4606,
+      "close": 38.1749,
+      "ma": 37.7488,
+      "disparity": 1.129,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-23",
+      "open": 38.3443,
+      "high": 38.5136,
+      "low": 38.0571,
+      "close": 38.2191,
+      "ma": 37.7241,
+      "disparity": 1.312,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-24",
+      "open": 38.2117,
+      "high": 38.7493,
+      "low": 37.9613,
+      "close": 38.6388,
+      "ma": 37.7096,
+      "disparity": 2.464,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-25",
+      "open": 38.7051,
+      "high": 38.7125,
+      "low": 38.2117,
+      "close": 38.4253,
+      "ma": 37.6986,
+      "disparity": 1.928,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-26",
+      "open": 38.4326,
+      "high": 38.926,
+      "low": 38.2264,
+      "close": 38.764,
+      "ma": 37.6838,
+      "disparity": 2.867,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-27",
+      "open": 38.8818,
+      "high": 39.9128,
+      "low": 38.4768,
+      "close": 39.6919,
+      "ma": 37.6705,
+      "disparity": 5.366,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-30",
+      "open": 39.8833,
+      "high": 40.1043,
+      "low": 39.5814,
+      "close": 39.876,
+      "ma": 37.6608,
+      "disparity": 5.882,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-10-31",
+      "open": 39.8244,
+      "high": 40.3915,
+      "low": 39.714,
+      "close": 40.0454,
+      "ma": 37.6515,
+      "disparity": 6.358,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-01",
+      "open": 40.2442,
+      "high": 40.6639,
+      "low": 39.6845,
+      "close": 39.9864,
+      "ma": 37.6473,
+      "disparity": 6.213,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-02",
+      "open": 39.9717,
+      "high": 40.3841,
+      "low": 39.7582,
+      "close": 40.1632,
+      "ma": 37.6431,
+      "disparity": 6.695,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-03",
+      "open": 40.3031,
+      "high": 41.0616,
+      "low": 40.0601,
+      "close": 40.9732,
+      "ma": 37.6386,
+      "disparity": 8.859,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-06",
+      "open": 41.2162,
+      "high": 42.4239,
+      "low": 40.9879,
+      "close": 42.2325,
+      "ma": 37.6423,
+      "disparity": 12.194,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-07",
+      "open": 42.1735,
+      "high": 42.4828,
+      "low": 41.8495,
+      "close": 42.122,
+      "ma": 37.6437,
+      "disparity": 11.896,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-08",
+      "open": 41.9498,
+      "high": 42.6503,
+      "low": 41.5422,
+      "close": 41.8365,
+      "ma": 37.6454,
+      "disparity": 11.133,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.8
+        },
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.19999999999999996
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-09",
+      "open": 41.86,
+      "high": 42.3629,
+      "low": 41.7453,
+      "close": 42.0953,
+      "ma": 37.6443,
+      "disparity": 11.824,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.6
+        },
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.4
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-10",
+      "open": 41.9939,
+      "high": 42.2275,
+      "low": 41.6486,
+      "close": 41.7882,
+      "ma": 37.6441,
+      "disparity": 11.009,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.4
+        },
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-13",
+      "open": 41.9174,
+      "high": 42.0774,
+      "low": 41.4535,
+      "close": 41.7853,
+      "ma": 37.646,
+      "disparity": 10.995,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2017-12",
+          "weight": 0.2
+        },
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-14",
+      "open": 41.7779,
+      "high": 41.7926,
+      "low": 40.3404,
+      "close": 40.9931,
+      "ma": 37.6433,
+      "disparity": 8.899,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-15",
+      "open": 40.5237,
+      "high": 40.8831,
+      "low": 40.399,
+      "close": 40.7218,
+      "ma": 37.6349,
+      "disparity": 8.202,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-16",
+      "open": 40.7144,
+      "high": 40.9491,
+      "low": 40.4504,
+      "close": 40.5971,
+      "ma": 37.6273,
+      "disparity": 7.893,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-17",
+      "open": 40.6778,
+      "high": 41.6753,
+      "low": 40.6264,
+      "close": 41.5946,
+      "ma": 37.6236,
+      "disparity": 10.555,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-20",
+      "open": 41.6606,
+      "high": 41.7559,
+      "low": 40.8905,
+      "close": 41.3819,
+      "ma": 37.622,
+      "disparity": 9.994,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-21",
+      "open": 41.3525,
+      "high": 41.9686,
+      "low": 41.3085,
+      "close": 41.6826,
+      "ma": 37.6252,
+      "disparity": 10.784,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-22",
+      "open": 41.8953,
+      "high": 42.6508,
+      "low": 41.8293,
+      "close": 42.5554,
+      "ma": 37.6321,
+      "disparity": 13.083,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-24",
+      "open": 42.5774,
+      "high": 43.3109,
+      "low": 42.3574,
+      "close": 43.2375,
+      "ma": 37.64,
+      "disparity": 14.871,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-27",
+      "open": 43.2375,
+      "high": 43.2669,
+      "low": 42.2107,
+      "close": 42.6214,
+      "ma": 37.6415,
+      "disparity": 13.23,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-28",
+      "open": 42.4381,
+      "high": 42.6214,
+      "low": 42.1153,
+      "close": 42.5334,
+      "ma": 37.646,
+      "disparity": 12.982,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-29",
+      "open": 42.3427,
+      "high": 42.7608,
+      "low": 41.6239,
+      "close": 42.0273,
+      "ma": 37.647,
+      "disparity": 11.635,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-11-30",
+      "open": 42.108,
+      "high": 42.5261,
+      "low": 41.6753,
+      "close": 42.1007,
+      "ma": 37.6487,
+      "disparity": 11.825,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-01",
+      "open": 42.1153,
+      "high": 43.1862,
+      "low": 42.02,
+      "close": 42.8048,
+      "ma": 37.6534,
+      "disparity": 13.681,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-04",
+      "open": 42.7755,
+      "high": 42.7901,
+      "low": 42.064,
+      "close": 42.152,
+      "ma": 37.6546,
+      "disparity": 11.944,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-05",
+      "open": 42.1593,
+      "high": 42.4821,
+      "low": 41.866,
+      "close": 42.262,
+      "ma": 37.6543,
+      "disparity": 12.237,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-06",
+      "open": 42.1373,
+      "high": 42.2254,
+      "low": 40.9785,
+      "close": 41.0445,
+      "ma": 37.6508,
+      "disparity": 9.014,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-07",
+      "open": 41.0738,
+      "high": 41.6459,
+      "low": 40.9418,
+      "close": 41.5799,
+      "ma": 37.6466,
+      "disparity": 10.448,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-08",
+      "open": 41.5491,
+      "high": 42.3836,
+      "low": 41.4714,
+      "close": 42.0742,
+      "ma": 37.6467,
+      "disparity": 11.761,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.8
+        },
+        {
+          "contractMonth": "2018-02",
+          "weight": 0.19999999999999996
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-11",
+      "open": 41.9906,
+      "high": 42.5903,
+      "low": 41.7472,
+      "close": 42.5301,
+      "ma": 37.6488,
+      "disparity": 12.965,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.6
+        },
+        {
+          "contractMonth": "2018-02",
+          "weight": 0.4
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-12",
+      "open": 42.5653,
+      "high": 42.9391,
+      "low": 41.6858,
+      "close": 41.8895,
+      "ma": 37.6479,
+      "disparity": 11.267,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.4
+        },
+        {
+          "contractMonth": "2018-02",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-13",
+      "open": 42.0933,
+      "high": 42.3718,
+      "low": 41.4337,
+      "close": 41.4762,
+      "ma": 37.6456,
+      "disparity": 10.175,
+      "inRoll": true,
+      "holdings": [
+        {
+          "contractMonth": "2018-01",
+          "weight": 0.2
+        },
+        {
+          "contractMonth": "2018-02",
+          "weight": 0.8
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-14",
+      "open": 41.5348,
+      "high": 41.9746,
+      "low": 41.1244,
+      "close": 41.8353,
+      "ma": 37.6499,
+      "disparity": 11.117,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-15",
+      "open": 41.9159,
+      "high": 42.1505,
+      "low": 41.7694,
+      "close": 42.0186,
+      "ma": 37.6523,
+      "disparity": 11.596,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-18",
+      "open": 42.0699,
+      "high": 42.3704,
+      "low": 41.6887,
+      "close": 41.9379,
+      "ma": 37.6547,
+      "disparity": 11.375,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-19",
+      "open": 42.0259,
+      "high": 42.363,
+      "low": 41.9233,
+      "close": 42.1871,
+      "ma": 37.6587,
+      "disparity": 12.025,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-20",
+      "open": 42.2604,
+      "high": 42.5976,
+      "low": 42.0992,
+      "close": 42.5756,
+      "ma": 37.6757,
+      "disparity": 13.006,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-21",
+      "open": 42.5243,
+      "high": 42.7881,
+      "low": 42.2384,
+      "close": 42.7735,
+      "ma": 37.6975,
+      "disparity": 13.465,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-22",
+      "open": 42.6635,
+      "high": 42.8761,
+      "low": 42.4143,
+      "close": 42.8541,
+      "ma": 37.7228,
+      "disparity": 13.603,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-26",
+      "open": 42.8028,
+      "high": 43.9828,
+      "low": 42.7442,
+      "close": 43.9535,
+      "ma": 37.754,
+      "disparity": 16.421,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-27",
+      "open": 43.8216,
+      "high": 43.9242,
+      "low": 43.4844,
+      "close": 43.7116,
+      "ma": 37.7863,
+      "disparity": 15.681,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-28",
+      "open": 43.631,
+      "high": 43.9315,
+      "low": 43.565,
+      "close": 43.8582,
+      "ma": 37.8153,
+      "disparity": 15.98,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "tradeDate": "2017-12-29",
+      "open": 43.9095,
+      "high": 44.3493,
+      "low": 43.8435,
+      "close": 44.2833,
+      "ma": 37.8469,
+      "disparity": 17.006,
+      "inRoll": false,
+      "holdings": [
+        {
+          "contractMonth": "2018-02",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "rareLevels": [
+    {
+      "direction": "UP",
+      "level": 1,
+      "disparity": 51.342,
+      "price": 118.1142
+    },
+    {
+      "direction": "UP",
+      "level": 2,
+      "disparity": 42.468,
+      "price": 111.1882
+    },
+    {
+      "direction": "UP",
+      "level": 5,
+      "disparity": 32.716,
+      "price": 103.578
+    },
+    {
+      "direction": "UP",
+      "level": 10,
+      "disparity": 23.553,
+      "price": 96.4267
+    },
+    {
+      "direction": "UP",
+      "level": 20,
+      "disparity": 11.884,
+      "price": 87.3191
+    },
+    {
+      "direction": "DOWN",
+      "level": 1,
+      "disparity": -52.362,
+      "price": 37.1785
+    },
+    {
+      "direction": "DOWN",
+      "level": 2,
+      "disparity": -44.024,
+      "price": 43.6862
+    },
+    {
+      "direction": "DOWN",
+      "level": 5,
+      "disparity": -33.91,
+      "price": 51.5798
+    },
+    {
+      "direction": "DOWN",
+      "level": 10,
+      "disparity": -21.054,
+      "price": 61.6134
+    },
+    {
+      "direction": "DOWN",
+      "level": 20,
+      "disparity": -12.067,
+      "price": 68.6271
+    }
+  ],
+  "currentTail": {
+    "side": "UP",
+    "pct": 4.661
+  },
+  "provisional": false,
+  "hasMore": true
+}
